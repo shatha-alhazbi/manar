@@ -19,21 +19,21 @@ class QatarVectorDatabase:
         self.embedding_model = SentenceTransformer(model_name)
         print(f" Loaded embedding model: {model_name}")
         
-        # Initialize ChromaDB
+        # Initialize ChromaDB with cosine similarity
         self.client = chromadb.PersistentClient(path="./chroma_db")
         
-        # Create or get collection
+        # Create or get collection with cosine similarity
         try:
             # Try to get existing collection
             self.collection = self.client.get_collection("qatar_tourism")
             print(" Loaded existing Qatar tourism collection")
         except:
-            # Create new collection if doesn't exist
+            # Create new collection with cosine similarity
             self.collection = self.client.create_collection(
                 name="qatar_tourism",
-                metadata={"description": "Qatar tourism data for RAG"}
+                metadata={"description": "Qatar tourism data for RAG", "hnsw:space": "cosine"}
             )
-            print(" Created new Qatar tourism collection")
+            print(" Created new Qatar tourism collection with cosine similarity")
     
     def load_and_process_data(self, embeddings_file: str = "qatar_embeddings_data.json"):
         """
@@ -61,7 +61,7 @@ class QatarVectorDatabase:
         texts = [item['text'] for item in self.data]
         
         # Create embeddings in batches for efficiency
-        print(" Processing embeddings (this may take a moment)...")
+        print("⚡ Processing embeddings (this may take a moment)...")
         embeddings = self.embedding_model.encode(
             texts, 
             batch_size=32,
@@ -76,7 +76,7 @@ class QatarVectorDatabase:
         """
         Populate ChromaDB with embeddings and metadata
         """
-        print(" Populating vector database...")
+        print("🗄️ Populating vector database...")
         
         # Check if collection already has data
         existing_count = self.collection.count()
@@ -151,12 +151,18 @@ class QatarVectorDatabase:
         # Format results
         formatted_results = []
         for i in range(len(results['ids'][0])):
+            # ChromaDB returns squared euclidean distance, convert to cosine similarity
+            distance = results['distances'][0][i]
+            # For cosine similarity: similarity = 1 - (distance / 2)
+            # Clamp between 0 and 1
+            similarity_score = max(0, min(1, 1 - (distance / 2)))
+            
             formatted_results.append({
                 'id': results['ids'][0][i],
                 'document': results['documents'][0][i],
                 'metadata': results['metadatas'][0][i],
-                'distance': results['distances'][0][i],
-                'similarity_score': 1 - results['distances'][0][i]  # Convert distance to similarity
+                'distance': distance,
+                'similarity_score': similarity_score
             })
         
         return formatted_results
@@ -196,12 +202,16 @@ class QatarVectorDatabase:
             if min_rating and metadata.get('rating', 0) < min_rating:
                 continue
             
+            # Fix similarity calculation here too
+            distance = results['distances'][0][i]
+            similarity_score = max(0, min(1, 1 - (distance / 2)))
+            
             filtered_results.append({
                 'id': results['ids'][0][i],
                 'document': results['documents'][0][i],
                 'metadata': metadata,
-                'distance': results['distances'][0][i],
-                'similarity_score': 1 - results['distances'][0][i]
+                'distance': distance,
+                'similarity_score': similarity_score
             })
             
             if len(filtered_results) >= n_results:
@@ -322,7 +332,7 @@ def setup_qatar_rag_system():
     
     # Test functionality
     vector_db.test_search_functionality()
-    
+
     print("\n Qatar Tourism RAG System Ready!")
     print(" Ready for Step 3: FANAR API Integration")
     
@@ -387,6 +397,8 @@ def quick_search(query: str, category: str = None):
     )
     
     for i, (name, doc) in enumerate(zip(results['metadatas'][0], results['documents'][0])):
+        distance = results['distances'][0][i]
+        similarity = max(0, min(1, 1 - (distance / 2)))
         print(f"{i+1}. {name['name']} ({name['category']})")
-        print(f"   Similarity: {1-results['distances'][0][i]:.3f}")
+        print(f"   Similarity: {similarity:.3f}")
         print()
