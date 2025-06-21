@@ -297,13 +297,12 @@
         "Mediterranean Salads",
         "Wood-fired Pizza"
       ],
-      "ambiance": "Cultural, Beachside, Art-inspired",
+      "ambiance": "Cultural, Beachside",
       "opening_hours": "12:00-23:00",
       "contact": "+974 4444 0006",
       "features": [
         "cultural_location",
         "beach_view",
-        "art_gallery",
         "wood_fired_oven",
         "family_friendly"
       ],
@@ -754,7 +753,7 @@
       "price_range": "$$",
       "avg_cost_per_person": 35,
       "rating": 4.6,
-      "description": "Unique café combining specialty coffee with pottery workshops in a cultural setting.",
+      "description": "Unique café combining specialty coffee with pottery in a cultural setting.",
       "specialties": [
         "Specialty Coffee",
         "Pottery Classes",
@@ -763,12 +762,11 @@
       "ambiance": "Artistic, Cultural, Creative",
       "opening_hours": "08:00-22:00",
       "features": [
-        "art_workshops",
         "cultural_location",
         "instagram_worthy",
         "creative_experience"
       ],
-      "best_time_to_visit": "Morning for workshops"
+      "best_time_to_visit": "Morning"
     },
     {
       "id": "cafe_003",
@@ -986,7 +984,7 @@
       "price_range": "$",
       "avg_cost_per_person": 25,
       "rating": 4.0,
-      "description": "British coffee chain known for their signature blend and comfortable seating areas.",
+      "description": "Greate for Studying. Come here to Study. British coffee chain known for their signature blend and comfortable seating areas.",
       "specialties": [
         "Flat White",
         "Costa Signature Blend",

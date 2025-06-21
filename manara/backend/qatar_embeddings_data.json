@@ -317,7 +317,7 @@
     "id": "rest_007",
     "category": "restaurants",
     "name": "Mandolin Restaurant",
-    "text": "Name: Mandolin Restaurant. Category: restaurants. Location: Katara Cultural Village. Description: Mediterranean cuisine in a cultural setting with art gallery views and beachside location.. Cuisine: Mediterranean. Price range: $. Specialties: Fresh Seafood, Pasta, Mediterranean Salads, Wood-fired Pizza. Ambiance: Cultural, Beachside, Art-inspired. Features: cultural_location, beach_view, art_gallery, wood_fired_oven, family_friendly. Hours: 12:00-23:00. Rating: 4.4/5. Best time to visit: Lunch with beach views",
+    "text": "Name: Mandolin Restaurant. Category: restaurants. Location: Katara Cultural Village. Description: Mediterranean cuisine in a cultural setting with art gallery views and beachside location.. Cuisine: Mediterranean. Price range: $. Specialties: Fresh Seafood, Pasta, Mediterranean Salads, Wood-fired Pizza. Ambiance: Cultural, Beachside. Features: cultural_location, beach_view, wood_fired_oven, family_friendly. Hours: 12:00-23:00. Rating: 4.4/5. Best time to visit: Lunch with beach views",
     "metadata": {
       "id": "rest_007",
       "name": "Mandolin Restaurant",
@@ -337,13 +337,12 @@
         "Mediterranean Salads",
         "Wood-fired Pizza"
       ],
-      "ambiance": "Cultural, Beachside, Art-inspired",
+      "ambiance": "Cultural, Beachside",
       "opening_hours": "12:00-23:00",
       "contact": "+974 4444 0006",
       "features": [
         "cultural_location",
         "beach_view",
-        "art_gallery",
         "wood_fired_oven",
         "family_friendly"
       ],
@@ -837,7 +836,7 @@
     "id": "cafe_002",
     "category": "cafes",
     "name": "Café Ceramic",
-    "text": "Name: Café Ceramic. Category: cafes. Location: Katara Cultural Village. Description: Unique café combining specialty coffee with pottery workshops in a cultural setting.. Specialty: Artisan Coffee & Pottery. Specialties: Specialty Coffee, Pottery Classes, Artisan Pastries. Ambiance: Artistic, Cultural, Creative. Features: art_workshops, cultural_location, instagram_worthy, creative_experience. Hours: 08:00-22:00. Rating: 4.6/5. Best time to visit: Morning for workshops",
+    "text": "Name: Café Ceramic. Category: cafes. Location: Katara Cultural Village. Description: Unique café combining specialty coffee with pottery in a cultural setting.. Specialty: Artisan Coffee & Pottery. Specialties: Specialty Coffee, Pottery Classes, Artisan Pastries. Ambiance: Artistic, Cultural, Creative. Features: cultural_location, instagram_worthy, creative_experience. Hours: 08:00-22:00. Rating: 4.6/5. Best time to visit: Morning",
     "metadata": {
       "id": "cafe_002",
       "name": "Café Ceramic",
@@ -850,7 +849,7 @@
       "price_range": "$$",
       "avg_cost_per_person": 35,
       "rating": 4.6,
-      "description": "Unique café combining specialty coffee with pottery workshops in a cultural setting.",
+      "description": "Unique café combining specialty coffee with pottery in a cultural setting.",
       "specialties": [
         "Specialty Coffee",
         "Pottery Classes",
@@ -859,12 +858,11 @@
       "ambiance": "Artistic, Cultural, Creative",
       "opening_hours": "08:00-22:00",
       "features": [
-        "art_workshops",
         "cultural_location",
         "instagram_worthy",
         "creative_experience"
       ],
-      "best_time_to_visit": "Morning for workshops"
+      "best_time_to_visit": "Morning"
     }
   },
   {
@@ -1111,7 +1109,7 @@
     "id": "cafe_009",
     "category": "cafes",
     "name": "Costa Coffee",
-    "text": "Name: Costa Coffee. Category: cafes. Location: Multiple Locations. Description: British coffee chain known for their signature blend and comfortable seating areas.. Specialty: British Coffee Chain. Specialties: Flat White, Costa Signature Blend, Paninis, Muffins, Iced Drinks. Ambiance: Comfortable, British style, Relaxed. Features: comfortable_seating, british_style, budget_friendly, multiple_locations, quick_service. Hours: 06:00-24:00. Rating: 4.0/5. Best time to visit: Afternoon for relaxation",
+    "text": "Name: Costa Coffee. Category: cafes. Location: Multiple Locations. Description: Greate for Studying. Come here to Study. British coffee chain known for their signature blend and comfortable seating areas.. Specialty: British Coffee Chain. Specialties: Flat White, Costa Signature Blend, Paninis, Muffins, Iced Drinks. Ambiance: Comfortable, British style, Relaxed. Features: comfortable_seating, british_style, budget_friendly, multiple_locations, quick_service. Hours: 06:00-24:00. Rating: 4.0/5. Best time to visit: Afternoon for relaxation",
     "metadata": {
       "id": "cafe_009",
       "name": "Costa Coffee",
@@ -1124,7 +1122,7 @@
       "price_range": "$",
       "avg_cost_per_person": 25,
       "rating": 4.0,
-      "description": "British coffee chain known for their signature blend and comfortable seating areas.",
+      "description": "Greate for Studying. Come here to Study. British coffee chain known for their signature blend and comfortable seating areas.",
       "specialties": [
         "Flat White",
         "Costa Signature Blend",

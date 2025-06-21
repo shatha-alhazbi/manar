@@ -540,10 +540,10 @@ async def test_manara_system():
         group_size=2,
         min_rating=4.0
     )
-    
+
     # Test queries
     test_queries = [
-        "I want to try authentic Qatari restaurants",
+        "I want a cafe where i can study",
         "Plan a perfect cultural day for me in Doha", 
         "Book a table for 2 at a traditional restaurant tonight",
         "What's the best time to visit Souq Waqif?"
@@ -559,7 +559,7 @@ async def test_manara_system():
         if result['type'] == 'recommendations':
             recs = result['data'].get('recommendations', [])
             print(f"Found {len(recs)} recommendations:")
-            for rec in recs[:2]:  # Show first 2
+            for rec in recs[:4]:  # Show first 2
                 print(f"  - {rec['name']} ({rec['type']}) - {rec['price_range']}")
         
         elif result['type'] == 'day_plan':
