@@ -25,18 +25,20 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.maroon,
+      backgroundColor: AppColors.primaryBlue,
       body: Consumer<UserService>(
         builder: (context, userService, child) {
           return LoadingOverlay(
             isLoading: userService.isLoading,
-            child: SafeArea(
-              child: Container(
+            child:
+            //  SafeArea(
+            //   child: 
+              Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [AppColors.maroon, AppColors.darkNavy],
+                    colors: [AppColors.primaryBlue, AppColors.darkNavy],
                   ),
                 ),
                 child: Column(
@@ -61,10 +63,11 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
                       ),
                     ),
                     _buildNavigationButtons(userService),
+                     SizedBox(height: 5),
                   ],
                 ),
               ),
-            ),
+            // ),
           );
         },
       ),
@@ -76,10 +79,11 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
       padding: AppStyles.defaultPadding,
       child: Column(
         children: [
+          SizedBox(height: 40),
           Row(
             children: [
               Text(
-                'مَنارة',
+                'مَنار',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 24),
               ),
               Spacer(),

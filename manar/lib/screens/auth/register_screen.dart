@@ -68,7 +68,8 @@ class _RegisterScreenState extends State<RegisterScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.maroon,
+      appBar: _buildHeader(),
+      // backgroundColor: AppColors.primaryBlue,
       body: Consumer<AuthService>(
         builder: (context, authService, child) {
           return LoadingOverlay(
@@ -80,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      AppColors.maroon,
+                      AppColors.primaryBlue,
                       AppColors.darkNavy,
                     ],
                   ),
@@ -92,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     child: Column(
                       children: [
                         // Header
-                        _buildHeader(),
+                        // _buildHeader(),
                         
                         // Form
                         Expanded(
@@ -121,47 +122,80 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.all(24),
-      child: Column(
-        children: [
-          // Back button and title
-          Row(
-            children: [
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  'Create Account',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(width: 48), // Balance the back button
-            ],
-          ),
-          
-          SizedBox(height: 16),
-          
-          // Subtitle
-          Text(
-            'Join us and start exploring Qatar',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              color: Colors.white70,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+AppBar _buildHeader() {
+  return AppBar(
+    backgroundColor: AppColors.primaryBlue, 
+    elevation: 0, // Remove shadow
+    leading: IconButton(
+      onPressed: () => Navigator.pop(context),
+      icon: Icon(
+        Icons.arrow_back_ios,
+        color: Colors.white,
       ),
-    );
-  }
+    ),
+    title: Text(
+      'Create Account',
+      style: Theme.of(context).textTheme.headlineMedium,
+      textAlign: TextAlign.center,
+    ),
+    centerTitle: true, // Center the title
+    bottom: PreferredSize(
+      preferredSize: Size.fromHeight(40), // Adjust height for subtitle
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Text(
+          'Join us and start exploring Qatar',
+          style: GoogleFonts.inter(
+            fontSize: 16,
+            color: Colors.white70,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ),
+  );
+}
+  // Widget _buildHeader() {
+  //   return Container(
+  //     padding: EdgeInsets.all(24),
+  //     child: Column(
+  //       children: [
+  //         // Back button and title
+  //         Row(
+  //           children: [
+  //             IconButton(
+  //               onPressed: () => Navigator.pop(context),
+  //               icon: Icon(
+  //                 Icons.arrow_back_ios,
+  //                 color: Colors.white,
+  //               ),
+  //             ),
+  //             Expanded(
+  //               child: Text(
+  //                 'Create Account',
+  //                 style: Theme.of(context).textTheme.headlineMedium,
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //             ),
+  //             SizedBox(width: 48), // Balance the back button
+  //           ],
+  //         ),
+          
+  //         SizedBox(height: 16),
+          
+  //         // Subtitle
+  //         Text(
+  //           'Join us and start exploring Qatar',
+  //           style: GoogleFonts.inter(
+  //             fontSize: 16,
+  //             color: Colors.white70,
+  //           ),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildRegistrationForm(AuthService authService) {
     return Form(
@@ -405,28 +439,61 @@ class _RegisterScreenState extends State<RegisterScreen>
             ),
           
           // Create Account button
+          // SizedBox(
+          //   height: 56,
+          //   child: ElevatedButton(
+          //     onPressed: (authService.isLoading || !_acceptTerms) 
+          //         ? null 
+          //         : () => _handleRegistration(authService),
+          //     style: ElevatedButton.styleFrom(
+          //       backgroundColor: AppColors.gold,
+          //       foregroundColor: AppColors.maroon,
+          //       shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(16),
+          //       ),
+          //     ),
+          //     child: Text(
+          //       'Create Account',
+          //       style: GoogleFonts.inter(
+          //         fontSize: 18,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SizedBox(
-            height: 56,
-            child: ElevatedButton(
-              onPressed: (authService.isLoading || !_acceptTerms) 
-                  ? null 
-                  : () => _handleRegistration(authService),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.gold,
-                foregroundColor: AppColors.maroon,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              child: Text(
-                'Create Account',
-                style: GoogleFonts.inter(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
+  height: 56,
+  child: ElevatedButton(
+    onPressed: authService.isLoading
+        ? null
+        : () {
+            if (_acceptTerms) {
+              _handleRegistration(authService);
+            } else {
+              // Optional: show a message or shake animation
+            }
+          },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: _acceptTerms
+          ? AppColors.gold
+          : AppColors.gold.withOpacity(0.4),  // lighter gold when disabled
+      foregroundColor:_acceptTerms
+          ? AppColors.maroon 
+          : AppColors.maroon.withOpacity(0.4), // lighter maroon when disabled
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+    child: Text(
+      'Create Account',
+      style: GoogleFonts.inter(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+),
+
         ],
       ),
     );

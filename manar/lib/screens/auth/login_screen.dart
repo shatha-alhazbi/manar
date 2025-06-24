@@ -63,7 +63,8 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.maroon,
+      appBar: _buildHeader(),
+      // backgroundColor: AppColors.primaryBlue,
       body: Consumer<AuthService>(
         builder: (context, authService, child) {
           return LoadingOverlay(
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen>
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      AppColors.maroon,
+                      AppColors.primaryBlue,
                       AppColors.darkNavy,
                     ],
                   ),
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen>
                     child: Column(
                       children: [
                         // Header
-                        _buildHeader(),
+                        // _buildHeader(),
                         
                         // Form
                         Expanded(
@@ -115,48 +116,80 @@ class _LoginScreenState extends State<LoginScreen>
       ),
     );
   }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.all(24),
-      child: Column(
-        children: [
-          // Back button and title
-          Row(
-            children: [
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  'Welcome Back',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(width: 48), // Balance the back button
-            ],
-          ),
-          
-          SizedBox(height: 16),
-          
-          // Subtitle
-          Text(
-            'Sign in to continue your Qatar journey',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              color: Colors.white70,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+AppBar _buildHeader() {
+  return AppBar(
+    backgroundColor: AppColors.primaryBlue, 
+    elevation: 0, // Remove shadow
+    leading: IconButton(
+      onPressed: () => Navigator.pop(context),
+      icon: Icon(
+        Icons.arrow_back_ios,
+        color: Colors.white,
       ),
-    );
-  }
+    ),
+    title: Text(
+      'Welcome Back',
+      style: Theme.of(context).textTheme.headlineMedium,
+      textAlign: TextAlign.center,
+    ),
+    centerTitle: true, // Center the title
+    bottom: PreferredSize(
+      preferredSize: Size.fromHeight(40), // Adjust height for subtitle
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Text(
+          'Sign in to continue your Qatar journey',
+          style: GoogleFonts.inter(
+            fontSize: 16,
+            color: Colors.white70,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ),
+  );
+}
+  // Widget _buildHeader() {
+  //   return Container(
+  //     padding: EdgeInsets.all(24),
+  //     child: Column(
+  //       children: [
+  //         // Back button and title
+  //         Row(
+  //           children: [
+  //             IconButton(
+  //               onPressed: () => Navigator.pop(context),
+  //               icon: Icon(
+  //                 Icons.arrow_back_ios,
+  //                 color: Colors.white,
+  //               ),
+  //             ),
+  //             Expanded(
+  //               child: Text(
+  //                 'Welcome Back',
+  //                 style: Theme.of(context).textTheme.headlineMedium,
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //             ),
+  //             SizedBox(width: 48), // Balance the back button
+  //           ],
+  //         ),
+          
+  //         SizedBox(height: 16),
+          
+  //         // Subtitle
+  //         Text(
+  //           'Sign in to continue your Qatar journey',
+  //           style: GoogleFonts.inter(
+  //             fontSize: 16,
+  //             color: Colors.white70,
+  //           ),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildLoginForm(AuthService authService) {
     return Form(
@@ -243,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen>
                   }
                   return Colors.transparent;
                 }),
-                checkColor: AppColors.maroon,
+                checkColor: AppColors.darkNavy,
               ),
               Text(
                 'Remember me',
@@ -317,7 +350,7 @@ class _LoginScreenState extends State<LoginScreen>
               onPressed: authService.isLoading ? null : () => _handleSignIn(authService),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.gold,
-                foregroundColor: AppColors.maroon,
+                foregroundColor: AppColors.darkNavy,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -396,7 +429,7 @@ class _LoginScreenState extends State<LoginScreen>
                 child: Text(
                   'G',
                   style: GoogleFonts.roboto(
-                    color: AppColors.maroon,
+                    color: AppColors.primaryBlue,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

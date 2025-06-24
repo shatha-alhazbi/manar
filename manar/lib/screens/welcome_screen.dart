@@ -62,9 +62,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.maroon,
-      body: SafeArea(
-        child: FadeTransition(
+      backgroundColor: AppColors.primaryBlue,
+      body: 
+      // SafeArea(
+        // child: 
+        FadeTransition(
           opacity: _fadeAnimation,
           child: Container(
             decoration: BoxDecoration(
@@ -72,7 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.maroon,
+                  AppColors.primaryBlue,
                   AppColors.darkNavy,
                 ],
               ),
@@ -112,7 +114,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
           ),
         ),
-      ),
+      // ),
     );
   }
 

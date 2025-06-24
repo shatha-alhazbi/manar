@@ -168,10 +168,13 @@ class ManaraApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         
         // Initial route based on auth state
+        // ARWA
         home: AuthStateWrapper(),
-        
+        // initialRoute: '/welcome',
         // Define all routes
         routes: {
+          // ARWA
+          // '/': (context) => AuthStateWrapper(),
           '/welcome': (context) => WelcomeScreen(),
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegisterScreen(),
@@ -219,7 +222,12 @@ class AuthStateWrapper extends StatelessWidget {
         }
         
         // User is not logged in
-        return WelcomeScreen();
+        // ARWA 
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+        });
+        return SplashScreen(); 
+        // return WelcomeScreen();
       },
     );
   }
