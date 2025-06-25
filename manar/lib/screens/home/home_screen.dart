@@ -6,6 +6,8 @@ import 'package:manara/screens/profile/profile_screen.dart';
 import 'package:manara/screens/bookings/bookings_screen.dart';  
 import 'package:manara/screens/chat/chat_screen.dart';  
 import 'package:manara/screens/home/dashboard_screen.dart';
+import 'package:manara/services/auth_services.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -79,6 +81,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: _buildHeader(),
+        backgroundColor: AppColors.primaryBlue,
+      ),
       backgroundColor: AppColors.darkNavy,
       body: SafeArea(
         child: PageView(
@@ -128,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       child: SafeArea(
         child: Container(
-          height: 70,
+          height: 80,
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -200,6 +206,74 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _fabAnimationController.forward();
       }
     }
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      padding: EdgeInsets.all(24),
+      child: Row(
+        children: [
+          // Top row with logo and profile
+          // Column(
+          //   children: [
+              // App logo and title
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'مَنار',
+                    style: GoogleFonts.amiri(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.gold,
+                    ),
+                  ),
+                ],
+              ),
+              
+              Spacer(),
+              
+              // Profile button
+              Row(
+                children: [
+              Consumer<AuthService>(
+                builder: (context, authService, child) {
+                  final user = authService.currentUser;
+                  return GestureDetector(
+                    onTap: () => _showProfileMenu(),
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: AppColors.gold,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.gold.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          user?.displayName?.substring(0, 1).toUpperCase() ?? 'U',
+                          style: GoogleFonts.inter(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.maroon,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   void _showQuickActions() {
@@ -408,4 +482,88 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
     );
   }
+  void _showProfileMenu() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.darkNavy,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            SizedBox(height: 20),
+            
+            Consumer<AuthService>(
+              builder: (context, authService, child) {
+                final user = authService.currentUser;
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: AppColors.gold,
+                    child: Text(
+                      user?.displayName?.substring(0, 1).toUpperCase() ?? 'U',
+                      style: TextStyle(
+                        color: AppColors.maroon,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  title: Text(
+                    user?.displayName ?? 'User',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    user?.email ?? 'Guest',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                );
+              },
+            ),
+            
+            Divider(color: Colors.white.withOpacity(0.2)),
+            
+            ListTile(
+              leading: Icon(Icons.person_outline, color: Colors.white),
+              title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.settings, color: Colors.white),
+              title: Text('Settings', style: TextStyle(color: Colors.white)),
+              onTap: () {},
+            ),
+            
+            Divider(color: Colors.white.withOpacity(0.2)),
+            
+            Consumer<AuthService>(
+              builder: (context, authService, child) {
+                return ListTile(
+                  leading: Icon(Icons.logout, color: AppColors.error),
+                  title: Text('Sign Out', style: TextStyle(color: AppColors.error)),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await authService.signOut();
+                    Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+                  },
+                );
+              },
+            ),
+            
+            SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
 }
+

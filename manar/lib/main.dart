@@ -163,7 +163,7 @@ class ManaraApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Manara - Qatar Tourism',
+        title: 'Manar - Qatar Tourism',
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
         

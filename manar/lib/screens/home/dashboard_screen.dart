@@ -115,9 +115,9 @@ class _DashboardScreenState extends State<DashboardScreen>
                         SizedBox(height: 32),
                         
                         // Quick Actions
-                        _buildQuickActions(),
+                        // _buildQuickActions(),
                         
-                        SizedBox(height: 32),
+                        // SizedBox(height: 32),
                         
                         // Day Planning Quick Access
                         _buildDayPlanningSection(),
@@ -177,63 +177,63 @@ class _DashboardScreenState extends State<DashboardScreen>
       child: Column(
         children: [
           // Top row with logo and profile
-          Row(
-            children: [
+          // Row(
+          //   children: [
               // App logo and title
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'مَنار',
-                    style: GoogleFonts.amiri(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.gold,
-                    ),
-                  ),
-                ],
-              ),
+          //     Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Text(
+          //           'مَنار',
+          //           style: GoogleFonts.amiri(
+          //             fontSize: 30,
+          //             fontWeight: FontWeight.bold,
+          //             color: AppColors.gold,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
               
-              Spacer(),
+          //     Spacer(),
               
-              // Profile button
-              Consumer<AuthService>(
-                builder: (context, authService, child) {
-                  final user = authService.currentUser;
-                  return GestureDetector(
-                    onTap: () => _showProfileMenu(),
-                    child: Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: AppColors.gold,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.gold.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          user?.displayName?.substring(0, 1).toUpperCase() ?? 'U',
-                          style: GoogleFonts.inter(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.maroon,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+          //     // Profile button
+          //     Consumer<AuthService>(
+          //       builder: (context, authService, child) {
+          //         final user = authService.currentUser;
+          //         return GestureDetector(
+          //           onTap: () => _showProfileMenu(),
+          //           child: Container(
+          //             width: 48,
+          //             height: 48,
+          //             decoration: BoxDecoration(
+          //               color: AppColors.gold,
+          //               borderRadius: BorderRadius.circular(12),
+          //               boxShadow: [
+          //                 BoxShadow(
+          //                   color: AppColors.gold.withOpacity(0.3),
+          //                   blurRadius: 8,
+          //                   offset: Offset(0, 4),
+          //                 ),
+          //               ],
+          //             ),
+          //             child: Center(
+          //               child: Text(
+          //                 user?.displayName?.substring(0, 1).toUpperCase() ?? 'U',
+          //                 style: GoogleFonts.inter(
+          //                   fontSize: 18,
+          //                   fontWeight: FontWeight.bold,
+          //                   color: AppColors.maroon,
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //         );
+          //       },
+          //     ),
+          //   ],
+          // ),
           
-          SizedBox(height: 20),
+          // SizedBox(height: 20),
           
           // Search bar
           Container(
@@ -343,68 +343,68 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  Widget _buildQuickActions() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Explore Qatar',
-          style: GoogleFonts.inter(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(child: _buildActionButton(Icons.restaurant_outlined, 'Restaurants')),
-            SizedBox(width: 12),
-            Expanded(child: _buildActionButton(Icons.account_balance, 'Attractions')),
-            SizedBox(width: 12),
-            Expanded(child: _buildActionButton(Icons.shopping_bag_outlined, 'Shopping')),
-            SizedBox(width: 12),
-            Expanded(child: _buildActionButton(Icons.local_cafe_outlined, 'Cafés')),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget _buildQuickActions() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         'Explore Qatar',
+  //         style: GoogleFonts.inter(
+  //           fontSize: 20,
+  //           fontWeight: FontWeight.bold,
+  //           color: Colors.white,
+  //         ),
+  //       ),
+  //       SizedBox(height: 16),
+  //       Row(
+  //         children: [
+  //           Expanded(child: _buildActionButton(Icons.restaurant_outlined, 'Restaurants')),
+  //           SizedBox(width: 12),
+  //           Expanded(child: _buildActionButton(Icons.account_balance, 'Attractions')),
+  //           SizedBox(width: 12),
+  //           Expanded(child: _buildActionButton(Icons.shopping_bag_outlined, 'Shopping')),
+  //           SizedBox(width: 12),
+  //           Expanded(child: _buildActionButton(Icons.local_cafe_outlined, 'Cafés')),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  Widget _buildActionButton(IconData icon, String label) {
-    return Container(
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => _navigateToCategory(label.toLowerCase()),
-          borderRadius: BorderRadius.circular(16),
-          child: Container(
-            decoration: AppStyles.gradientContainer,
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Column(
-              children: [
-                Icon(
-                  icon,
-                  color: AppColors.gold,
-                  size: 28,
-                ),
-                SizedBox(height: 8),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildActionButton(IconData icon, String label) {
+  //   return Container(
+  //     child: Material(
+  //       color: Colors.transparent,
+  //       child: InkWell(
+  //         onTap: () => _navigateToCategory(label.toLowerCase()),
+  //         borderRadius: BorderRadius.circular(16),
+  //         child: Container(
+  //           decoration: AppStyles.gradientContainer,
+  //           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+  //           child: Column(
+  //             children: [
+  //               Icon(
+  //                 icon,
+  //                 color: AppColors.gold,
+  //                 size: 28,
+  //               ),
+  //               SizedBox(height: 8),
+  //               Text(
+  //                 label,
+  //                 style: TextStyle(
+  //                   color: Colors.white,
+  //                   fontSize: 12,
+  //                   fontWeight: FontWeight.w600,
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildDayPlanningSection() {
     return Container(
@@ -877,90 +877,6 @@ class _DashboardScreenState extends State<DashboardScreen>
             child: Text('Close', style: TextStyle(color: AppColors.gold)),
           ),
         ],
-      ),
-    );
-  }
-
-  void _showProfileMenu() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.darkNavy,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            SizedBox(height: 20),
-            
-            Consumer<AuthService>(
-              builder: (context, authService, child) {
-                final user = authService.currentUser;
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: AppColors.gold,
-                    child: Text(
-                      user?.displayName?.substring(0, 1).toUpperCase() ?? 'U',
-                      style: TextStyle(
-                        color: AppColors.maroon,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    user?.displayName ?? 'User',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    user?.email ?? 'Guest',
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                );
-              },
-            ),
-            
-            Divider(color: Colors.white.withOpacity(0.2)),
-            
-            ListTile(
-              leading: Icon(Icons.person_outline, color: Colors.white),
-              title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.settings, color: Colors.white),
-              title: Text('Settings', style: TextStyle(color: Colors.white)),
-              onTap: () {},
-            ),
-            
-            Divider(color: Colors.white.withOpacity(0.2)),
-            
-            Consumer<AuthService>(
-              builder: (context, authService, child) {
-                return ListTile(
-                  leading: Icon(Icons.logout, color: AppColors.error),
-                  title: Text('Sign Out', style: TextStyle(color: AppColors.error)),
-                  onTap: () async {
-                    Navigator.pop(context);
-                    await authService.signOut();
-                    Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
-                  },
-                );
-              },
-            ),
-            
-            SizedBox(height: 20),
-          ],
-        ),
       ),
     );
   }
