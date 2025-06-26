@@ -1,4 +1,4 @@
-// main.dart - Updated with new routes
+// lib/main.dart - Updated with full AI integration
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,16 +16,21 @@ import 'screens/onboarding/onboarding_flow.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/splash_screen.dart';
 
-// Import the new day planner screens
+// Import the AI planner screens
 import 'screens/planner/booking_agent_screen.dart';
 import 'screens/planner/day_planner_screen.dart';
 import 'screens/planner/generated_plan_screen.dart';
+
 // Import services
 import 'services/auth_services.dart';
 import 'services/user_services.dart';
 import 'services/ai_recommendation_service.dart';
 import 'services/day_planner_service.dart';
+import 'services/booking_service.dart';
+
+// Import models
 import 'models/day_planner_model.dart';
+
 // Import constants
 import 'constants/app_theme.dart';
 
@@ -50,8 +55,15 @@ class ManaraApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // Core services
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => UserService()),
+        
+        // AI and planning services
+        ChangeNotifierProvider(create: (_) => AIDayPlannerService()),
+        ChangeNotifierProvider(create: (_) => BookingService()),
+        
+        // Dependent services
         ChangeNotifierProxyProvider2<UserService, AuthService, AIRecommendationService>(
           create: (context) => AIRecommendationService(
             Provider.of<UserService>(context, listen: false),
@@ -60,10 +72,9 @@ class ManaraApp extends StatelessWidget {
           update: (context, userService, authService, previous) =>
               previous ?? AIRecommendationService(userService, authService),
         ),
-        ChangeNotifierProvider(create: (_) => AIDayPlannerService()),
       ],
       child: MaterialApp(
-        title: 'Manar - Qatar Tourism',
+        title: 'Manar - AI-Powered Qatar Tourism',
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
         
@@ -86,7 +97,8 @@ class ManaraApp extends StatelessWidget {
               final args = settings.arguments as Map<String, dynamic>?;
               return MaterialPageRoute(
                 builder: (context) => GeneratedPlanScreen(
-                  planningData: args ?? {},
+                  planningData: args?['planningData'] ?? {},
+                  generatedStops: args?['generatedStops'],
                 ),
               );
             
@@ -94,7 +106,7 @@ class ManaraApp extends StatelessWidget {
               final args = settings.arguments as Map<String, dynamic>?;
               return MaterialPageRoute(
                 builder: (context) => BookingAgentScreen(
-                  dayPlan: args?['dayPlan'] ?? [],
+                  dayPlan: List<PlanStop>.from(args?['dayPlan'] ?? []),
                   planningData: args?['planningData'] ?? {},
                 ),
               );
@@ -130,10 +142,9 @@ class AuthStateWrapper extends StatelessWidget {
               
               // Check if user completed onboarding
               if (onboardingSnapshot.data == true) {
-                // Initialize AI service when navigating to home
+                // Initialize all AI services when navigating to home
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  final aiService = context.read<AIRecommendationService>();
-                  aiService.loadAllRecommendations();
+                  _initializeAIServices(context, snapshot.data!.uid);
                 });
                 return HomeScreen();
               } else {
@@ -151,21 +162,26 @@ class AuthStateWrapper extends StatelessWidget {
       },
     );
   }
+
+  void _initializeAIServices(BuildContext context, String userId) async {
+    try {
+      // Initialize AI recommendation service
+      final aiService = context.read<AIRecommendationService>();
+      aiService.loadAllRecommendations();
+      
+      // Initialize booking service
+      final bookingService = context.read<BookingService>();
+      await bookingService.initialize(userId);
+      
+      print('AI services initialized successfully for user: $userId');
+    } catch (e) {
+      print('Error initializing AI services: $e');
+    }
+  }
 }
 
-// Updated dashboard_screen.dart - Add navigation method
-// Add this method to your existing DashboardScreen class:
-
-/*
-  void _navigateToTripPlanner() {
-    Navigator.pushNamed(context, '/ai-day-planner');
-  }
-*/
-
-// constants/app_routes.dart - Route management
-class AppRoutes {
-  static const String login = '/login';
-  static const String dashboard = '/dashboard';
+// Navigation helpers for AI day planner
+class AIPlannerRoutes {
   static const String aiDayPlanner = '/ai-day-planner';
   static const String generatedPlan = '/generated-plan';
   static const String bookingAgent = '/booking-agent';
@@ -174,11 +190,18 @@ class AppRoutes {
     Navigator.pushNamed(context, aiDayPlanner);
   }
   
-  static void navigateToGeneratedPlan(BuildContext context, Map<String, dynamic> planningData) {
+  static void navigateToGeneratedPlan(
+    BuildContext context, 
+    Map<String, dynamic> planningData,
+    {List<PlanStop>? generatedStops}
+  ) {
     Navigator.pushNamed(
       context, 
       generatedPlan,
-      arguments: planningData,
+      arguments: {
+        'planningData': planningData,
+        'generatedStops': generatedStops,
+      },
     );
   }
   
@@ -198,100 +221,79 @@ class AppRoutes {
   }
 }
 
-// Updated ai_day_planner_screen.dart - Navigation method
-// Add this method to your AIDayPlannerScreen class:
-
-/*
-  void _generatePlan() {
-    // Use the service to generate plan, then navigate
-    final plannerService = context.read<AIDayPlannerService>();
-    final authService = context.read<AuthService>();
-    
-    plannerService.generateDayPlan(
-      userId: authService.currentUser?.uid ?? 'guest',
-      planningData: userResponses,
-    ).then((generatedPlan) {
-      if (generatedPlan != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => GeneratedPlanScreen(
-              planningData: userResponses,
-              generatedStops: generatedPlan, // Pass generated stops
-            ),
-          ),
-        );
-      } else {
-        // Handle error
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Failed to generate plan. Please try again.'),
-            backgroundColor: AppColors.error,
-          ),
-        );
-      }
-    });
-  }
-*/
-
-// pubspec.yaml dependencies - Add these if not already present
-/*
-dependencies:
-  flutter:
-    sdk: flutter
-  provider: ^6.0.5
-  google_fonts: ^4.0.4
-  http: ^0.13.5
-  shared_preferences: ^2.1.0
-  
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
-*/
-
-// Example usage in your existing code:
-
-class ExampleIntegration {
+// Updated dashboard integration example
+class DashboardAIIntegration {
   // How to integrate the AI Day Planner button in your dashboard
-  Widget buildAIDayPlannerButton(BuildContext context) {
+  static Widget buildAIDayPlannerCard(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(16),
       padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.gold, AppColors.gold.withOpacity(0.8)],
+          colors: [
+            AppColors.gold.withOpacity(0.1),
+            AppColors.primaryBlue.withOpacity(0.1),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppColors.gold.withOpacity(0.3),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(
-                Icons.lightbulb_outline,
-                color: AppColors.maroon,
-                size: 28,
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.gold,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.psychology,
+                  color: AppColors.maroon,
+                  size: 28,
+                ),
               ),
-              SizedBox(width: 12),
+              SizedBox(width: 16),
               Expanded(
-                child: Text(
-                  'Plan Your Perfect Day',
-                  style: GoogleFonts.inter(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.maroon,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'AI Day Planner',
+                      style: GoogleFonts.inter(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Powered by FANAR AI',
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        color: AppColors.gold,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 12),
+          SizedBox(height: 16),
           Text(
-            'Let our AI create a personalized itinerary based on your preferences and available time.',
+            'Let our advanced AI create a personalized Qatar itinerary, handle all bookings, and optimize your perfect day automatically.',
             style: GoogleFonts.inter(
               fontSize: 16,
-              color: AppColors.maroon.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.9),
+              height: 1.4,
             ),
           ),
           SizedBox(height: 20),
@@ -299,14 +301,15 @@ class ExampleIntegration {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () => AppRoutes.navigateToAIDayPlanner(context),
+                  onPressed: () => AIPlannerRoutes.navigateToAIDayPlanner(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.maroon,
-                    foregroundColor: Colors.white,
+                    backgroundColor: AppColors.gold,
+                    foregroundColor: AppColors.maroon,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 16),
+                    elevation: 0,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -314,10 +317,10 @@ class ExampleIntegration {
                       Icon(Icons.auto_awesome, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        'Create AI Plan',
+                        'Start AI Planning',
                         style: GoogleFonts.inter(
                           fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -326,69 +329,231 @@ class ExampleIntegration {
               ),
             ],
           ),
+          SizedBox(height: 12),
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.auto_awesome,
+                  color: AppColors.gold,
+                  size: 16,
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'AI will handle everything: planning, booking, and optimization',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: Colors.white.withOpacity(0.8),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
-  
-  // How to integrate with your backend API
-  void setupBackendIntegration() {
-    /*
-    1. Update your backend_api_wrapper.py to handle the new planning endpoints
-    2. Make sure your FANAR API integration is working
-    3. Test the endpoints with the provided mock data
-    4. Update the baseUrl in AIDayPlannerService to your server
-    
-    Backend endpoints needed:
-    - POST /api/v1/plan (day planning)
-    - POST /api/v1/book (booking)  
-    - POST /api/v1/chat (AI chat)
-    - POST /api/v1/recommendations (recommendations)
-    */
-  }
-  
-  // How to add map integration (Google Maps example)
-  Widget buildMapIntegration() {
-    /*
-    For real map integration, add google_maps_flutter to pubspec.yaml:
-    
-    dependencies:
-      google_maps_flutter: ^2.2.8
-    
-    Then replace the mock map in GeneratedPlanScreen with:
-    
-    GoogleMap(
-      initialCameraPosition: CameraPosition(
-        target: LatLng(25.2854, 51.5310), // Doha center
-        zoom: 12,
-      ),
-      markers: Set<Marker>.from(
-        dayPlan.asMap().entries.map((entry) {
-          final index = entry.key;
-          final stop = entry.value;
-          return Marker(
-            markerId: MarkerId(stop.id),
-            position: stop.coordinates,
-            infoWindow: InfoWindow(
-              title: stop.name,
-              snippet: stop.location,
-            ),
-          );
-        }),
-      ),
-      polylines: {
-        Polyline(
-          polylineId: PolylineId('route'),
-          points: dayPlan.map((stop) => stop.coordinates).toList(),
-          color: AppColors.gold,
-          width: 4,
+
+  // Example integration in dashboard screen
+  static Widget buildDashboardWithAI(BuildContext context) {
+    return Column(
+      children: [
+        // Existing dashboard content
+        // ...
+        
+        // AI Day Planner Section
+        buildAIDayPlannerCard(context),
+        
+        // Recent AI Activities
+        Consumer2<AIDayPlannerService, BookingService>(
+          builder: (context, plannerService, bookingService, child) {
+            return Container(
+              margin: EdgeInsets.all(16),
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Recent AI Activity',
+                    style: GoogleFonts.inter(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  
+                  // Show recent AI bookings
+                  if (bookingService.upcomingBookings.any((b) => b['created_by_ai'] == true)) ...[
+                    ...bookingService.upcomingBookings
+                        .where((b) => b['created_by_ai'] == true)
+                        .take(2)
+                        .map((booking) => Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: AppColors.gold.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.psychology, color: AppColors.gold, size: 16),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'AI booked: ${booking['name']}',
+                                  style: TextStyle(color: Colors.white, fontSize: 14),
+                                ),
+                              ),
+                              Text(
+                                booking['date'],
+                                style: TextStyle(color: AppColors.gold, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        )).toList(),
+                  ] else ...[
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.psychology, color: Colors.white60, size: 20),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              'No AI activity yet. Start planning your first AI-powered adventure!',
+                              style: GoogleFonts.inter(
+                                fontSize: 14,
+                                color: Colors.white60,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            );
+          },
         ),
-      },
-    )
-    */
-    
-    return Container(
-      child: Text('Map integration placeholder'),
+        
+        // More dashboard content
+        // ...
+      ],
     );
+  }
+}
+
+// Error handling and fallback systems
+class AIServiceErrorHandler {
+  static void handleAIError(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.error_outline, color: Colors.white),
+            SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'AI Service Error',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(error, style: TextStyle(fontSize: 12)),
+                ],
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: AppColors.error,
+        duration: Duration(seconds: 5),
+        action: SnackBarAction(
+          label: 'Retry',
+          textColor: Colors.white,
+          onPressed: () {
+            // Retry logic here
+          },
+        ),
+      ),
+    );
+  }
+
+  static Widget buildOfflineMode(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.warning.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppColors.warning.withOpacity(0.3),
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.wifi_off, color: AppColors.warning),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'AI Services Offline',
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  'Using cached recommendations. Connect to internet for full AI features.',
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Performance monitoring for AI services
+class AIPerformanceMonitor {
+  static void trackAIResponse(String endpoint, Duration responseTime) {
+    print('AI Endpoint: $endpoint - Response Time: ${responseTime.inMilliseconds}ms');
+    
+    if (responseTime.inSeconds > 10) {
+      print('WARNING: Slow AI response detected for $endpoint');
+    }
+  }
+
+  static void trackUserSatisfaction(String feature, double rating) {
+    print('User Satisfaction - $feature: $rating/5.0');
   }
 }

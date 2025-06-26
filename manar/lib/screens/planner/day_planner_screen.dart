@@ -1,8 +1,11 @@
-// screens/day_planner/ai_day_planner_screen.dart
+// lib/screens/planner/day_planner_screen.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/models/day_planner_model.dart';
+import '../../models/day_planner_model.dart';
+import '../../services/day_planner_service.dart';
+import '../../services/auth_services.dart';
 import 'generated_plan_screen.dart';
 
 class AIDayPlannerScreen extends StatefulWidget {
@@ -16,6 +19,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
   late Animation<double> _fadeAnimation;
   
   List<ChatMessage> messages = [];
+  List<PlannerQuestion> questions = [];
   TextEditingController _textController = TextEditingController();
   ScrollController _scrollController = ScrollController();
   
@@ -23,44 +27,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
   Map<String, dynamic> userResponses = {};
   bool isTyping = false;
   bool questionsCompleted = false;
-
-  final List<PlannerQuestion> questions = [
-    PlannerQuestion(
-      id: 'time_available',
-      question: 'How much time do you have for your Qatar adventure today?',
-      options: ['Half day (4 hours)', 'Full day (8 hours)', 'Extended day (12 hours)'],
-      followUp: 'Perfect! What time would you like to start?',
-      responseKey: 'duration',
-    ),
-    PlannerQuestion(
-      id: 'start_time',
-      question: 'What time would you like to start your day?',
-      options: ['Early morning (7-9 AM)', 'Morning (9-11 AM)', 'Afternoon (12-2 PM)'],
-      followUp: 'Got it! What type of experiences are you most interested in?',
-      responseKey: 'start_time',
-    ),
-    PlannerQuestion(
-      id: 'interests',
-      question: 'What type of experiences excite you most?',
-      options: ['Cultural & Historic', 'Food & Dining', 'Modern & Shopping', 'Mix of everything'],
-      followUp: 'Excellent choice! What\'s your budget range for today?',
-      responseKey: 'interests',
-    ),
-    PlannerQuestion(
-      id: 'budget',
-      question: 'What\'s your budget range for today\'s adventure?',
-      options: ['Budget-friendly (\$50-100)', 'Moderate (\$100-200)', 'Premium (\$200+)'],
-      followUp: 'Great! Any specific places you definitely want to visit or avoid?',
-      responseKey: 'budget',
-    ),
-    PlannerQuestion(
-      id: 'preferences',
-      question: 'Any specific preferences or must-visit places?',
-      options: ['Surprise me with the best!', 'Include traditional souqs', 'Modern attractions only'],
-      followUp: 'Perfect! I have everything I need to create your amazing day plan.',
-      responseKey: 'special_preferences',
-    ),
-  ];
+  bool isLoadingQuestions = true;
 
   @override
   void initState() {
@@ -72,17 +39,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     _animationController.forward();
     
-    // Start conversation
-    _addMessage(ChatMessage(
-      text: 'Hi there! 👋 I\'m your AI trip planner. I\'ll ask you a few quick questions to create the perfect day plan for you in Qatar!',
-      isUser: false,
-      timestamp: DateTime.now(),
-    ));
-    
-    // Start first question after a delay
-    Future.delayed(Duration(milliseconds: 1500), () {
-      _askQuestion(0);
-    });
+    _initializeConversation();
   }
 
   @override
@@ -91,6 +48,51 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
     _textController.dispose();
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _initializeConversation() async {
+    final authService = context.read<AuthService>();
+    final plannerService = context.read<AIDayPlannerService>();
+    final userId = authService.currentUser?.uid ?? 'guest';
+    
+    // Start conversation
+    _addMessage(ChatMessage(
+      text: 'Hi there! 👋 I\'m your AI trip planner. Let me ask you a few questions to create the perfect day plan for you in Qatar!',
+      isUser: false,
+      timestamp: DateTime.now(),
+    ));
+    
+    // Generate dynamic questions using AI
+    setState(() {
+      isTyping = true;
+    });
+    
+    try {
+      questions = await plannerService.generateDynamicQuestions(userId);
+      setState(() {
+        isLoadingQuestions = false;
+        isTyping = false;
+      });
+      
+      Future.delayed(Duration(milliseconds: 1500), () {
+        _askQuestion(0);
+      });
+    } catch (e) {
+      setState(() {
+        isLoadingQuestions = false;
+        isTyping = false;
+      });
+      
+      _addMessage(ChatMessage(
+        text: 'I\'m having trouble connecting to my AI brain right now. Let me ask you some basic questions to get started!',
+        isUser: false,
+        timestamp: DateTime.now(),
+      ));
+      
+      Future.delayed(Duration(milliseconds: 1000), () {
+        _askQuestion(0);
+      });
+    }
   }
 
   void _addMessage(ChatMessage message) {
@@ -164,7 +166,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
     });
   }
 
-  void _handleTextResponse(String text) {
+  void _handleTextResponse(String text) async {
     if (text.trim().isEmpty) return;
 
     _addMessage(ChatMessage(
@@ -173,22 +175,60 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
       timestamp: DateTime.now(),
     ));
 
-    // Store custom response
-    if (currentQuestionIndex < questions.length) {
-      final question = questions[currentQuestionIndex];
-      userResponses[question.responseKey] = text;
+    // Use AI to understand and respond to custom input
+    final authService = context.read<AuthService>();
+    final plannerService = context.read<AIDayPlannerService>();
+    final userId = authService.currentUser?.uid ?? 'guest';
 
-      Future.delayed(Duration(milliseconds: 800), () {
-        _addMessage(ChatMessage(
-          text: question.followUp,
-          isUser: false,
-          timestamp: DateTime.now(),
-        ));
+    setState(() {
+      isTyping = true;
+    });
+
+    try {
+      String aiResponse = await plannerService.chatWithPlanningAI(
+        message: text,
+        userId: userId,
+        conversationHistory: messages,
+      );
+
+      setState(() {
+        isTyping = false;
+      });
+
+      _addMessage(ChatMessage(
+        text: aiResponse,
+        isUser: false,
+        timestamp: DateTime.now(),
+      ));
+
+      // Store custom response
+      if (currentQuestionIndex < questions.length) {
+        final question = questions[currentQuestionIndex];
+        userResponses[question.responseKey] = text;
 
         Future.delayed(Duration(milliseconds: 1200), () {
           _askQuestion(currentQuestionIndex + 1);
         });
+      }
+    } catch (e) {
+      setState(() {
+        isTyping = false;
       });
+      
+      _addMessage(ChatMessage(
+        text: 'I understand! Let me continue with the next question.',
+        isUser: false,
+        timestamp: DateTime.now(),
+      ));
+
+      if (currentQuestionIndex < questions.length) {
+        final question = questions[currentQuestionIndex];
+        userResponses[question.responseKey] = text;
+
+        Future.delayed(Duration(milliseconds: 1200), () {
+          _askQuestion(currentQuestionIndex + 1);
+        });
+      }
     }
 
     _textController.clear();
@@ -207,16 +247,91 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
     ));
   }
 
-  void _generatePlan() {
-    // Navigate to generated plan screen with user responses
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => GeneratedPlanScreen(
-          planningData: userResponses,
-        ),
-      ),
-    );
+  void _generatePlan() async {
+    final authService = context.read<AuthService>();
+    final plannerService = context.read<AIDayPlannerService>();
+    final userId = authService.currentUser?.uid ?? 'guest';
+
+    // Show loading state
+    _addMessage(ChatMessage(
+      text: 'Perfect! I\'m now creating your personalized Qatar adventure. This might take a moment while I craft the perfect itinerary for you... ✨',
+      isUser: false,
+      timestamp: DateTime.now(),
+    ));
+
+    try {
+      List<PlanStop>? generatedPlan = await plannerService.generateDayPlan(
+        userId: userId,
+        planningData: userResponses,
+      );
+
+      if (generatedPlan != null && generatedPlan.isNotEmpty) {
+        // Navigate to generated plan screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GeneratedPlanScreen(
+              planningData: userResponses,
+              generatedStops: generatedPlan,
+            ),
+          ),
+        );
+      } else {
+        _addMessage(ChatMessage(
+          text: 'I\'m having trouble creating your plan right now. Please try again in a moment, or let me know if you\'d like to modify your preferences!',
+          isUser: false,
+          timestamp: DateTime.now(),
+        ));
+      }
+    } catch (e) {
+      _addMessage(ChatMessage(
+        text: 'Oops! Something went wrong while creating your plan. Let\'s try again - would you like to restart or modify any of your answers?',
+        isUser: false,
+        timestamp: DateTime.now(),
+        options: ['Try again', 'Restart planning', 'Modify preferences'],
+        questionId: 'error_recovery',
+      ));
+    }
+  }
+
+  void _handleErrorRecovery(String option) {
+    switch (option) {
+      case 'Try again':
+        _generatePlan();
+        break;
+      case 'Restart planning':
+        _restartPlanning();
+        break;
+      case 'Modify preferences':
+        _modifyPreferences();
+        break;
+    }
+  }
+
+  void _restartPlanning() {
+    setState(() {
+      messages.clear();
+      userResponses.clear();
+      currentQuestionIndex = 0;
+      questionsCompleted = false;
+      isTyping = false;
+    });
+    _initializeConversation();
+  }
+
+  void _modifyPreferences() {
+    _addMessage(ChatMessage(
+      text: 'No problem! Which aspect would you like to change?',
+      isUser: false,
+      timestamp: DateTime.now(),
+      options: [
+        'Duration & timing',
+        'Interests & activities',
+        'Budget preferences',
+        'Special requirements'
+      ],
+      questionId: 'modify_preferences',
+    ));
   }
 
   @override
@@ -236,31 +351,185 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          if (userResponses.isNotEmpty)
+            IconButton(
+              icon: Icon(Icons.refresh, color: Colors.white),
+              onPressed: _restartPlanning,
+              tooltip: 'Restart planning',
+            ),
+        ],
         elevation: 0,
       ),
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: Column(
           children: [
+            // Progress indicator
+            if (!questionsCompleted && questions.isNotEmpty)
+              _buildProgressIndicator(),
+            
             // Chat messages
             Expanded(
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: EdgeInsets.all(16),
-                itemCount: messages.length + (isTyping ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (isTyping && index == messages.length) {
-                    return _buildTypingIndicator();
-                  }
-                  return _buildMessageBubble(messages[index]);
+              child: Consumer<AIDayPlannerService>(
+                builder: (context, plannerService, child) {
+                  return ListView.builder(
+                    controller: _scrollController,
+                    padding: EdgeInsets.all(16),
+                    itemCount: messages.length + (isTyping ? 1 : 0) + (plannerService.isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (plannerService.isLoading && index == messages.length + (isTyping ? 1 : 0)) {
+                        return _buildAIProcessingIndicator();
+                      }
+                      if (isTyping && index == messages.length) {
+                        return _buildTypingIndicator();
+                      }
+                      return _buildMessageBubble(messages[index]);
+                    },
+                  );
                 },
               ),
             ),
             
             // Input area
             if (!questionsCompleted) _buildInputArea(),
+            
+            // Error display
+            Consumer<AIDayPlannerService>(
+              builder: (context, plannerService, child) {
+                if (plannerService.error.isNotEmpty) {
+                  return Container(
+                    padding: EdgeInsets.all(16),
+                    color: AppColors.error.withOpacity(0.1),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error_outline, color: AppColors.error),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            plannerService.error,
+                            style: TextStyle(color: AppColors.error),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Clear error and retry
+                            context.read<AIDayPlannerService>().clearError();
+                          },
+                          child: Text('Retry', style: TextStyle(color: AppColors.gold)),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return SizedBox.shrink();
+              },
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildProgressIndicator() {
+    double progress = questions.isNotEmpty ? (currentQuestionIndex / questions.length) : 0.0;
+    
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.primaryBlue,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Planning Progress',
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
+              ),
+              Text(
+                '${currentQuestionIndex + 1} of ${questions.length}',
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.gold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          LinearProgressIndicator(
+            value: progress,
+            backgroundColor: Colors.white.withOpacity(0.2),
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.gold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAIProcessingIndicator() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 16),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.gold,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Icon(Icons.psychology, color: AppColors.maroon, size: 24),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.gold),
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      Text(
+                        'AI is thinking...',
+                        style: GoogleFonts.inter(
+                          color: AppColors.gold,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Creating your personalized Qatar adventure',
+                    style: GoogleFonts.inter(
+                      color: Colors.white70,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -317,7 +586,13 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
                       margin: EdgeInsets.only(bottom: 8),
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () => _handleOptionSelected(option, message.questionId!),
+                        onPressed: () {
+                          if (message.questionId == 'error_recovery') {
+                            _handleErrorRecovery(option);
+                          } else {
+                            _handleOptionSelected(option, message.questionId!);
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.gold.withOpacity(0.1),
                           foregroundColor: AppColors.gold,
@@ -336,24 +611,25 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
                       ),
                     )).toList(),
                     
-                    // Custom answer option
-                    Container(
-                      margin: EdgeInsets.only(top: 8),
-                      child: TextButton.icon(
-                        onPressed: () {
-                          // Focus on text input
-                          setState(() {});
-                        },
-                        icon: Icon(Icons.edit, color: Colors.white70, size: 16),
-                        label: Text(
-                          'Or type your own answer',
-                          style: GoogleFonts.inter(
-                            color: Colors.white70,
-                            fontSize: 14,
+                    // Custom answer option (only for regular questions)
+                    if (message.questionId != 'error_recovery' && message.questionId != 'modify_preferences')
+                      Container(
+                        margin: EdgeInsets.only(top: 8),
+                        child: TextButton.icon(
+                          onPressed: () {
+                            // Focus on text input
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
+                          icon: Icon(Icons.edit, color: Colors.white70, size: 16),
+                          label: Text(
+                            'Or type your own answer',
+                            style: GoogleFonts.inter(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                   
                   // Generate button
@@ -377,7 +653,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
                             Icon(Icons.auto_awesome, size: 20),
                             SizedBox(width: 8),
                             Text(
-                              'Generate My Day Plan',
+                              'Generate My AI Day Plan',
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -491,6 +767,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               ),
               onSubmitted: _handleTextResponse,
+              maxLines: null,
             ),
           ),
           SizedBox(width: 12),

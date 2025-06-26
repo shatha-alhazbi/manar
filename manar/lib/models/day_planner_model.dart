@@ -87,7 +87,7 @@ class PlanStop {
 // Booking step model
 class BookingStep {
   final String id;
-  final String stopName;
+  String stopName;
   final String type;
   final String location;
   final String time;
