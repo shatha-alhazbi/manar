@@ -1,0 +1,845 @@
+# Step 1: Create Qatar Tourism Database
+# This will be our knowledge base for RAG implementation
+
+import json
+import pandas as pd
+from datetime import datetime
+from typing import List, Dict, Any
+
+class QatarTourismDatabase:
+    def __init__(self):
+        self.data = {
+            "restaurants": [],
+            "attractions": [],
+            "cafes": [],
+            "shopping": [],
+            "hotels": [],
+            "transportation": [],
+            "cultural_sites": [],
+            "events": []
+        }
+        self._populate_sample_data()
+    
+    def _populate_sample_data(self):
+        """
+        Populate with curated Qatar tourism data
+        This data is structured to work well with embeddings later
+        """
+        
+        # RESTAURANTS DATA
+        self.data["restaurants"] = [
+             {
+                "id": "rest_001",
+                "name": "Al Mourjan Restaurant",
+                "cuisine_type": "Traditional Qatari",
+                "location": "West Bay, Corniche",
+                "coordinates": {"lat": 25.3548, "lng": 51.5310},
+                "price_range": "$",
+                "avg_cost_per_person": 80,
+                "rating": 4.6,
+                "description": "Authentic Qatari cuisine with stunning views of the Corniche waterfront. Famous for traditional dishes like machboos and harees.",
+                "specialties": ["Machboos", "Harees", "Luqaimat", "Fresh Seafood"],
+                "ambiance": "Traditional, Family-friendly, Waterfront views",
+                "opening_hours": "12:00-15:00, 19:00-23:00",
+                "contact": "+974 4444 0000",
+                "features": ["outdoor_seating", "family_friendly", "traditional_music", "corniche_view", "valet_parking"],
+                "dietary_options": ["halal", "vegetarian_options"],
+                "languages_spoken": ["Arabic", "English"],
+                "dress_code": "Smart casual",
+                "best_time_to_visit": "Sunset for best views",
+                "booking_required": True,
+                "payment_methods": ["cash", "card", "digital_wallet"]
+            },
+            {
+                "id": "rest_002",
+                "name": "Souq Waqif Traditional Restaurant",
+                "cuisine_type": "Middle Eastern",
+                "location": "Souq Waqif, Old Doha",
+                "coordinates": {"lat": 25.2867, "lng": 51.5333},
+                "price_range": "$",
+                "avg_cost_per_person": 35,
+                "rating": 4.4,
+                "description": "Experience authentic Middle Eastern flavors in the heart of Qatar's most famous traditional market.",
+                "specialties": ["Mixed Grill", "Hummus", "Fattoush", "Kunafa"],
+                "ambiance": "Traditional market setting, Cultural experience",
+                "opening_hours": "11:00-24:00",
+                "contact": "+974 4444 0001",
+                "features": ["historic_location", "budget_friendly", "local_experience", "shisha", "live_entertainment"],
+                "dietary_options": ["halal", "vegetarian", "vegan_options"],
+                "languages_spoken": ["Arabic", "English", "Urdu"],
+                "dress_code": "Casual",
+                "best_time_to_visit": "Evening for cultural atmosphere",
+                "booking_required": False,
+                "payment_methods": ["cash", "card"]
+            },
+            {
+                "id": "rest_003",
+                "name": "Al Shaheen Restaurant",
+                "cuisine_type": "Traditional Qatari",
+                "location": "Souq Waqif",
+                "coordinates": {"lat": 25.2867, "lng": 51.5330},
+                "price_range": "$",
+                "avg_cost_per_person": 40,
+                "rating": 4.3,
+                "description": "Affordable authentic Qatari home-style cooking in the heart of Souq Waqif. Known for generous portions and traditional hospitality.",
+                "specialties": ["Machboos Laham", "Margoog", "Khanfaroosh", "Traditional Rice Dishes"],
+                "ambiance": "Casual, Family-style, Traditional",
+                "opening_hours": "10:00-23:00",
+                "contact": "+974 4444 0002",
+                "features": ["budget_friendly", "large_portions", "family_owned", "traditional_recipes", "quick_service"],
+                "dietary_options": ["halal", "vegetarian_options"],
+                "languages_spoken": ["Arabic", "English"],
+                "dress_code": "Casual",
+                "best_time_to_visit": "Lunch for best value",
+                "booking_required": False,
+                "payment_methods": ["cash", "card"]
+            },
+            {
+                "id": "rest_004",
+                "name": "Damasca Restaurant",
+                "cuisine_type": "Syrian",
+                "location": "Souq Waqif",
+                "coordinates": {"lat": 25.2865, "lng": 51.5335},
+                "price_range": "$",
+                "avg_cost_per_person": 38,
+                "rating": 4.5,
+                "description": "Authentic Syrian cuisine with traditional preparation methods. Famous for their fresh bread and mezze platters.",
+                "specialties": ["Kibbeh", "Fattoush", "Shawarma", "Fresh Bread", "Baklava"],
+                "ambiance": "Traditional Syrian, Cozy, Family atmosphere",
+                "opening_hours": "11:00-24:00",
+                "contact": "+974 4444 0003",
+                "features": ["budget_friendly", "fresh_bread", "mezze_specialist", "family_friendly", "authentic_recipes"],
+                "dietary_options": ["halal", "vegetarian", "vegan_options"],
+                "languages_spoken": ["Arabic", "English"],
+                "dress_code": "Casual",
+                "best_time_to_visit": "Evening for fresh bread",
+                "booking_required": False,
+                "payment_methods": ["cash", "card"]
+            },
+            {
+                "id": "rest_005",
+                "name": "Bandar Aden Restaurant",
+                "cuisine_type": "Yemeni",
+                "location": "Souq Waqif",
+                "coordinates": {"lat": 25.2869, "lng": 51.5332},
+                "price_range": "$",
+                "avg_cost_per_person": 32,
+                "rating": 4.2,
+                "description": "Traditional Yemeni cuisine known for excellent fish dishes and aromatic rice preparations.",
+                "specialties": ["Mandi", "Zurbian", "Fahsa", "Fish Curry", "Yemeni Tea"],
+                "ambiance": "Traditional, Authentic, Local experience",
+                "opening_hours": "12:00-24:00",
+                "contact": "+974 4444 0004",
+                "features": ["budget_friendly", "fish_specialist", "traditional_cooking", "local_favorite", "spice_expert"],
+                "dietary_options": ["halal", "limited_vegetarian"],
+                "languages_spoken": ["Arabic", "English"],
+                "dress_code": "Casual",
+                "best_time_to_visit": "Dinner for fresh fish",
+                "booking_required": False,
+                "payment_methods": ["cash", "card"]
+            },
+            
+            # Mid-range restaurants
+            {
+                "id": "rest_006",
+                "name": "Smat Restaurant",
+                "cuisine_type": "Lebanese",
+                "location": "The Pearl Qatar",
+                "coordinates": {"lat": 25.3713, "lng": 51.5515},
+                "price_range": "$",
+                "avg_cost_per_person": 75,
+                "rating": 4.6,
+                "description": "Upscale Lebanese dining with modern presentation and traditional flavors. Beautiful Pearl location with marina views.",
+                "specialties": ["Mezze Platter", "Grilled Seafood", "Lamb Ouzi", "Fresh Juices"],
+                "ambiance": "Modern Lebanese, Marina views, Sophisticated",
+                "opening_hours": "12:00-24:00",
+                "contact": "+974 4444 0005",
+                "features": ["marina_view", "modern_ambiance", "fresh_seafood", "extensive_mezze", "outdoor_terrace"],
+                "dietary_options": ["halal", "vegetarian", "vegan_options"],
+                "languages_spoken": ["Arabic", "English", "French"],
+                "dress_code": "Smart casual",
+                "best_time_to_visit": "Sunset for marina views",
+                "booking_required": True,
+                "payment_methods": ["card", "digital_wallet"]
+            },
+            {
+                "id": "rest_007",
+                "name": "Mandolin Restaurant",
+                "cuisine_type": "Mediterranean",
+                "location": "Katara Cultural Village",
+                "coordinates": {"lat": 25.3792, "lng": 51.5318},
+                "price_range": "$",
+                "avg_cost_per_person": 85,
+                "rating": 4.4,
+                "description": "Mediterranean cuisine in a cultural setting with art gallery views and beachside location.",
+                "specialties": ["Fresh Seafood", "Pasta", "Mediterranean Salads", "Wood-fired Pizza"],
+                "ambiance": "Cultural, Beachside",
+                "opening_hours": "12:00-23:00",
+                "contact": "+974 4444 0006",
+                "features": ["cultural_location", "beach_view", "wood_fired_oven", "family_friendly"],
+                "dietary_options": ["halal", "vegetarian", "vegan", "gluten_free"],
+                "languages_spoken": ["English", "Arabic", "Italian"],
+                "dress_code": "Casual to smart casual",
+                "best_time_to_visit": "Lunch with beach views",
+                "booking_required": True,
+                "payment_methods": ["card", "digital_wallet"]
+            },
+            {
+                "id": "rest_008",
+                "name": "Spice Market",
+                "cuisine_type": "Indian",
+                "location": "W Hotel, West Bay",
+                "coordinates": {"lat": 25.3600, "lng": 51.5280},
+                "price_range": "$",
+                "avg_cost_per_person": 90,
+                "rating": 4.5,
+                "description": "Contemporary Indian cuisine with traditional spices and modern presentation techniques.",
+                "specialties": ["Tandoor Dishes", "Biryani", "Curry Selection", "Indian Breads"],
+                "ambiance": "Modern Indian, Upscale, Spice-themed decor",
+                "opening_hours": "18:30-24:00",
+                "contact": "+974 4444 0007",
+                "features": ["tandoor_specialist", "extensive_curry_menu", "modern_presentation", "spice_market_theme", "vegetarian_friendly"],
+                "dietary_options": ["halal", "vegetarian", "vegan", "jain_food"],
+                "languages_spoken": ["English", "Hindi", "Arabic"],
+                "dress_code": "Smart casual",
+                "best_time_to_visit": "Dinner for full menu",
+                "booking_required": True,
+                "payment_methods": ["card", "digital_wallet"]
+            },
+            
+            # High-end restaurants
+            {
+                "id": "rest_009",
+                "name": "Nobu Doha",
+                "cuisine_type": "Japanese-Peruvian Fusion",
+                "location": "Four Seasons Hotel, West Bay",
+                "coordinates": {"lat": 25.3656, "lng": 51.5310},
+                "price_range": "$$",
+                "avg_cost_per_person": 350,
+                "rating": 4.8,
+                "description": "World-renowned Japanese-Peruvian fusion cuisine with innovative dishes and premium ingredients.",
+                "specialties": ["Black Cod Miso", "Yellowtail Jalapeño", "Wagyu Beef", "Premium Sushi"],
+                "ambiance": "Upscale, Modern, Fine dining",
+                "opening_hours": "18:00-24:00",
+                "contact": "+974 4494 8888",
+                "features": ["fine_dining", "city_views", "premium_ingredients", "wine_pairing", "private_dining"],
+                "dietary_options": ["halal_available", "vegetarian", "gluten_free"],
+                "languages_spoken": ["English", "Japanese", "Arabic"],
+                "dress_code": "Formal",
+                "best_time_to_visit": "Dinner for full experience",
+                "booking_required": True,
+                "payment_methods": ["card", "digital_wallet"]
+            },
+            {
+                "id": "rest_010",
+                "name": "IDAM by Alain Ducasse",
+                "cuisine_type": "French Fine Dining",
+                "location": "Museum of Islamic Art",
+                "coordinates": {"lat": 25.2948, "lng": 51.5397},
+                "price_range": "$$",
+                "avg_cost_per_person": 400,
+                "rating": 4.9,
+                "description": "French fine dining by Michelin-starred chef Alain Ducasse with views of Doha Bay and the museum.",
+                "specialties": ["French Haute Cuisine", "Seasonal Menu", "Wine Pairing", "Artistic Presentation"],
+                "ambiance": "Elegant, Museum setting, Fine dining",
+                "opening_hours": "19:00-23:00",
+                "contact": "+974 4422 4555",
+                "features": ["michelin_chef", "museum_location", "bay_views", "seasonal_menu", "wine_sommelier"],
+                "dietary_options": ["vegetarian", "gluten_free", "special_dietary"],
+                "languages_spoken": ["French", "English", "Arabic"],
+                "dress_code": "Formal",
+                "best_time_to_visit": "Evening for ambiance",
+                "booking_required": True,
+                "payment_methods": ["card", "digital_wallet"]
+            },
+            
+            # International fast-casual
+            {
+                "id": "rest_011",
+                "name": "Paul Bakery & Restaurant",
+                "cuisine_type": "French Bakery",
+                "location": "City Center Mall",
+                "coordinates": {"lat": 25.3219, "lng": 51.5068},
+                "price_range": "$",
+                "avg_cost_per_person": 45,
+                "rating": 4.3,
+                "description": "French bakery chain offering fresh pastries, sandwiches, and light meals in a casual setting.",
+                "specialties": ["Fresh Croissants", "Sandwiches", "Quiche", "French Pastries", "Coffee"],
+                "ambiance": "Casual, French bistro, Family-friendly",
+                "opening_hours": "07:00-23:00",
+                "contact": "+974 4444 0008",
+                "features": ["fresh_pastries", "breakfast_all_day", "takeaway", "budget_friendly", "quick_service"],
+                "dietary_options": ["vegetarian", "some_vegan"],
+                "languages_spoken": ["English", "French", "Arabic"],
+                "dress_code": "Casual",
+                "best_time_to_visit": "Morning for fresh pastries",
+                "booking_required": False,
+                "payment_methods": ["cash", "card", "digital_wallet"]
+            },
+            {
+                "id": "rest_012",
+                "name": "Subway",
+                "cuisine_type": "American Fast Food",
+                "location": "Multiple Locations",
+                "coordinates": {"lat": 25.3000, "lng": 51.5000},
+                "price_range": "$",
+                "avg_cost_per_person": 25,
+                "rating": 4.0,
+                "description": "International sandwich chain with customizable healthy options and quick service.",
+                "specialties": ["Custom Sandwiches", "Salads", "Healthy Options", "Quick Service"],
+                "ambiance": "Fast casual, Clean, Modern",
+                "opening_hours": "07:00-24:00",
+                "contact": "+974 4444 0009",
+                "features": ["healthy_options", "customizable", "quick_service", "budget_friendly", "multiple_locations"],
+                "dietary_options": ["vegetarian", "some_vegan", "halal"],
+                "languages_spoken": ["English", "Arabic"],
+                "dress_code": "Casual",
+                "best_time_to_visit": "Lunch for fresh ingredients",
+                "booking_required": False,
+                "payment_methods": ["cash", "card", "digital_wallet"]
+            }
+            
+        ]
+        
+        # ATTRACTIONS DATA
+        self.data["attractions"] = [
+            {
+                "id": "attr_001",
+                "name": "Museum of Islamic Art",
+                "category": "Museum",
+                "location": "Corniche, Doha",
+                "coordinates": {"lat": 25.2948, "lng": 51.5397},
+                "entry_fee": "Free",
+                "rating": 4.9,
+                "description": "World-class museum showcasing Islamic art spanning 1,400 years from three continents. Designed by I.M. Pei.",
+                "highlights": ["14th-century manuscripts", "Ceramic collection", "Textiles", "Architecture by I.M. Pei"],
+                "opening_hours": "09:00-19:00 (Closed Mondays)",
+                "estimated_duration": "2-3 hours",
+                "contact": "+974 4422 4444",
+                "features": ["family_friendly", "educational", "photography_allowed", "guided_tours", "café", "gift_shop"],
+                "accessibility": ["wheelchair_accessible", "audio_guides"],
+                "languages_available": ["Arabic", "English", "French"],
+                "best_time_to_visit": "Morning for fewer crowds",
+                "nearby_attractions": ["Corniche", "Souq Waqif"],
+                "transportation": ["metro_nearby", "parking_available", "taxi_accessible"]
+            },
+            {
+                "id": "attr_002",
+                "name": "Souq Waqif",
+                "category": "Traditional Market",
+                "location": "Al Souq, Doha",
+                "coordinates": {"lat": 25.2867, "lng": 51.5333},
+                "entry_fee": "Free",
+                "rating": 4.8,
+                "description": "Traditional marketplace rebuilt to retain its original Qatari architectural style. Hub for shopping, dining, and cultural experiences.",
+                "highlights": ["Traditional architecture", "Spice market", "Falcon Souq", "Cultural performances"],
+                "opening_hours": "10:00-22:00 (Shops vary)",
+                "estimated_duration": "2-4 hours",
+                "contact": "+974 4433 3333",
+                "features": ["shopping", "dining", "cultural_experience", "evening_entertainment", "traditional_crafts"],
+                "accessibility": ["wheelchair_accessible", "family_friendly"],
+                "languages_available": ["Arabic", "English", "Multiple"],
+                "best_time_to_visit": "Evening for atmosphere and cooler weather",
+                "nearby_attractions": ["Museum of Islamic Art", "Corniche"],
+                "transportation": ["metro_station", "taxi_accessible", "walking_distance_corniche"]
+            },
+            {
+                "id": "attr_003",
+                "name": "Katara Cultural Village",
+                "category": "Cultural Complex",
+                "location": "Katara, Doha",
+                "coordinates": {"lat": 25.3792, "lng": 51.5310},
+                "entry_fee": "Free (Individual attractions may charge)",
+                "rating": 4.7,
+                "description": "Cultural district featuring galleries, theaters, restaurants, and beaches. Qatar's premier destination for arts and culture.",
+                "highlights": ["Blue Mosque", "Pigeon Towers", "Beach", "Amphitheater", "Art galleries"],
+                "opening_hours": "24/7 (Individual venues vary)",
+                "estimated_duration": "3-5 hours",
+                "contact": "+974 4408 0000",
+                "features": ["cultural_events", "art_galleries", "beach_access", "restaurants", "festivals", "family_friendly"],
+                "accessibility": ["wheelchair_accessible", "parking_available"],
+                "languages_available": ["Arabic", "English"],
+                "best_time_to_visit": "Late afternoon and evening",
+                "nearby_attractions": ["The Pearl Qatar", "West Bay"],
+                "transportation": ["taxi_accessible", "parking_available", "bus_routes"]
+            }
+        ]
+        
+        # CAFES DATA
+        self.data["cafes"] = [
+            {
+                "id": "cafe_001",
+                "name": "Karak House",
+                "specialty": "Traditional Karak Tea",
+                "location": "Souq Waqif",
+                "coordinates": {"lat": 25.2867, "lng": 51.5330},
+                "price_range": "$",
+                "avg_cost_per_person": 15,
+                "rating": 4.5,
+                "description": "Authentic Qatari tea house serving the perfect blend of karak tea with traditional snacks.",
+                "specialties": ["Karak Tea", "Arabic Coffee", "Traditional Sweets", "Sambosas"],
+                "ambiance": "Traditional, Local experience, Casual",
+                "opening_hours": "06:00-24:00",
+                "features": ["authentic_experience", "budget_friendly", "outdoor_seating", "quick_service"],
+                "best_time_to_visit": "Early morning or evening"
+            },
+            {
+                "id": "cafe_002",
+                "name": "Café Ceramic",
+                "specialty": "Artisan Coffee & Pottery",
+                "location": "Katara Cultural Village",
+                "coordinates": {"lat": 25.3792, "lng": 51.5315},
+                "price_range": "$$",
+                "avg_cost_per_person": 35,
+                "rating": 4.6,
+                "description": "Unique café combining specialty coffee with pottery in a cultural setting.",
+                "specialties": ["Specialty Coffee", "Pottery Classes", "Artisan Pastries"],
+                "ambiance": "Artistic, Cultural, Creative",
+                "opening_hours": "08:00-22:00",
+                "features": [ "cultural_location", "instagram_worthy", "creative_experience"],
+                "best_time_to_visit": "Morning"
+            },
+                        {
+                "id": "cafe_003",
+                "name": "Chapati & Karak",
+                "specialty": "Indian-style Karak & Snacks",
+                "location": "Souq Waqif",
+                "coordinates": {"lat": 25.2865, "lng": 51.5334},
+                "price_range": "$",
+                "avg_cost_per_person": 18,
+                "rating": 4.4,
+                "description": "Popular local spot for strong karak tea and Indian-style snacks, beloved by workers and locals.",
+                "specialties": ["Strong Karak", "Chapati", "Paratha", "Samosas", "Omelette"],
+                "ambiance": "Local, Casual, No-frills",
+                "opening_hours": "05:00-24:00",
+                "contact": "+974 4444 1003",
+                "features": ["local_favorite", "strong_tea", "budget_friendly", "quick_service", "authentic_taste"],
+                "best_time_to_visit": "Early morning with workers",
+                "wifi": False,
+                "seating": "Simple tables and chairs"
+            },
+            
+            # Modern Coffee Shops - Mid-range
+            {
+                "id": "cafe_004",
+                "name": "Café Ceramic",
+                "specialty": "Artisan Coffee & Pottery",
+                "location": "Katara Cultural Village",
+                "coordinates": {"lat": 25.3792, "lng": 51.5315},
+                "price_range": "$",
+                "avg_cost_per_person": 35,
+                "rating": 4.6,
+                "description": "Unique café combining specialty coffee with pottery workshops in a cultural setting.",
+                "specialties": ["Specialty Coffee", "Pottery Classes", "Artisan Pastries", "Fresh Juices", "Healthy Bowls"],
+                "ambiance": "Artistic, Cultural, Creative",
+                "opening_hours": "08:00-22:00",
+                "contact": "+974 4444 1004",
+                "features": ["art_workshops", "cultural_location", "instagram_worthy", "creative_experience", "beach_nearby"],
+                "best_time_to_visit": "Morning for workshops",
+                "wifi": True,
+                "seating": "Artistic tables with pottery displays"
+            },
+            {
+                "id": "cafe_005",
+                "name": "Dose Café",
+                "specialty": "Third Wave Coffee",
+                "location": "The Pearl Qatar",
+                "coordinates": {"lat": 25.3713, "lng": 51.5520},
+                "price_range": "$",
+                "avg_cost_per_person": 40,
+                "rating": 4.7,
+                "description": "Modern coffee shop focusing on high-quality single-origin beans and artisanal brewing methods.",
+                "specialties": ["Single Origin Coffee", "Cold Brew", "Specialty Lattes", "Avocado Toast", "Acai Bowls"],
+                "ambiance": "Modern, Trendy, Marina views",
+                "opening_hours": "07:00-23:00",
+                "contact": "+974 4444 1005",
+                "features": ["third_wave_coffee", "marina_view", "healthy_options", "instagram_worthy", "specialty_beans"],
+                "best_time_to_visit": "Morning for fresh roast",
+                "wifi": True,
+                "seating": "Modern furniture with marina views"
+            },
+            {
+                "id": "cafe_006",
+                "name": "Project Café",
+                "specialty": "Specialty Coffee & Co-working",
+                "location": "West Bay",
+                "coordinates": {"lat": 25.3600, "lng": 51.5290},
+                "price_range": "$",
+                "avg_cost_per_person": 38,
+                "rating": 4.5,
+                "description": "Coffee shop designed for productivity with excellent WiFi, quiet atmosphere, and specialty drinks.",
+                "specialties": ["Flat White", "Nitro Coffee", "Matcha Lattes", "Protein Smoothies", "Healthy Wraps"],
+                "ambiance": "Professional, Quiet, Work-friendly",
+                "opening_hours": "06:30-22:00",
+                "contact": "+974 4444 1006",
+                "features": ["coworking_space", "fast_wifi", "quiet_atmosphere", "charging_stations", "meeting_rooms"],
+                "best_time_to_visit": "Morning for productivity",
+                "wifi": True,
+                "seating": "Ergonomic chairs and work tables"
+            },
+            {
+                "id": "cafe_007",
+                "name": "Raw Coffee Company",
+                "specialty": "Local Roastery",
+                "location": "Msheireb Downtown",
+                "coordinates": {"lat": 25.2900, "lng": 51.5280},
+                "price_range": "$",
+                "avg_cost_per_person": 42,
+                "rating": 4.8,
+                "description": "Local coffee roastery with freshly roasted beans and expert baristas. Qatar's premier coffee destination.",
+                "specialties": ["Freshly Roasted Beans", "Pour Over", "Espresso Drinks", "Coffee Tasting", "Local Blends"],
+                "ambiance": "Industrial, Coffee-focused, Local",
+                "opening_hours": "07:00-21:00",
+                "contact": "+974 4444 1007",
+                "features": ["local_roastery", "coffee_education", "bean_sales", "expert_baristas", "tasting_sessions"],
+                "best_time_to_visit": "Mid-morning for fresh roast",
+                "wifi": True,
+                "seating": "Industrial style with coffee bean displays"
+            },
+            
+            # International Chains - Various Price Points
+            {
+                "id": "cafe_008",
+                "name": "Starbucks",
+                "specialty": "International Coffee Chain",
+                "location": "Multiple Locations",
+                "coordinates": {"lat": 25.3000, "lng": 51.5000},
+                "price_range": "$",
+                "avg_cost_per_person": 28,
+                "rating": 4.2,
+                "description": "International coffee chain with consistent quality and familiar menu items across multiple locations.",
+                "specialties": ["Frappuccinos", "Seasonal Drinks", "Pastries", "Sandwiches", "Iced Coffee"],
+                "ambiance": "Familiar, International, Consistent",
+                "opening_hours": "06:00-24:00",
+                "contact": "+974 4444 1008",
+                "features": ["multiple_locations", "consistent_quality", "seasonal_menu", "mobile_ordering", "loyalty_program"],
+                "best_time_to_visit": "Any time for consistency",
+                "wifi": True,
+                "seating": "Standard franchise seating"
+            },
+            {
+                "id": "cafe_009",
+                "name": "Costa Coffee",
+                "specialty": "British Coffee Chain",
+                "location": "Multiple Locations",
+                "coordinates": {"lat": 25.3100, "lng": 51.5100},
+                "price_range": "$",
+                "avg_cost_per_person": 25,
+                "rating": 4.0,
+                "description": "Greate for Studying. Come here to Study. British coffee chain known for their signature blend and comfortable seating areas.",
+                "specialties": ["Flat White", "Costa Signature Blend", "Paninis", "Muffins", "Iced Drinks"],
+                "ambiance": "Comfortable, British style, Relaxed",
+                "opening_hours": "06:00-24:00",
+                "contact": "+974 4444 1009",
+                "features": ["comfortable_seating", "british_style", "budget_friendly", "multiple_locations", "quick_service"],
+                "best_time_to_visit": "Afternoon for relaxation",
+                "wifi": True,
+                "seating": "Comfortable sofas and chairs"
+            },
+            
+            # Specialty & Themed Cafes
+            {
+                "id": "cafe_010",
+                "name": "Shakespeare & Co.",
+                "specialty": "French-style Café & Bookstore",
+                "location": "The Gate Mall",
+                "coordinates": {"lat": 25.3730, "lng": 51.5410},
+                "price_range": "$",
+                "avg_cost_per_person": 45,
+                "rating": 4.4,
+                "description": "French-inspired café with bookstore atmosphere, serving coffee, pastries, and light meals.",
+                "specialties": ["French Pastries", "Café au Lait", "Croque Monsieur", "Fresh Salads", "Quiche"],
+                "ambiance": "French, Literary, Cozy",
+                "opening_hours": "08:00-23:00",
+                "contact": "+974 4444 1010",
+                "features": ["bookstore_atmosphere", "french_pastries", "quiet_reading", "literary_theme", "all_day_dining"],
+                "best_time_to_visit": "Afternoon for reading",
+                "wifi": True,
+                "seating": "Cozy chairs with books around"
+            },
+            {
+                "id": "cafe_011",
+                "name": "Tche Tche",
+                "specialty": "Lebanese Café & Sweets",
+                "location": "Villaggio Mall",
+                "coordinates": {"lat": 25.2613, "lng": 51.4440},
+                "price_range": "$",
+                "avg_cost_per_person": 35,
+                "rating": 4.5,
+                "description": "Lebanese café famous for traditional sweets, Arabic coffee, and Middle Eastern desserts.",
+                "specialties": ["Knafeh", "Muhallabia", "Arabic Coffee", "Turkish Delight", "Fresh Juices"],
+                "ambiance": "Lebanese, Sweet-focused, Traditional",
+                "opening_hours": "10:00-23:00",
+                "contact": "+974 4444 1011",
+                "features": ["traditional_sweets", "middle_eastern_desserts", "family_friendly", "mall_location", "takeaway_available"],
+                "best_time_to_visit": "Evening for fresh sweets",
+                "wifi": True,
+                "seating": "Traditional Middle Eastern style"
+            },
+            {
+                "id": "cafe_012",
+                "name": "Tim Hortons",
+                "specialty": "Canadian Coffee & Donuts",
+                "location": "Multiple Locations",
+                "coordinates": {"lat": 25.3200, "lng": 51.5200},
+                "price_range": "$",
+                "avg_cost_per_person": 22,
+                "rating": 4.1,
+                "description": "Canadian coffee chain known for fresh donuts, coffee, and casual breakfast items.",
+                "specialties": ["Fresh Donuts", "Canadian Coffee", "Breakfast Sandwiches", "Iced Capp", "Timbits"],
+                "ambiance": "Casual, Canadian, Family-friendly",
+                "opening_hours": "05:30-24:00",
+                "contact": "+974 4444 1012",
+                "features": ["fresh_donuts", "canadian_style", "breakfast_all_day", "budget_friendly", "quick_service"],
+                "best_time_to_visit": "Morning for fresh donuts",
+                "wifi": True,
+                "seating": "Simple tables and booths"
+            },
+            
+            # Health & Juice Focused
+            {
+                "id": "cafe_013",
+                "name": "Fresh Express",
+                "specialty": "Fresh Juices & Smoothies",
+                "location": "Multiple Locations",
+                "coordinates": {"lat": 25.3300, "lng": 51.5300},
+                "price_range": "$",
+                "avg_cost_per_person": 20,
+                "rating": 4.3,
+                "description": "Health-focused café specializing in fresh juices, smoothies, and light healthy meals.",
+                "specialties": ["Fresh Juices", "Protein Smoothies", "Salads", "Wraps", "Acai Bowls"],
+                "ambiance": "Health-focused, Fresh, Modern",
+                "opening_hours": "07:00-22:00",
+                "contact": "+974 4444 1013",
+                "features": ["healthy_options", "fresh_ingredients", "customizable_drinks", "quick_service", "multiple_locations"],
+                "best_time_to_visit": "Post-workout or lunch",
+                "wifi": True,
+                "seating": "Modern healthy café style"
+            },
+            {
+                "id": "cafe_014",
+                "name": "Boost Juice",
+                "specialty": "Australian Juice & Smoothie Bar",
+                "location": "City Center Mall",
+                "coordinates": {"lat": 25.3219, "lng": 51.5070},
+                "price_range": "$",
+                "avg_cost_per_person": 25,
+                "rating": 4.2,
+                "description": "Australian juice bar offering fresh fruit smoothies, protein shakes, and healthy snacks.",
+                "specialties": ["Fruit Smoothies", "Protein Shakes", "Fresh Juices", "Energy Boosters", "Healthy Snacks"],
+                "ambiance": "Energetic, Australian, Health-conscious",
+                "opening_hours": "10:00-22:00",
+                "contact": "+974 4444 1014",
+                "features": ["australian_style", "energy_drinks", "post_workout", "fresh_fruit", "healthy_lifestyle"],
+                "best_time_to_visit": "After gym or midday",
+                "wifi": True,
+                "seating": "High tables and bar stools"
+            }
+        ]
+        
+        # SHOPPING DATA
+        self.data["shopping"] = [
+            {
+                "id": "shop_001",
+                "name": "Villaggio Mall",
+                "category": "Shopping Mall",
+                "location": "Aspire Zone",
+                "coordinates": {"lat": 25.2613, "lng": 51.4436},
+                "description": "Venice-themed luxury shopping mall with gondola rides and high-end international brands.",
+                "highlights": ["Gondola rides", "Sky ceiling", "Luxury brands", "Family entertainment"],
+                "opening_hours": "10:00-22:00",
+                "features": ["luxury_shopping", "family_entertainment", "dining", "unique_experience"],
+                "brands": ["International luxury", "Fashion", "Electronics", "Home goods"],
+                "best_time_to_visit": "Weekday afternoons"
+            },
+            {
+                "id": "shop_002",
+                "name": "Gold Souq",
+                "category": "Traditional Market",
+                "location": "Souq Waqif",
+                "coordinates": {"lat": 25.2867, "lng": 51.5335},
+                "description": "Traditional gold and jewelry market with competitive prices and custom designs.",
+                "highlights": ["Gold jewelry", "Custom designs", "Competitive prices", "Traditional craftsmanship"],
+                "opening_hours": "09:00-22:00",
+                "features": ["traditional_shopping", "negotiable_prices", "custom_jewelry", "authentic_experience"],
+                "best_time_to_visit": "Evening when less crowded"
+            }
+        ]
+        
+        # TRANSPORTATION DATA
+        self.data["transportation"] = [
+            {
+                "id": "trans_001",
+                "type": "Doha Metro",
+                "description": "Modern, efficient metro system connecting major attractions and districts",
+                "lines": ["Red Line", "Green Line", "Gold Line"],
+                "operating_hours": "05:30-24:00",
+                "cost": "2-8 QAR depending on zones",
+                "features": ["air_conditioned", "wifi", "accessibility", "contactless_payment"],
+                "coverage": ["Airport", "City Center", "West Bay", "Cultural Village"]
+            },
+            {
+                "id": "trans_002",
+                "type": "Karwa Taxi",
+                "description": "Official Qatar taxi service with fixed meters and trained drivers",
+                "cost": "Starting 10 QAR + per km",
+                "features": ["metered_fare", "trained_drivers", "credit_card_accepted", "app_booking"],
+                "availability": "24/7"
+            }
+        
+        ]
+
+    def get_all_data(self) -> Dict[str, List[Dict]]:
+        """Return all data"""
+        return self.data
+    
+    def get_category_data(self, category: str) -> List[Dict]:
+        """Get data for specific category"""
+        return self.data.get(category, [])
+    
+    def search_by_name(self, name: str) -> List[Dict]:
+        """Search across all categories by name"""
+        results = []
+        for category, items in self.data.items():
+            for item in items:
+                if name.lower() in item.get('name', '').lower():
+                    results.append({**item, 'category': category})
+        return results
+    
+    def search_by_location(self, location: str) -> List[Dict]:
+        """Search by location"""
+        results = []
+        for category, items in self.data.items():
+            for item in items:
+                if location.lower() in item.get('location', '').lower():
+                    results.append({**item, 'category': category})
+        return results
+    
+    def get_by_price_range(self, price_range: str) -> List[Dict]:
+        """Filter by price range"""
+        results = []
+        for category, items in self.data.items():
+            for item in items:
+                if item.get('price_range') == price_range:
+                    results.append({**item, 'category': category})
+        return results
+    
+    def export_to_json(self, filename: str = "qatar_tourism_data.json"):
+        """Export data to JSON file"""
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(self.data, f, indent=2, ensure_ascii=False)
+        print(f"Data exported to {filename}")
+    
+    def export_to_csv(self, category: str, filename: str = None):
+        """Export specific category to CSV"""
+        if category not in self.data:
+            print(f"Category {category} not found")
+            return
+        
+        if filename is None:
+            filename = f"qatar_{category}.csv"
+        
+        df = pd.DataFrame(self.data[category])
+        df.to_csv(filename, index=False)
+        print(f"{category} data exported to {filename}")
+    
+    def create_embeddings_text(self) -> List[Dict]:
+        """
+        Create rich text descriptions for each item that will work well with embeddings
+        This prepares the data for RAG implementation
+        """
+        embeddings_data = []
+        
+        for category, items in self.data.items():
+            for item in items:
+                # Create comprehensive text description
+                text_parts = []
+                
+                # Basic info
+                text_parts.append(f"Name: {item.get('name', '')}")
+                text_parts.append(f"Category: {category}")
+                text_parts.append(f"Location: {item.get('location', '')}")
+                
+                # Description
+                if item.get('description'):
+                    text_parts.append(f"Description: {item['description']}")
+                
+                # Specific fields based on category
+                if category == "restaurants":
+                    text_parts.append(f"Cuisine: {item.get('cuisine_type', '')}")
+                    text_parts.append(f"Price range: {item.get('price_range', '')}")
+                    text_parts.append(f"Specialties: {', '.join(item.get('specialties', []))}")
+                    text_parts.append(f"Ambiance: {item.get('ambiance', '')}")
+                    
+                elif category == "attractions":
+                    text_parts.append(f"Type: {item.get('category', '')}")
+                    text_parts.append(f"Entry fee: {item.get('entry_fee', '')}")
+                    text_parts.append(f"Duration: {item.get('estimated_duration', '')}")
+                    text_parts.append(f"Highlights: {', '.join(item.get('highlights', []))}")
+                
+                elif category == "cafes":
+                    text_parts.append(f"Specialty: {item.get('specialty', '')}")
+                    text_parts.append(f"Specialties: {', '.join(item.get('specialties', []))}")
+                    text_parts.append(f"Ambiance: {item.get('ambiance', '')}")
+                
+                # Common fields
+                if item.get('features'):
+                    text_parts.append(f"Features: {', '.join(item['features'])}")
+                
+                if item.get('opening_hours'):
+                    text_parts.append(f"Hours: {item['opening_hours']}")
+                
+                if item.get('rating'):
+                    text_parts.append(f"Rating: {item['rating']}/5")
+                
+                if item.get('best_time_to_visit'):
+                    text_parts.append(f"Best time to visit: {item['best_time_to_visit']}")
+                
+                # Create final text
+                full_text = ". ".join(text_parts)
+                
+                embeddings_data.append({
+                    'id': item.get('id', f"{category}_{len(embeddings_data)}"),
+                    'category': category,
+                    'name': item.get('name', ''),
+                    'text': full_text,
+                    'metadata': item
+                })
+        
+        return embeddings_data
+    
+    def print_summary(self):
+        """Print database summary"""
+        print(" Qatar Tourism Database Summary")
+        print("=" * 50)
+        total_items = 0
+        for category, items in self.data.items():
+            count = len(items)
+            total_items += count
+            print(f"{category.title()}: {count} items")
+        print(f"\nTotal items: {total_items}")
+        print("=" * 50)
+
+# Usage Example
+if __name__ == "__main__":
+    # Create the database
+    db = QatarTourismDatabase()
+    
+    # Print summary
+    db.print_summary()
+    
+    # Export data for later use
+    db.export_to_json("qatar_tourism_data.json")
+    
+    # Create embeddings-ready text
+    embeddings_data = db.create_embeddings_text()
+    
+    # Save embeddings data
+    with open("qatar_embeddings_data.json", 'w', encoding='utf-8') as f:
+        json.dump(embeddings_data, f, indent=2, ensure_ascii=False)
+    
+    print("\n Database created successfully!")
+    print(" Files created:")
+    print("  - qatar_tourism_data.json (raw data)")
+    print("  - qatar_embeddings_data.json (prepared for embeddings)")
+    print("\n Ready for Step 2: Creating embeddings and implementing RAG!")
