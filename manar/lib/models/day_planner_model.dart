@@ -1,4 +1,4 @@
-// lib/models/day_planner_models.dart
+// lib/models/day_planner_model.dart
 import 'package:flutter/foundation.dart';
 
 // Shared coordinate model
@@ -7,6 +7,20 @@ class LatLng {
   final double longitude;
 
   LatLng(this.latitude, this.longitude);
+
+  @override
+  String toString() => 'LatLng($latitude, $longitude)';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LatLng &&
+          runtimeType == other.runtimeType &&
+          latitude == other.latitude &&
+          longitude == other.longitude;
+
+  @override
+  int get hashCode => latitude.hashCode ^ longitude.hashCode;
 }
 
 // Plan stop model
@@ -82,6 +96,47 @@ class PlanStop {
       'bookingRequired': bookingRequired,
     };
   }
+
+  // Create a copy with updated values
+  PlanStop copyWith({
+    String? id,
+    String? name,
+    String? location,
+    String? type,
+    String? startTime,
+    String? duration,
+    String? description,
+    String? estimatedCost,
+    String? travelToNext,
+    LatLng? coordinates,
+    String? tips,
+    double? rating,
+    bool? bookingRequired,
+  }) {
+    return PlanStop(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      location: location ?? this.location,
+      type: type ?? this.type,
+      startTime: startTime ?? this.startTime,
+      duration: duration ?? this.duration,
+      description: description ?? this.description,
+      estimatedCost: estimatedCost ?? this.estimatedCost,
+      travelToNext: travelToNext ?? this.travelToNext,
+      coordinates: coordinates ?? this.coordinates,
+      tips: tips ?? this.tips,
+      rating: rating ?? this.rating,
+      bookingRequired: bookingRequired ?? this.bookingRequired,
+    );
+  }
+}
+
+// Booking status enum
+enum BookingStatus {
+  pending,
+  processing,
+  confirmed,
+  failed,
 }
 
 // Booking step model
@@ -102,16 +157,50 @@ class BookingStep {
     required this.location,
     required this.time,
     required this.status,
-    required this.details,
+    Map<String, dynamic>? details,
     this.confirmationNumber,
-  });
-}
+  }) : details = details ?? {};
 
-enum BookingStatus {
-  pending,
-  processing,
-  confirmed,
-  failed,
+  // Get error message from details if booking failed
+  String? get errorMessage => details['error_message'];
+
+  // Set error message in details
+  set errorMessage(String? message) {
+    if (message != null) {
+      details['error_message'] = message;
+    } else {
+      details.remove('error_message');
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'stopName': stopName,
+      'type': type,
+      'location': location,
+      'time': time,
+      'status': status.toString(),
+      'details': details,
+      'confirmationNumber': confirmationNumber,
+    };
+  }
+
+  factory BookingStep.fromJson(Map<String, dynamic> json) {
+    return BookingStep(
+      id: json['id'] ?? '',
+      stopName: json['stopName'] ?? '',
+      type: json['type'] ?? '',
+      location: json['location'] ?? '',
+      time: json['time'] ?? '',
+      status: BookingStatus.values.firstWhere(
+        (e) => e.toString() == json['status'],
+        orElse: () => BookingStatus.pending,
+      ),
+      details: Map<String, dynamic>.from(json['details'] ?? {}),
+      confirmationNumber: json['confirmationNumber'],
+    );
+  }
 }
 
 // Chat message models
@@ -139,8 +228,39 @@ class ChatMessage {
     this.stepId,
     this.showSummary,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'text': text,
+      'isUser': isUser,
+      'timestamp': timestamp.toIso8601String(),
+      'options': options,
+      'questionId': questionId,
+      'showGenerateButton': showGenerateButton,
+      'needsInput': needsInput,
+      'inputFields': inputFields,
+      'stepId': stepId,
+      'showSummary': showSummary,
+    };
+  }
+
+  factory ChatMessage.fromJson(Map<String, dynamic> json) {
+    return ChatMessage(
+      text: json['text'] ?? '',
+      isUser: json['isUser'] ?? false,
+      timestamp: DateTime.parse(json['timestamp']),
+      options: json['options'] != null ? List<String>.from(json['options']) : null,
+      questionId: json['questionId'],
+      showGenerateButton: json['showGenerateButton'],
+      needsInput: json['needsInput'],
+      inputFields: json['inputFields'] != null ? List<String>.from(json['inputFields']) : null,
+      stepId: json['stepId'],
+      showSummary: json['showSummary'],
+    );
+  }
 }
 
+// Planner question model
 class PlannerQuestion {
   final String id;
   final String question;
@@ -155,6 +275,26 @@ class PlannerQuestion {
     required this.followUp,
     required this.responseKey,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'question': question,
+      'options': options,
+      'followUp': followUp,
+      'responseKey': responseKey,
+    };
+  }
+
+  factory PlannerQuestion.fromJson(Map<String, dynamic> json) {
+    return PlannerQuestion(
+      id: json['id'] ?? '',
+      question: json['question'] ?? '',
+      options: List<String>.from(json['options'] ?? []),
+      followUp: json['followUp'] ?? '',
+      responseKey: json['responseKey'] ?? '',
+    );
+  }
 }
 
 // Enhanced recommendation item model
@@ -219,5 +359,28 @@ class RecommendationItem {
       'contact': contact,
       'features': features,
     };
+  }
+
+  // Convert to PlanStop for adding to day plan
+  PlanStop toPlanStop({
+    required String startTime,
+    String? travelToNext,
+    LatLng? coordinates,
+  }) {
+    return PlanStop(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: name,
+      location: location,
+      type: type,
+      startTime: startTime,
+      duration: estimatedDuration,
+      description: description,
+      estimatedCost: priceRange,
+      travelToNext: travelToNext ?? '15 min travel',
+      coordinates: coordinates ?? LatLng(25.2854, 51.5310), // Default to Doha
+      tips: whyRecommended,
+      rating: rating,
+      bookingRequired: bookingAvailable,
+    );
   }
 }
