@@ -6,6 +6,7 @@ import '../../constants/app_theme.dart';
 import 'package:manara/services/user_services.dart';
 import 'package:manara/services/auth_services.dart';
 import '../../services/ai_recommendation_service.dart';
+import 'package:manara/screens/planner/day_planner_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -66,6 +67,13 @@ class _DashboardScreenState extends State<DashboardScreen>
       if (mounted) setState(() {});
     });
   }
+
+void _navigateToTripPlanner() {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => AIDayPlannerScreen()),
+  );
+}
 
   @override
   void dispose() {
@@ -406,77 +414,77 @@ class _DashboardScreenState extends State<DashboardScreen>
   //   );
   // }
 
-  Widget _buildDayPlanningSection() {
-    return Container(
-      padding: EdgeInsets.all(24),
-      decoration: AppStyles.goldGradientContainer,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.lightbulb_outline,
-                color: AppColors.maroon,
-                size: 28,
-              ),
-              SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  'Plan Your Perfect Day',
-                  style: GoogleFonts.inter(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.maroon,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12),
-          Text(
-            'Let our AI create a personalized itinerary based on your preferences and available time.',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              color: AppColors.maroon.withOpacity(0.8),
+Widget _buildDayPlanningSection() {
+  return Container(
+    padding: EdgeInsets.all(24),
+    decoration: AppStyles.goldGradientContainer,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(
+              Icons.lightbulb_outline,
+              color: AppColors.maroon,
+              size: 28,
             ),
-          ),
-          SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => _navigateToTripPlanner(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.maroon,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.auto_awesome, size: 20),
-                      SizedBox(width: 8),
-                      Text(
-                        'Create AI Plan',
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
+            SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'Plan Your Perfect Day',
+                style: GoogleFonts.inter(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.maroon,
                 ),
               ),
-            ],
+            ),
+          ],
+        ),
+        SizedBox(height: 12),
+        Text(
+          'Let our AI create a personalized itinerary based on your preferences and available time.',
+          style: GoogleFonts.inter(
+            fontSize: 16,
+            color: AppColors.maroon.withOpacity(0.8),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+        SizedBox(height: 20),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () => _navigateToTripPlanner(), // Fixed this line
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.maroon,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.auto_awesome, size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      'Create AI Plan',
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildRecommendationSection(String title, List<RecommendationItem> items) {
     return Consumer<UserService>(
@@ -749,11 +757,6 @@ class _DashboardScreenState extends State<DashboardScreen>
         ],
       ),
     );
-  }
-
-  void _navigateToTripPlanner() {
-    // This will be handled by the main navigation
-    Navigator.pushNamed(context, '/day-planner');
   }
 
   void _navigateToDetails(RecommendationItem item) {

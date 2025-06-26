@@ -1,1043 +1,514 @@
-// screens/planner/day_planner_screen.dart
+// screens/day_planner/ai_day_planner_screen.dart
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/user_services.dart';
+import 'package:manara/models/day_planner_model.dart';
+import 'generated_plan_screen.dart';
 
-class DayPlannerScreen extends StatefulWidget {
+class AIDayPlannerScreen extends StatefulWidget {
   @override
-  _DayPlannerScreenState createState() => _DayPlannerScreenState();
+  _AIDayPlannerScreenState createState() => _AIDayPlannerScreenState();
 }
 
-class _DayPlannerScreenState extends State<DayPlannerScreen> 
+class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   
-  String _selectedDuration = '4_hours';
-  String _selectedBudget = 'mid_range';
-  List<String> _selectedInterests = [];
-  bool _isGeneratingPlan = false;
+  List<ChatMessage> messages = [];
+  TextEditingController _textController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
   
-  final List<Map<String, dynamic>> _savedPlans = [
-    {
-      'title': 'Cultural Heritage Tour',
-      'date': 'Today',
-      'duration': '6 hours',
-      'places': 4,
-      'status': 'active',
-    },
-    {
-      'title': 'Food & Shopping Adventure',
-      'date': 'Yesterday',
-      'duration': '4 hours', 
-      'places': 3,
-      'status': 'completed',
-    },
-    {
-      'title': 'Modern Doha Experience',
-      'date': '2 days ago',
-      'duration': '8 hours',
-      'places': 6,
-      'status': 'completed',
-    },
+  int currentQuestionIndex = 0;
+  Map<String, dynamic> userResponses = {};
+  bool isTyping = false;
+  bool questionsCompleted = false;
+
+  final List<PlannerQuestion> questions = [
+    PlannerQuestion(
+      id: 'time_available',
+      question: 'How much time do you have for your Qatar adventure today?',
+      options: ['Half day (4 hours)', 'Full day (8 hours)', 'Extended day (12 hours)'],
+      followUp: 'Perfect! What time would you like to start?',
+      responseKey: 'duration',
+    ),
+    PlannerQuestion(
+      id: 'start_time',
+      question: 'What time would you like to start your day?',
+      options: ['Early morning (7-9 AM)', 'Morning (9-11 AM)', 'Afternoon (12-2 PM)'],
+      followUp: 'Got it! What type of experiences are you most interested in?',
+      responseKey: 'start_time',
+    ),
+    PlannerQuestion(
+      id: 'interests',
+      question: 'What type of experiences excite you most?',
+      options: ['Cultural & Historic', 'Food & Dining', 'Modern & Shopping', 'Mix of everything'],
+      followUp: 'Excellent choice! What\'s your budget range for today?',
+      responseKey: 'interests',
+    ),
+    PlannerQuestion(
+      id: 'budget',
+      question: 'What\'s your budget range for today\'s adventure?',
+      options: ['Budget-friendly (\$50-100)', 'Moderate (\$100-200)', 'Premium (\$200+)'],
+      followUp: 'Great! Any specific places you definitely want to visit or avoid?',
+      responseKey: 'budget',
+    ),
+    PlannerQuestion(
+      id: 'preferences',
+      question: 'Any specific preferences or must-visit places?',
+      options: ['Surprise me with the best!', 'Include traditional souqs', 'Modern attractions only'],
+      followUp: 'Perfect! I have everything I need to create your amazing day plan.',
+      responseKey: 'special_preferences',
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
-    
     _animationController = AnimationController(
-      duration: AppDurations.medium,
+      duration: Duration(milliseconds: 1000),
       vsync: this,
     );
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_animationController);
+    _animationController.forward();
     
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
+    // Start conversation
+    _addMessage(ChatMessage(
+      text: 'Hi there! 👋 I\'m your AI trip planner. I\'ll ask you a few quick questions to create the perfect day plan for you in Qatar!',
+      isUser: false,
+      timestamp: DateTime.now(),
     ));
     
-    _animationController.forward();
+    // Start first question after a delay
+    Future.delayed(Duration(milliseconds: 1500), () {
+      _askQuestion(0);
+    });
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _textController.dispose();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _addMessage(ChatMessage message) {
+    setState(() {
+      messages.add(message);
+    });
+    _scrollToBottom();
+  }
+
+  void _scrollToBottom() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  void _askQuestion(int questionIndex) {
+    if (questionIndex >= questions.length) {
+      _completeQuestionnaire();
+      return;
+    }
+
+    setState(() {
+      isTyping = true;
+      currentQuestionIndex = questionIndex;
+    });
+
+    Future.delayed(Duration(milliseconds: 1000), () {
+      setState(() {
+        isTyping = false;
+      });
+      
+      _addMessage(ChatMessage(
+        text: questions[questionIndex].question,
+        isUser: false,
+        timestamp: DateTime.now(),
+        options: questions[questionIndex].options,
+        questionId: questions[questionIndex].id,
+      ));
+    });
+  }
+
+  void _handleOptionSelected(String option, String questionId) {
+    // Add user response
+    _addMessage(ChatMessage(
+      text: option,
+      isUser: true,
+      timestamp: DateTime.now(),
+    ));
+
+    // Store response
+    final question = questions.firstWhere((q) => q.id == questionId);
+    userResponses[question.responseKey] = option;
+
+    // Show follow-up and move to next question
+    Future.delayed(Duration(milliseconds: 800), () {
+      _addMessage(ChatMessage(
+        text: question.followUp,
+        isUser: false,
+        timestamp: DateTime.now(),
+      ));
+
+      Future.delayed(Duration(milliseconds: 1200), () {
+        _askQuestion(currentQuestionIndex + 1);
+      });
+    });
+  }
+
+  void _handleTextResponse(String text) {
+    if (text.trim().isEmpty) return;
+
+    _addMessage(ChatMessage(
+      text: text,
+      isUser: true,
+      timestamp: DateTime.now(),
+    ));
+
+    // Store custom response
+    if (currentQuestionIndex < questions.length) {
+      final question = questions[currentQuestionIndex];
+      userResponses[question.responseKey] = text;
+
+      Future.delayed(Duration(milliseconds: 800), () {
+        _addMessage(ChatMessage(
+          text: question.followUp,
+          isUser: false,
+          timestamp: DateTime.now(),
+        ));
+
+        Future.delayed(Duration(milliseconds: 1200), () {
+          _askQuestion(currentQuestionIndex + 1);
+        });
+      });
+    }
+
+    _textController.clear();
+  }
+
+  void _completeQuestionnaire() {
+    setState(() {
+      questionsCompleted = true;
+    });
+
+    _addMessage(ChatMessage(
+      text: 'Excellent! I have all the information I need. Let me create an amazing personalized day plan just for you! 🎉',
+      isUser: false,
+      timestamp: DateTime.now(),
+      showGenerateButton: true,
+    ));
+  }
+
+  void _generatePlan() {
+    // Navigate to generated plan screen with user responses
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GeneratedPlanScreen(
+          planningData: userResponses,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.primaryBlue,
-            AppColors.darkNavy,
-          ],
-        ),
-      ),
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: SingleChildScrollView(
-          padding: AppStyles.defaultPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              _buildHeader(),
-              
-              SizedBox(height: 24),
-              
-              // Quick Plan Generator
-              _buildQuickPlanGenerator(),
-              
-              SizedBox(height: 32),
-              
-              // Saved Plans
-              _buildSavedPlans(),
-              
-              SizedBox(height: 32),
-              
-              // Plan Templates
-              _buildPlanTemplates(),
-              
-              SizedBox(height: 100), // Space for bottom navigation
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Day Planner',
+    return Scaffold(
+      backgroundColor: AppColors.darkNavy,
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryBlue,
+        title: Text(
+          'AI Day Planner',
           style: GoogleFonts.inter(
-            fontSize: 28,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-        SizedBox(height: 8),
-        Text(
-          'Create personalized itineraries with AI',
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            color: Colors.white70,
-          ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
         ),
-      ],
+        elevation: 0,
+      ),
+      body: FadeTransition(
+        opacity: _fadeAnimation,
+        child: Column(
+          children: [
+            // Chat messages
+            Expanded(
+              child: ListView.builder(
+                controller: _scrollController,
+                padding: EdgeInsets.all(16),
+                itemCount: messages.length + (isTyping ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (isTyping && index == messages.length) {
+                    return _buildTypingIndicator();
+                  }
+                  return _buildMessageBubble(messages[index]);
+                },
+              ),
+            ),
+            
+            // Input area
+            if (!questionsCompleted) _buildInputArea(),
+          ],
+        ),
+      ),
     );
   }
 
-  Widget _buildQuickPlanGenerator() {
+  Widget _buildMessageBubble(ChatMessage message) {
     return Container(
-      padding: EdgeInsets.all(24),
-      decoration: AppStyles.goldGradientContainer,
-      child: Column(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.auto_awesome,
-                color: AppColors.maroon,
-                size: 28,
+          if (!message.isUser) ...[
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: AppColors.gold,
+                borderRadius: BorderRadius.circular(20),
               ),
-              SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  'Generate New Plan',
-                  style: GoogleFonts.inter(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.maroon,
+              child: Icon(Icons.smart_toy, color: AppColors.maroon, size: 24),
+            ),
+            SizedBox(width: 12),
+          ],
+          
+          Flexible(
+            child: Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                gradient: message.isUser 
+                  ? LinearGradient(colors: [AppColors.primaryBlue, AppColors.darkPurple])
+                  : LinearGradient(colors: [Colors.grey[800]!, Colors.grey[700]!]),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(message.isUser ? 20 : 5),
+                  bottomRight: Radius.circular(message.isUser ? 5 : 20),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    message.text,
+                    style: GoogleFonts.inter(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-              ),
-            ],
-          ),
-          
-          SizedBox(height: 20),
-          
-          // Duration Selection
-          Text(
-            'How much time do you have?',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppColors.maroon,
-            ),
-          ),
-          SizedBox(height: 12),
-          
-          Row(
-            children: [
-              Expanded(child: _buildDurationOption('2_hours', '2 Hours', 'Quick visit')),
-              SizedBox(width: 8),
-              Expanded(child: _buildDurationOption('4_hours', '4 Hours', 'Half day')),
-              SizedBox(width: 8),
-              Expanded(child: _buildDurationOption('8_hours', '8 Hours', 'Full day')),
-            ],
-          ),
-          
-          SizedBox(height: 20),
-          
-          // Budget Selection
-          Text(
-            'Budget preference?',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppColors.maroon,
-            ),
-          ),
-          SizedBox(height: 12),
-          
-          Row(
-            children: [
-              Expanded(child: _buildBudgetOption('budget', '\$', 'Budget')),
-              SizedBox(width: 8),
-              Expanded(child: _buildBudgetOption('mid_range', '\$\$', 'Mid-range')),
-              SizedBox(width: 8),
-              Expanded(child: _buildBudgetOption('premium', '\$\$\$', 'Premium')),
-            ],
-          ),
-          
-          SizedBox(height: 20),
-          
-          // Generate Button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _isGeneratingPlan ? null : _generatePlan,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.maroon,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 16),
-              ),
-              child: _isGeneratingPlan
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  
+                  // Options buttons
+                  if (message.options != null && message.options!.isNotEmpty) ...[
+                    SizedBox(height: 16),
+                    ...message.options!.map((option) => Container(
+                      margin: EdgeInsets.only(bottom: 8),
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => _handleOptionSelected(option, message.questionId!),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.gold.withOpacity(0.1),
+                          foregroundColor: AppColors.gold,
+                          side: BorderSide(color: AppColors.gold.withOpacity(0.3)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
+                          padding: EdgeInsets.symmetric(vertical: 12),
                         ),
-                        SizedBox(width: 12),
-                        Text('Generating Plan...'),
-                      ],
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.auto_awesome, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          'Generate AI Plan',
+                        child: Text(
+                          option,
                           style: GoogleFonts.inter(
-                            fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDurationOption(String value, String title, String subtitle) {
-    bool isSelected = _selectedDuration == value;
-    return GestureDetector(
-      onTap: () => setState(() => _selectedDuration = value),
-      child: Container(
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isSelected 
-              ? AppColors.maroon.withOpacity(0.2)
-              : Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSelected 
-                ? AppColors.maroon
-                : Colors.transparent,
-            width: 2,
-          ),
-        ),
-        child: Column(
-          children: [
-            Text(
-              title,
-              style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColors.maroon,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              subtitle,
-              style: GoogleFonts.inter(
-                fontSize: 11,
-                color: AppColors.maroon.withOpacity(0.7),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBudgetOption(String value, String symbol, String title) {
-    bool isSelected = _selectedBudget == value;
-    return GestureDetector(
-      onTap: () => setState(() => _selectedBudget = value),
-      child: Container(
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isSelected 
-              ? AppColors.maroon.withOpacity(0.2)
-              : Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSelected 
-                ? AppColors.maroon
-                : Colors.transparent,
-            width: 2,
-          ),
-        ),
-        child: Column(
-          children: [
-            Text(
-              symbol,
-              style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppColors.maroon,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              title,
-              style: GoogleFonts.inter(
-                fontSize: 11,
-                color: AppColors.maroon.withOpacity(0.7),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSavedPlans() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Your Plans',
-              style: GoogleFonts.inter(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            TextButton(
-              onPressed: () => _showAllPlans(),
-              child: Text(
-                'View All',
-                style: GoogleFonts.inter(
-                  color: AppColors.gold,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
-        ),
-        
-        SizedBox(height: 16),
-        
-        ..._savedPlans.take(3).map((plan) => _buildPlanCard(plan)).toList(),
-      ],
-    );
-  }
-
-  Widget _buildPlanCard(Map<String, dynamic> plan) {
-    Color statusColor = plan['status'] == 'active' 
-        ? AppColors.success 
-        : plan['status'] == 'completed' 
-            ? AppColors.info 
-            : AppColors.mediumGray;
-
-    return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => _viewPlan(plan),
-          borderRadius: BorderRadius.circular(16),
-          child: Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.1),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        plan['title'],
-                        style: GoogleFonts.inter(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
                       ),
-                    ),
+                    )).toList(),
+                    
+                    // Custom answer option
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: statusColor.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        plan['status'].toUpperCase(),
-                        style: GoogleFonts.inter(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: statusColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                
-                SizedBox(height: 8),
-                
-                Row(
-                  children: [
-                    Icon(Icons.calendar_today, color: Colors.white70, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      plan['date'],
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Icon(Icons.access_time, color: Colors.white70, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      plan['duration'],
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Icon(Icons.location_on, color: Colors.white70, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      '${plan['places']} places',
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPlanTemplates() {
-    final templates = [
-      {
-        'title': 'Cultural Heritage',
-        'subtitle': 'Museums, souqs, and traditions',
-        'duration': '6-8 hours',
-        'icon': Icons.museum,
-        'color': AppColors.primaryBlue,
-      },
-      {
-        'title': 'Modern Qatar',
-        'subtitle': 'Skyscrapers, malls, and luxury',
-        'duration': '4-6 hours',
-        'icon': Icons.location_city,
-        'color': AppColors.mediumGray,
-      },
-      {
-        'title': 'Food Adventure',
-        'subtitle': 'Local cuisine and hidden gems',
-        'duration': '3-5 hours',
-        'icon': Icons.restaurant,
-        'color': AppColors.darkPurple,
-      },
-      {
-        'title': 'Family Fun',
-        'subtitle': 'Parks, activities, and entertainment',
-        'duration': '5-7 hours',
-        'icon': Icons.family_restroom,
-        'color': AppColors.primaryBlue,
-      },
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Plan Templates',
-          style: GoogleFonts.inter(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          'Quick start with pre-made itineraries',
-          style: GoogleFonts.inter(
-            fontSize: 14,
-            color: Colors.white70,
-          ),
-        ),
-        
-        SizedBox(height: 16),
-        
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-          ),
-          itemCount: templates.length,
-          itemBuilder: (context, index) {
-            final template = templates[index];
-            return _buildTemplateCard(template);
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTemplateCard(Map<String, dynamic> template) {
-    return Container(
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => _useTemplate(template),
-          borderRadius: BorderRadius.circular(16),
-          child: Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: template['color'],
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.1),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    template['icon'],
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                ),
-                
-                SizedBox(height: 16),
-                
-                Text(
-                  template['title'],
-                  style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                
-                SizedBox(height: 8),
-                
-                Text(
-                  template['subtitle'],
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: Colors.white70,
-                  ),
-                ),
-                
-                Spacer(),
-                
-                Row(
-                  children: [
-                    Icon(Icons.access_time, color: Colors.white70, size: 14),
-                    SizedBox(width: 4),
-                    Text(
-                      template['duration'],
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Action methods
-  void _generatePlan() async {
-    setState(() => _isGeneratingPlan = true);
-    
-    // Simulate AI plan generation
-    await Future.delayed(Duration(seconds: 3));
-    
-    setState(() => _isGeneratingPlan = false);
-    
-    _showGeneratedPlan();
-  }
-
-  void _showGeneratedPlan() {
-    final samplePlan = {
-      'title': 'Your Perfect Day in Qatar',
-      'total_duration': '${_selectedDuration.replaceAll('_', ' ')}',
-      'total_cost': _selectedBudget == 'budget' ? 'QR 80-120' : 
-                   _selectedBudget == 'mid_range' ? 'QR 200-300' : 'QR 400-600',
-      'activities': [
-        {
-          'time': '9:00 AM',
-          'activity': 'Museum of Islamic Art',
-          'description': 'Explore world-class Islamic art collection',
-          'location': 'Corniche',
-          'duration': '2 hours',
-          'cost': _selectedBudget == 'budget' ? 'Free' : 'QR 25',
-        },
-        {
-          'time': '11:30 AM',
-          'activity': 'Souq Waqif',
-          'description': 'Traditional market with local crafts and spices',
-          'location': 'Old Doha',
-          'duration': '1.5 hours',
-          'cost': _selectedBudget == 'budget' ? 'QR 50' : 'QR 100',
-        },
-        {
-          'time': '1:00 PM',
-          'activity': 'Local Restaurant',
-          'description': 'Authentic Qatari cuisine experience',
-          'location': 'Souq Waqif',
-          'duration': '1 hour',
-          'cost': _selectedBudget == 'budget' ? 'QR 40' : 'QR 80',
-        },
-        if (_selectedDuration != '2_hours') {
-          'time': '3:00 PM',
-          'activity': 'The Pearl-Qatar',
-          'description': 'Luxury shopping and waterfront views',
-          'location': 'The Pearl',
-          'duration': '2 hours',
-          'cost': _selectedBudget == 'budget' ? 'Free' : 'QR 50',
-        },
-      ],
-    };
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        contentPadding: EdgeInsets.zero,
-        content: Container(
-          width: double.maxFinite,
-          height: MediaQuery.of(context).size.height * 0.7,
-          child: Column(
-            children: [
-              // Header
-              Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.gold, AppColors.gold.withOpacity(0.8)],
-                  ),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      samplePlan['title'] as String,
-                      style: GoogleFonts.inter(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.maroon,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Text(
-                          'Duration: ${samplePlan['total_duration']} • ',
-                          style: GoogleFonts.inter(
-                            fontSize: 14,
-                            color: AppColors.maroon.withOpacity(0.8),
-                          ),
-                        ),
-                        Text(
-                          'Cost: ${samplePlan['total_cost']}',
-                          style: GoogleFonts.inter(
-                            fontSize: 14,
-                            color: AppColors.maroon.withOpacity(0.8),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              
-              // Activities list
-              Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.all(16),
-                  itemCount: (samplePlan['activities'] as List).length,
-                  itemBuilder: (context, index) {
-                    final activity = (samplePlan['activities'] as List)[index] as Map<String, dynamic>;
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 16),
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryBlue.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.1),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: AppColors.gold,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Text(
-                                  activity['time'] as String,
-                                  style: GoogleFonts.inter(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.maroon,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  activity['activity'] as String,
-                                  style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            activity['description'] as String,
-                            style: GoogleFonts.inter(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on, color: AppColors.gold, size: 14),
-                              SizedBox(width: 4),
-                              Text(
-                                activity['location'] as String,
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  color: AppColors.gold,
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              Icon(Icons.access_time, color: AppColors.gold, size: 14),
-                              SizedBox(width: 4),
-                              Text(
-                                activity['duration'] as String,
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  color: AppColors.gold,
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              Icon(Icons.attach_money, color: AppColors.gold, size: 14),
-                              SizedBox(width: 4),
-                              Text(
-                                activity['cost'] as String,
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  color: AppColors.gold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              
-              // Action buttons
-              Container(
-                padding: EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () => Navigator.pop(context),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          side: BorderSide(color: Colors.white.withOpacity(0.5)),
-                        ),
-                        child: Text('Generate New'),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton(
+                      margin: EdgeInsets.only(top: 8),
+                      child: TextButton.icon(
                         onPressed: () {
-                          Navigator.pop(context);
-                          _savePlan(samplePlan);
+                          // Focus on text input
+                          setState(() {});
                         },
+                        icon: Icon(Icons.edit, color: Colors.white70, size: 16),
+                        label: Text(
+                          'Or type your own answer',
+                          style: GoogleFonts.inter(
+                            color: Colors.white70,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  
+                  // Generate button
+                  if (message.showGenerateButton == true) ...[
+                    SizedBox(height: 16),
+                    Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _generatePlan,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.gold,
                           foregroundColor: AppColors.maroon,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 16),
                         ),
-                        child: Text('Save Plan'),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.auto_awesome, size: 20),
+                            SizedBox(width: 8),
+                            Text(
+                              'Generate My Day Plan',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
-  }
-
-  void _savePlan(Map<String, dynamic> plan) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Plan saved successfully!'),
-        backgroundColor: AppColors.success,
-      ),
-    );
-  }
-
-  void _viewPlan(Map<String, dynamic> plan) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text(
-          plan['title'],
-          style: TextStyle(color: Colors.white),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Date: ${plan['date']}',
-              style: TextStyle(color: Colors.white70),
-            ),
-            Text(
-              'Duration: ${plan['duration']}',
-              style: TextStyle(color: Colors.white70),
-            ),
-            Text(
-              'Places: ${plan['places']}',
-              style: TextStyle(color: Colors.white70),
-            ),
-            Text(
-              'Status: ${plan['status']}',
-              style: TextStyle(color: Colors.white70),
+          
+          if (message.isUser) ...[
+            SizedBox(width: 12),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: AppColors.primaryBlue,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Icon(Icons.person, color: Colors.white, size: 24),
             ),
           ],
-        ),
-        actions: [
-          if (plan['status'] == 'active')
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                _startPlan(plan);
-              },
-              child: Text('Start Plan', style: TextStyle(color: AppColors.gold)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTypingIndicator() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.gold,
+              borderRadius: BorderRadius.circular(20),
             ),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close', style: TextStyle(color: Colors.white70)),
+            child: Icon(Icons.smart_toy, color: AppColors.maroon, size: 24),
+          ),
+          SizedBox(width: 12),
+          Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey[800],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildDot(0),
+                SizedBox(width: 4),
+                _buildDot(1),
+                SizedBox(width: 4),
+                _buildDot(2),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  void _startPlan(Map<String, dynamic> plan) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text(
-          'Start Plan',
-          style: TextStyle(color: Colors.white),
-        ),
-        content: Text(
-          'This would open the active plan interface with navigation and real-time updates.',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close', style: TextStyle(color: AppColors.gold)),
+  Widget _buildDot(int index) {
+    return TweenAnimationBuilder<double>(
+      duration: Duration(milliseconds: 600),
+      tween: Tween(begin: 0.4, end: 1.0),
+      builder: (context, value, child) {
+        return Container(
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(value),
+            shape: BoxShape.circle,
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  void _useTemplate(Map<String, dynamic> template) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text(
-          template['title'],
-          style: TextStyle(color: Colors.white),
+  Widget _buildInputArea() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.primaryBlue,
+        border: Border(
+          top: BorderSide(color: Colors.white.withOpacity(0.1)),
         ),
-        content: Text(
-          'This would customize the ${template['title']} template based on your preferences and generate a personalized plan.',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Cancel', style: TextStyle(color: Colors.white70)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _generateTemplateBasedPlan(template);
-            },
-            child: Text('Customize & Generate'),
-          ),
-        ],
       ),
-    );
-  }
-
-  void _generateTemplateBasedPlan(Map<String, dynamic> template) {
-    // This would generate a plan based on the selected template
-    _generatePlan();
-  }
-
-  void _showAllPlans() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text(
-          'All Your Plans',
-          style: TextStyle(color: Colors.white),
-        ),
-        content: Container(
-          width: double.maxFinite,
-          height: 300,
-          child: ListView.builder(
-            itemCount: _savedPlans.length,
-            itemBuilder: (context, index) {
-              final plan = _savedPlans[index];
-              return ListTile(
-                title: Text(
-                  plan['title'],
-                  style: TextStyle(color: Colors.white),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _textController,
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: 'Type your answer here...',
+                hintStyle: TextStyle(color: Colors.white60),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  borderSide: BorderSide.none,
                 ),
-                subtitle: Text(
-                  '${plan['date']} • ${plan['duration']}',
-                  style: TextStyle(color: Colors.white70),
-                ),
-                trailing: Text(
-                  plan['status'].toUpperCase(),
-                  style: TextStyle(
-                    color: plan['status'] == 'active' ? AppColors.success : AppColors.info,
-                    fontSize: 12,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  _viewPlan(plan);
-                },
-              );
-            },
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.1),
+                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              ),
+              onSubmitted: _handleTextResponse,
+            ),
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close', style: TextStyle(color: AppColors.gold)),
+          SizedBox(width: 12),
+          GestureDetector(
+            onTap: () => _handleTextResponse(_textController.text),
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: AppColors.gold,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.send,
+                color: AppColors.maroon,
+                size: 24,
+              ),
+            ),
           ),
         ],
       ),
