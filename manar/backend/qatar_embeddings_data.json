@@ -3,7 +3,7 @@
     "id": "rest_001",
     "category": "restaurants",
     "name": "Al Mourjan Restaurant",
-    "text": "Name: Al Mourjan Restaurant. Category: restaurants. Location: West Bay, Corniche. Description: Authentic Qatari cuisine with stunning views of the Corniche waterfront. Famous for traditional dishes like machboos and harees.. Cuisine: Traditional Qatari. Price range: $. Specialties: Machboos, Harees, Luqaimat, Fresh Seafood. Ambiance: Traditional, Family-friendly, Waterfront views. Features: outdoor_seating, family_friendly, traditional_music, corniche_view, valet_parking. Hours: 12:00-15:00, 19:00-23:00. Rating: 4.6/5. Best time to visit: Sunset for best views",
+    "text": "Name: Al Mourjan Restaurant. Category: restaurants. Location: West Bay, Corniche. Description: Authentic Qatari cuisine with stunning views of the Corniche waterfront. Famous for traditional dishes like machboos and harees.. Cuisine: Traditional Qatari. Price range: $$. Specialties: Machboos, Harees, Luqaimat, Fresh Seafood. Ambiance: Traditional, Family-friendly, Waterfront views. Features: outdoor_seating, family_friendly, traditional_music, corniche_view, valet_parking. Hours: 12:00-15:00, 19:00-23:00. Rating: 4.6/5. Best time to visit: Sunset for best views",
     "metadata": {
       "id": "rest_001",
       "name": "Al Mourjan Restaurant",
@@ -13,7 +13,7 @@
         "lat": 25.3548,
         "lng": 51.531
       },
-      "price_range": "$",
+      "price_range": "$$",
       "avg_cost_per_person": 80,
       "rating": 4.6,
       "description": "Authentic Qatari cuisine with stunning views of the Corniche waterfront. Famous for traditional dishes like machboos and harees.",
@@ -38,7 +38,6 @@
         "vegetarian_options"
       ],
       "languages_spoken": [
-        "Arabic",
         "English"
       ],
       "dress_code": "Smart casual",
@@ -54,325 +53,10 @@
   {
     "id": "rest_002",
     "category": "restaurants",
-    "name": "Souq Waqif Traditional Restaurant",
-    "text": "Name: Souq Waqif Traditional Restaurant. Category: restaurants. Location: Souq Waqif, Old Doha. Description: Experience authentic Middle Eastern flavors in the heart of Qatar's most famous traditional market.. Cuisine: Middle Eastern. Price range: $. Specialties: Mixed Grill, Hummus, Fattoush, Kunafa. Ambiance: Traditional market setting, Cultural experience. Features: historic_location, budget_friendly, local_experience, shisha, live_entertainment. Hours: 11:00-24:00. Rating: 4.4/5. Best time to visit: Evening for cultural atmosphere",
+    "name": "Spice Market",
+    "text": "Name: Spice Market. Category: restaurants. Location: W Hotel, West Bay. Description: Contemporary Indian cuisine with traditional spices and modern presentation techniques. Known for its tandoor dishes and vibrant ambiance.. Cuisine: Indian. Price range: $$$. Specialties: Tandoor Dishes, Biryani, Curry Selection, Indian Breads. Ambiance: Modern Indian, Upscale, Spice-themed decor. Features: tandoor_specialist, extensive_curry_menu, modern_presentation, spice_market_theme, vegetarian_friendly. Hours: 18:30-24:00. Rating: 4.5/5. Best time to visit: Dinner for full menu",
     "metadata": {
       "id": "rest_002",
-      "name": "Souq Waqif Traditional Restaurant",
-      "cuisine_type": "Middle Eastern",
-      "location": "Souq Waqif, Old Doha",
-      "coordinates": {
-        "lat": 25.2867,
-        "lng": 51.5333
-      },
-      "price_range": "$",
-      "avg_cost_per_person": 35,
-      "rating": 4.4,
-      "description": "Experience authentic Middle Eastern flavors in the heart of Qatar's most famous traditional market.",
-      "specialties": [
-        "Mixed Grill",
-        "Hummus",
-        "Fattoush",
-        "Kunafa"
-      ],
-      "ambiance": "Traditional market setting, Cultural experience",
-      "opening_hours": "11:00-24:00",
-      "contact": "+974 4444 0001",
-      "features": [
-        "historic_location",
-        "budget_friendly",
-        "local_experience",
-        "shisha",
-        "live_entertainment"
-      ],
-      "dietary_options": [
-        "halal",
-        "vegetarian",
-        "vegan_options"
-      ],
-      "languages_spoken": [
-        "Arabic",
-        "English",
-        "Urdu"
-      ],
-      "dress_code": "Casual",
-      "best_time_to_visit": "Evening for cultural atmosphere",
-      "booking_required": false,
-      "payment_methods": [
-        "cash",
-        "card"
-      ]
-    }
-  },
-  {
-    "id": "rest_003",
-    "category": "restaurants",
-    "name": "Al Shaheen Restaurant",
-    "text": "Name: Al Shaheen Restaurant. Category: restaurants. Location: Souq Waqif. Description: Affordable authentic Qatari home-style cooking in the heart of Souq Waqif. Known for generous portions and traditional hospitality.. Cuisine: Traditional Qatari. Price range: $. Specialties: Machboos Laham, Margoog, Khanfaroosh, Traditional Rice Dishes. Ambiance: Casual, Family-style, Traditional. Features: budget_friendly, large_portions, family_owned, traditional_recipes, quick_service. Hours: 10:00-23:00. Rating: 4.3/5. Best time to visit: Lunch for best value",
-    "metadata": {
-      "id": "rest_003",
-      "name": "Al Shaheen Restaurant",
-      "cuisine_type": "Traditional Qatari",
-      "location": "Souq Waqif",
-      "coordinates": {
-        "lat": 25.2867,
-        "lng": 51.533
-      },
-      "price_range": "$",
-      "avg_cost_per_person": 40,
-      "rating": 4.3,
-      "description": "Affordable authentic Qatari home-style cooking in the heart of Souq Waqif. Known for generous portions and traditional hospitality.",
-      "specialties": [
-        "Machboos Laham",
-        "Margoog",
-        "Khanfaroosh",
-        "Traditional Rice Dishes"
-      ],
-      "ambiance": "Casual, Family-style, Traditional",
-      "opening_hours": "10:00-23:00",
-      "contact": "+974 4444 0002",
-      "features": [
-        "budget_friendly",
-        "large_portions",
-        "family_owned",
-        "traditional_recipes",
-        "quick_service"
-      ],
-      "dietary_options": [
-        "halal",
-        "vegetarian_options"
-      ],
-      "languages_spoken": [
-        "Arabic",
-        "English"
-      ],
-      "dress_code": "Casual",
-      "best_time_to_visit": "Lunch for best value",
-      "booking_required": false,
-      "payment_methods": [
-        "cash",
-        "card"
-      ]
-    }
-  },
-  {
-    "id": "rest_004",
-    "category": "restaurants",
-    "name": "Damasca Restaurant",
-    "text": "Name: Damasca Restaurant. Category: restaurants. Location: Souq Waqif. Description: Authentic Syrian cuisine with traditional preparation methods. Famous for their fresh bread and mezze platters.. Cuisine: Syrian. Price range: $. Specialties: Kibbeh, Fattoush, Shawarma, Fresh Bread, Baklava. Ambiance: Traditional Syrian, Cozy, Family atmosphere. Features: budget_friendly, fresh_bread, mezze_specialist, family_friendly, authentic_recipes. Hours: 11:00-24:00. Rating: 4.5/5. Best time to visit: Evening for fresh bread",
-    "metadata": {
-      "id": "rest_004",
-      "name": "Damasca Restaurant",
-      "cuisine_type": "Syrian",
-      "location": "Souq Waqif",
-      "coordinates": {
-        "lat": 25.2865,
-        "lng": 51.5335
-      },
-      "price_range": "$",
-      "avg_cost_per_person": 38,
-      "rating": 4.5,
-      "description": "Authentic Syrian cuisine with traditional preparation methods. Famous for their fresh bread and mezze platters.",
-      "specialties": [
-        "Kibbeh",
-        "Fattoush",
-        "Shawarma",
-        "Fresh Bread",
-        "Baklava"
-      ],
-      "ambiance": "Traditional Syrian, Cozy, Family atmosphere",
-      "opening_hours": "11:00-24:00",
-      "contact": "+974 4444 0003",
-      "features": [
-        "budget_friendly",
-        "fresh_bread",
-        "mezze_specialist",
-        "family_friendly",
-        "authentic_recipes"
-      ],
-      "dietary_options": [
-        "halal",
-        "vegetarian",
-        "vegan_options"
-      ],
-      "languages_spoken": [
-        "Arabic",
-        "English"
-      ],
-      "dress_code": "Casual",
-      "best_time_to_visit": "Evening for fresh bread",
-      "booking_required": false,
-      "payment_methods": [
-        "cash",
-        "card"
-      ]
-    }
-  },
-  {
-    "id": "rest_005",
-    "category": "restaurants",
-    "name": "Bandar Aden Restaurant",
-    "text": "Name: Bandar Aden Restaurant. Category: restaurants. Location: Souq Waqif. Description: Traditional Yemeni cuisine known for excellent fish dishes and aromatic rice preparations.. Cuisine: Yemeni. Price range: $. Specialties: Mandi, Zurbian, Fahsa, Fish Curry, Yemeni Tea. Ambiance: Traditional, Authentic, Local experience. Features: budget_friendly, fish_specialist, traditional_cooking, local_favorite, spice_expert. Hours: 12:00-24:00. Rating: 4.2/5. Best time to visit: Dinner for fresh fish",
-    "metadata": {
-      "id": "rest_005",
-      "name": "Bandar Aden Restaurant",
-      "cuisine_type": "Yemeni",
-      "location": "Souq Waqif",
-      "coordinates": {
-        "lat": 25.2869,
-        "lng": 51.5332
-      },
-      "price_range": "$",
-      "avg_cost_per_person": 32,
-      "rating": 4.2,
-      "description": "Traditional Yemeni cuisine known for excellent fish dishes and aromatic rice preparations.",
-      "specialties": [
-        "Mandi",
-        "Zurbian",
-        "Fahsa",
-        "Fish Curry",
-        "Yemeni Tea"
-      ],
-      "ambiance": "Traditional, Authentic, Local experience",
-      "opening_hours": "12:00-24:00",
-      "contact": "+974 4444 0004",
-      "features": [
-        "budget_friendly",
-        "fish_specialist",
-        "traditional_cooking",
-        "local_favorite",
-        "spice_expert"
-      ],
-      "dietary_options": [
-        "halal",
-        "limited_vegetarian"
-      ],
-      "languages_spoken": [
-        "Arabic",
-        "English"
-      ],
-      "dress_code": "Casual",
-      "best_time_to_visit": "Dinner for fresh fish",
-      "booking_required": false,
-      "payment_methods": [
-        "cash",
-        "card"
-      ]
-    }
-  },
-  {
-    "id": "rest_006",
-    "category": "restaurants",
-    "name": "Smat Restaurant",
-    "text": "Name: Smat Restaurant. Category: restaurants. Location: The Pearl Qatar. Description: Upscale Lebanese dining with modern presentation and traditional flavors. Beautiful Pearl location with marina views.. Cuisine: Lebanese. Price range: $. Specialties: Mezze Platter, Grilled Seafood, Lamb Ouzi, Fresh Juices. Ambiance: Modern Lebanese, Marina views, Sophisticated. Features: marina_view, modern_ambiance, fresh_seafood, extensive_mezze, outdoor_terrace. Hours: 12:00-24:00. Rating: 4.6/5. Best time to visit: Sunset for marina views",
-    "metadata": {
-      "id": "rest_006",
-      "name": "Smat Restaurant",
-      "cuisine_type": "Lebanese",
-      "location": "The Pearl Qatar",
-      "coordinates": {
-        "lat": 25.3713,
-        "lng": 51.5515
-      },
-      "price_range": "$",
-      "avg_cost_per_person": 75,
-      "rating": 4.6,
-      "description": "Upscale Lebanese dining with modern presentation and traditional flavors. Beautiful Pearl location with marina views.",
-      "specialties": [
-        "Mezze Platter",
-        "Grilled Seafood",
-        "Lamb Ouzi",
-        "Fresh Juices"
-      ],
-      "ambiance": "Modern Lebanese, Marina views, Sophisticated",
-      "opening_hours": "12:00-24:00",
-      "contact": "+974 4444 0005",
-      "features": [
-        "marina_view",
-        "modern_ambiance",
-        "fresh_seafood",
-        "extensive_mezze",
-        "outdoor_terrace"
-      ],
-      "dietary_options": [
-        "halal",
-        "vegetarian",
-        "vegan_options"
-      ],
-      "languages_spoken": [
-        "Arabic",
-        "English",
-        "French"
-      ],
-      "dress_code": "Smart casual",
-      "best_time_to_visit": "Sunset for marina views",
-      "booking_required": true,
-      "payment_methods": [
-        "card",
-        "digital_wallet"
-      ]
-    }
-  },
-  {
-    "id": "rest_007",
-    "category": "restaurants",
-    "name": "Mandolin Restaurant",
-    "text": "Name: Mandolin Restaurant. Category: restaurants. Location: Katara Cultural Village. Description: Mediterranean cuisine in a cultural setting with art gallery views and beachside location.. Cuisine: Mediterranean. Price range: $. Specialties: Fresh Seafood, Pasta, Mediterranean Salads, Wood-fired Pizza. Ambiance: Cultural, Beachside. Features: cultural_location, beach_view, wood_fired_oven, family_friendly. Hours: 12:00-23:00. Rating: 4.4/5. Best time to visit: Lunch with beach views",
-    "metadata": {
-      "id": "rest_007",
-      "name": "Mandolin Restaurant",
-      "cuisine_type": "Mediterranean",
-      "location": "Katara Cultural Village",
-      "coordinates": {
-        "lat": 25.3792,
-        "lng": 51.5318
-      },
-      "price_range": "$",
-      "avg_cost_per_person": 85,
-      "rating": 4.4,
-      "description": "Mediterranean cuisine in a cultural setting with art gallery views and beachside location.",
-      "specialties": [
-        "Fresh Seafood",
-        "Pasta",
-        "Mediterranean Salads",
-        "Wood-fired Pizza"
-      ],
-      "ambiance": "Cultural, Beachside",
-      "opening_hours": "12:00-23:00",
-      "contact": "+974 4444 0006",
-      "features": [
-        "cultural_location",
-        "beach_view",
-        "wood_fired_oven",
-        "family_friendly"
-      ],
-      "dietary_options": [
-        "halal",
-        "vegetarian",
-        "vegan",
-        "gluten_free"
-      ],
-      "languages_spoken": [
-        "English",
-        "Arabic",
-        "Italian"
-      ],
-      "dress_code": "Casual to smart casual",
-      "best_time_to_visit": "Lunch with beach views",
-      "booking_required": true,
-      "payment_methods": [
-        "card",
-        "digital_wallet"
-      ]
-    }
-  },
-  {
-    "id": "rest_008",
-    "category": "restaurants",
-    "name": "Spice Market",
-    "text": "Name: Spice Market. Category: restaurants. Location: W Hotel, West Bay. Description: Contemporary Indian cuisine with traditional spices and modern presentation techniques.. Cuisine: Indian. Price range: $. Specialties: Tandoor Dishes, Biryani, Curry Selection, Indian Breads. Ambiance: Modern Indian, Upscale, Spice-themed decor. Features: tandoor_specialist, extensive_curry_menu, modern_presentation, spice_market_theme, vegetarian_friendly. Hours: 18:30-24:00. Rating: 4.5/5. Best time to visit: Dinner for full menu",
-    "metadata": {
-      "id": "rest_008",
       "name": "Spice Market",
       "cuisine_type": "Indian",
       "location": "W Hotel, West Bay",
@@ -380,10 +64,10 @@
         "lat": 25.36,
         "lng": 51.528
       },
-      "price_range": "$",
-      "avg_cost_per_person": 90,
+      "price_range": "$$$",
+      "avg_cost_per_person": 120,
       "rating": 4.5,
-      "description": "Contemporary Indian cuisine with traditional spices and modern presentation techniques.",
+      "description": "Contemporary Indian cuisine with traditional spices and modern presentation techniques. Known for its tandoor dishes and vibrant ambiance.",
       "specialties": [
         "Tandoor Dishes",
         "Biryani",
@@ -407,9 +91,7 @@
         "jain_food"
       ],
       "languages_spoken": [
-        "English",
-        "Hindi",
-        "Arabic"
+        "English"
       ],
       "dress_code": "Smart casual",
       "best_time_to_visit": "Dinner for full menu",
@@ -421,12 +103,12 @@
     }
   },
   {
-    "id": "rest_009",
+    "id": "rest_003",
     "category": "restaurants",
     "name": "Nobu Doha",
-    "text": "Name: Nobu Doha. Category: restaurants. Location: Four Seasons Hotel, West Bay. Description: World-renowned Japanese-Peruvian fusion cuisine with innovative dishes and premium ingredients.. Cuisine: Japanese-Peruvian Fusion. Price range: $$. Specialties: Black Cod Miso, Yellowtail Jalapeño, Wagyu Beef, Premium Sushi. Ambiance: Upscale, Modern, Fine dining. Features: fine_dining, city_views, premium_ingredients, wine_pairing, private_dining. Hours: 18:00-24:00. Rating: 4.8/5. Best time to visit: Dinner for full experience",
+    "text": "Name: Nobu Doha. Category: restaurants. Location: Four Seasons Hotel, West Bay. Description: World-renowned Japanese-Peruvian fusion cuisine with innovative dishes and premium ingredients. Signature dishes include Black Cod Miso and Yellowtail Jalapeño.. Cuisine: Japanese-Peruvian Fusion. Price range: $$$$. Specialties: Black Cod Miso, Yellowtail Jalapeño, Wagyu Beef, Premium Sushi. Ambiance: Upscale, Modern, Fine dining. Features: fine_dining, city_views, premium_ingredients, wine_pairing, private_dining. Hours: 18:00-24:00. Rating: 4.8/5. Best time to visit: Dinner for full experience",
     "metadata": {
-      "id": "rest_009",
+      "id": "rest_003",
       "name": "Nobu Doha",
       "cuisine_type": "Japanese-Peruvian Fusion",
       "location": "Four Seasons Hotel, West Bay",
@@ -434,10 +116,10 @@
         "lat": 25.3656,
         "lng": 51.531
       },
-      "price_range": "$$",
+      "price_range": "$$$$",
       "avg_cost_per_person": 350,
       "rating": 4.8,
-      "description": "World-renowned Japanese-Peruvian fusion cuisine with innovative dishes and premium ingredients.",
+      "description": "World-renowned Japanese-Peruvian fusion cuisine with innovative dishes and premium ingredients. Signature dishes include Black Cod Miso and Yellowtail Jalapeño.",
       "specialties": [
         "Black Cod Miso",
         "Yellowtail Jalapeño",
@@ -460,9 +142,312 @@
         "gluten_free"
       ],
       "languages_spoken": [
-        "English",
-        "Japanese",
-        "Arabic"
+        "English"
+      ],
+      "dress_code": "Formal",
+      "best_time_to_visit": "Dinner for full experience",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ]
+    }
+  },
+  {
+    "id": "rest_004",
+    "category": "restaurants",
+    "name": "Bandar Aden Restaurant",
+    "text": "Name: Bandar Aden Restaurant. Category: restaurants. Location: Souq Waqif. Description: Traditional Yemeni cuisine known for excellent fish dishes and aromatic rice preparations. A local favorite for authentic mandi and zurbian.. Cuisine: Yemeni. Price range: $. Specialties: Mandi, Zurbian, Fahsa, Fish Curry, Yemeni Tea. Ambiance: Traditional, Authentic, Local experience. Features: budget_friendly, fish_specialist, traditional_cooking, local_favorite, spice_expert. Hours: 12:00-24:00. Rating: 4.2/5. Best time to visit: Dinner for fresh fish",
+    "metadata": {
+      "id": "rest_004",
+      "name": "Bandar Aden Restaurant",
+      "cuisine_type": "Yemeni",
+      "location": "Souq Waqif",
+      "coordinates": {
+        "lat": 25.2869,
+        "lng": 51.5332
+      },
+      "price_range": "$",
+      "avg_cost_per_person": 32,
+      "rating": 4.2,
+      "description": "Traditional Yemeni cuisine known for excellent fish dishes and aromatic rice preparations. A local favorite for authentic mandi and zurbian.",
+      "specialties": [
+        "Mandi",
+        "Zurbian",
+        "Fahsa",
+        "Fish Curry",
+        "Yemeni Tea"
+      ],
+      "ambiance": "Traditional, Authentic, Local experience",
+      "opening_hours": "12:00-24:00",
+      "contact": "+974 4444 0004",
+      "features": [
+        "budget_friendly",
+        "fish_specialist",
+        "traditional_cooking",
+        "local_favorite",
+        "spice_expert"
+      ],
+      "dietary_options": [
+        "halal",
+        "limited_vegetarian"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Casual",
+      "best_time_to_visit": "Dinner for fresh fish",
+      "booking_required": false,
+      "payment_methods": [
+        "cash",
+        "card"
+      ]
+    }
+  },
+  {
+    "id": "rest_005",
+    "category": "restaurants",
+    "name": "La Spiga by Paper Moon",
+    "text": "Name: La Spiga by Paper Moon. Category: restaurants. Location: W Doha Hotel & Residences. Description: Elegant Italian restaurant offering classic and contemporary dishes, handmade pasta, and a curated wine list. Renowned for its chic ambiance and attentive service.. Cuisine: Italian. Price range: $$$. Specialties: Handmade Pasta, Wood-fired Pizza, Tiramisu, Seafood Risotto. Ambiance: Chic, Modern, Romantic. Features: wine_list, romantic_setting, private_dining, open_kitchen, chef_specials. Hours: 12:00-23:30. Rating: 4.7/5. Best time to visit: Evening for date night",
+    "metadata": {
+      "id": "rest_005",
+      "name": "La Spiga by Paper Moon",
+      "cuisine_type": "Italian",
+      "location": "W Doha Hotel & Residences",
+      "coordinates": {
+        "lat": 25.324,
+        "lng": 51.532
+      },
+      "price_range": "$$$",
+      "avg_cost_per_person": 150,
+      "rating": 4.7,
+      "description": "Elegant Italian restaurant offering classic and contemporary dishes, handmade pasta, and a curated wine list. Renowned for its chic ambiance and attentive service.",
+      "specialties": [
+        "Handmade Pasta",
+        "Wood-fired Pizza",
+        "Tiramisu",
+        "Seafood Risotto"
+      ],
+      "ambiance": "Chic, Modern, Romantic",
+      "opening_hours": "12:00-23:30",
+      "contact": "+974 4453 5135",
+      "features": [
+        "wine_list",
+        "romantic_setting",
+        "private_dining",
+        "open_kitchen",
+        "chef_specials"
+      ],
+      "dietary_options": [
+        "vegetarian",
+        "gluten_free"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Smart casual",
+      "best_time_to_visit": "Evening for date night",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ]
+    }
+  },
+  {
+    "id": "rest_006",
+    "category": "restaurants",
+    "name": "Al Terrace",
+    "text": "Name: Al Terrace. Category: restaurants. Location: Al Mirqab Boutique Hotel, Souq Waqif. Description: Lebanese restaurant with a beautiful terrace overlooking Souq Waqif. Known for its mezze platters, grilled meats, and shisha in a lively setting.. Cuisine: Lebanese. Price range: $$. Specialties: Mezze Platter, Mixed Grill, Tabbouleh, Baklava. Ambiance: Terrace, Lively, Family-friendly. Features: terrace_seating, shisha, mezze_specialist, family_friendly, live_entertainment. Hours: 13:00-01:00. Rating: 4.5/5. Best time to visit: Evening for shisha",
+    "metadata": {
+      "id": "rest_006",
+      "name": "Al Terrace",
+      "cuisine_type": "Lebanese",
+      "location": "Al Mirqab Boutique Hotel, Souq Waqif",
+      "coordinates": {
+        "lat": 25.287,
+        "lng": 51.533
+      },
+      "price_range": "$$",
+      "avg_cost_per_person": 70,
+      "rating": 4.5,
+      "description": "Lebanese restaurant with a beautiful terrace overlooking Souq Waqif. Known for its mezze platters, grilled meats, and shisha in a lively setting.",
+      "specialties": [
+        "Mezze Platter",
+        "Mixed Grill",
+        "Tabbouleh",
+        "Baklava"
+      ],
+      "ambiance": "Terrace, Lively, Family-friendly",
+      "opening_hours": "13:00-01:00",
+      "contact": "+974 4433 6666",
+      "features": [
+        "terrace_seating",
+        "shisha",
+        "mezze_specialist",
+        "family_friendly",
+        "live_entertainment"
+      ],
+      "dietary_options": [
+        "halal",
+        "vegetarian",
+        "vegan_options"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Casual",
+      "best_time_to_visit": "Evening for shisha",
+      "booking_required": false,
+      "payment_methods": [
+        "cash",
+        "card"
+      ]
+    }
+  },
+  {
+    "id": "rest_007",
+    "category": "restaurants",
+    "name": "Mykonos",
+    "text": "Name: Mykonos. Category: restaurants. Location: InterContinental Doha Beach & Spa. Description: Greek restaurant with a beachside setting, offering fresh seafood, grilled meats, and classic Greek desserts. Famous for its relaxed Mediterranean vibe.. Cuisine: Greek. Price range: $$$. Specialties: Grilled Octopus, Moussaka, Baklava, Greek Salad. Ambiance: Beachside, Mediterranean, Relaxed. Features: beachside, seafood_specialist, mediterranean_vibe, outdoor_seating, family_friendly. Hours: 12:30-23:00. Rating: 4.6/5. Best time to visit: Lunch for sea views",
+    "metadata": {
+      "id": "rest_007",
+      "name": "Mykonos",
+      "cuisine_type": "Greek",
+      "location": "InterContinental Doha Beach & Spa",
+      "coordinates": {
+        "lat": 25.348,
+        "lng": 51.52
+      },
+      "price_range": "$$$",
+      "avg_cost_per_person": 140,
+      "rating": 4.6,
+      "description": "Greek restaurant with a beachside setting, offering fresh seafood, grilled meats, and classic Greek desserts. Famous for its relaxed Mediterranean vibe.",
+      "specialties": [
+        "Grilled Octopus",
+        "Moussaka",
+        "Baklava",
+        "Greek Salad"
+      ],
+      "ambiance": "Beachside, Mediterranean, Relaxed",
+      "opening_hours": "12:30-23:00",
+      "contact": "+974 4484 4919",
+      "features": [
+        "beachside",
+        "seafood_specialist",
+        "mediterranean_vibe",
+        "outdoor_seating",
+        "family_friendly"
+      ],
+      "dietary_options": [
+        "halal",
+        "vegetarian",
+        "gluten_free"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Resort casual",
+      "best_time_to_visit": "Lunch for sea views",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ]
+    }
+  },
+  {
+    "id": "rest_008",
+    "category": "restaurants",
+    "name": "The Cheesecake Factory",
+    "text": "Name: The Cheesecake Factory. Category: restaurants. Location: Doha Festival City. Description: Popular American chain known for its extensive menu, generous portions, and over 30 varieties of cheesecake. Family-friendly and great for groups.. Cuisine: American. Price range: $$. Specialties: Cheesecake, Burgers, Pasta, Salads. Ambiance: Casual, Family-friendly, Bustling. Features: large_menu, family_friendly, group_seating, takeaway, dessert_specialist. Hours: 11:00-23:00. Rating: 4.4/5. Best time to visit: Afternoon for dessert",
+    "metadata": {
+      "id": "rest_008",
+      "name": "The Cheesecake Factory",
+      "cuisine_type": "American",
+      "location": "Doha Festival City",
+      "coordinates": {
+        "lat": 25.415,
+        "lng": 51.451
+      },
+      "price_range": "$$",
+      "avg_cost_per_person": 90,
+      "rating": 4.4,
+      "description": "Popular American chain known for its extensive menu, generous portions, and over 30 varieties of cheesecake. Family-friendly and great for groups.",
+      "specialties": [
+        "Cheesecake",
+        "Burgers",
+        "Pasta",
+        "Salads"
+      ],
+      "ambiance": "Casual, Family-friendly, Bustling",
+      "opening_hours": "11:00-23:00",
+      "contact": "+974 4035 6100",
+      "features": [
+        "large_menu",
+        "family_friendly",
+        "group_seating",
+        "takeaway",
+        "dessert_specialist"
+      ],
+      "dietary_options": [
+        "vegetarian",
+        "gluten_free"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Casual",
+      "best_time_to_visit": "Afternoon for dessert",
+      "booking_required": false,
+      "payment_methods": [
+        "cash",
+        "card",
+        "digital_wallet"
+      ]
+    }
+  },
+  {
+    "id": "rest_009",
+    "category": "restaurants",
+    "name": "Saffron Lounge",
+    "text": "Name: Saffron Lounge. Category: restaurants. Location: Katara Cultural Village. Description: Elegant Indian restaurant offering a modern take on classic dishes, with a focus on regional specialties and creative presentation.. Cuisine: Indian Fine Dining. Price range: $$$. Specialties: Lamb Rogan Josh, Butter Chicken, Dosa, Gulab Jamun. Ambiance: Elegant, Artistic, Fine dining. Features: regional_specialties, creative_presentation, fine_dining, private_dining, wine_pairing. Hours: 12:00-23:00. Rating: 4.7/5. Best time to visit: Dinner for full experience",
+    "metadata": {
+      "id": "rest_009",
+      "name": "Saffron Lounge",
+      "cuisine_type": "Indian Fine Dining",
+      "location": "Katara Cultural Village",
+      "coordinates": {
+        "lat": 25.379,
+        "lng": 51.531
+      },
+      "price_range": "$$$",
+      "avg_cost_per_person": 160,
+      "rating": 4.7,
+      "description": "Elegant Indian restaurant offering a modern take on classic dishes, with a focus on regional specialties and creative presentation.",
+      "specialties": [
+        "Lamb Rogan Josh",
+        "Butter Chicken",
+        "Dosa",
+        "Gulab Jamun"
+      ],
+      "ambiance": "Elegant, Artistic, Fine dining",
+      "opening_hours": "12:00-23:00",
+      "contact": "+974 4408 2000",
+      "features": [
+        "regional_specialties",
+        "creative_presentation",
+        "fine_dining",
+        "private_dining",
+        "wine_pairing"
+      ],
+      "dietary_options": [
+        "halal",
+        "vegetarian",
+        "vegan_options"
+      ],
+      "languages_spoken": [
+        "English"
       ],
       "dress_code": "Formal",
       "best_time_to_visit": "Dinner for full experience",
@@ -476,51 +461,49 @@
   {
     "id": "rest_010",
     "category": "restaurants",
-    "name": "IDAM by Alain Ducasse",
-    "text": "Name: IDAM by Alain Ducasse. Category: restaurants. Location: Museum of Islamic Art. Description: French fine dining by Michelin-starred chef Alain Ducasse with views of Doha Bay and the museum.. Cuisine: French Fine Dining. Price range: $$. Specialties: French Haute Cuisine, Seasonal Menu, Wine Pairing, Artistic Presentation. Ambiance: Elegant, Museum setting, Fine dining. Features: michelin_chef, museum_location, bay_views, seasonal_menu, wine_sommelier. Hours: 19:00-23:00. Rating: 4.9/5. Best time to visit: Evening for ambiance",
+    "name": "Jones the Grocer",
+    "text": "Name: Jones the Grocer. Category: restaurants. Location: The Pearl Qatar. Description: Modern gourmet eatery and deli offering international cuisine, artisan cheeses, and a curated selection of gourmet products. Great for breakfast, lunch, or dinner.. Cuisine: International. Price range: $$. Specialties: Gourmet Burgers, Artisan Cheese Board, Eggs Benedict, Wood-fired Pizza. Ambiance: Modern, Gourmet, Casual. Features: gourmet_products, artisan_cheese, breakfast_menu, family_friendly, deli_counter. Hours: 08:00-23:00. Rating: 4.5/5. Best time to visit: Morning for breakfast",
     "metadata": {
       "id": "rest_010",
-      "name": "IDAM by Alain Ducasse",
-      "cuisine_type": "French Fine Dining",
-      "location": "Museum of Islamic Art",
+      "name": "Jones the Grocer",
+      "cuisine_type": "International",
+      "location": "The Pearl Qatar",
       "coordinates": {
-        "lat": 25.2948,
-        "lng": 51.5397
+        "lat": 25.37,
+        "lng": 51.553
       },
       "price_range": "$$",
-      "avg_cost_per_person": 400,
-      "rating": 4.9,
-      "description": "French fine dining by Michelin-starred chef Alain Ducasse with views of Doha Bay and the museum.",
+      "avg_cost_per_person": 85,
+      "rating": 4.5,
+      "description": "Modern gourmet eatery and deli offering international cuisine, artisan cheeses, and a curated selection of gourmet products. Great for breakfast, lunch, or dinner.",
       "specialties": [
-        "French Haute Cuisine",
-        "Seasonal Menu",
-        "Wine Pairing",
-        "Artistic Presentation"
+        "Gourmet Burgers",
+        "Artisan Cheese Board",
+        "Eggs Benedict",
+        "Wood-fired Pizza"
       ],
-      "ambiance": "Elegant, Museum setting, Fine dining",
-      "opening_hours": "19:00-23:00",
-      "contact": "+974 4422 4555",
+      "ambiance": "Modern, Gourmet, Casual",
+      "opening_hours": "08:00-23:00",
+      "contact": "+974 4495 3876",
       "features": [
-        "michelin_chef",
-        "museum_location",
-        "bay_views",
-        "seasonal_menu",
-        "wine_sommelier"
+        "gourmet_products",
+        "artisan_cheese",
+        "breakfast_menu",
+        "family_friendly",
+        "deli_counter"
       ],
       "dietary_options": [
         "vegetarian",
-        "gluten_free",
-        "special_dietary"
+        "gluten_free"
       ],
       "languages_spoken": [
-        "French",
-        "English",
-        "Arabic"
+        "English"
       ],
-      "dress_code": "Formal",
-      "best_time_to_visit": "Evening for ambiance",
-      "booking_required": true,
+      "dress_code": "Casual",
+      "best_time_to_visit": "Morning for breakfast",
+      "booking_required": false,
       "payment_methods": [
+        "cash",
         "card",
         "digital_wallet"
       ]
@@ -529,52 +512,49 @@
   {
     "id": "rest_011",
     "category": "restaurants",
-    "name": "Paul Bakery & Restaurant",
-    "text": "Name: Paul Bakery & Restaurant. Category: restaurants. Location: City Center Mall. Description: French bakery chain offering fresh pastries, sandwiches, and light meals in a casual setting.. Cuisine: French Bakery. Price range: $. Specialties: Fresh Croissants, Sandwiches, Quiche, French Pastries, Coffee. Ambiance: Casual, French bistro, Family-friendly. Features: fresh_pastries, breakfast_all_day, takeaway, budget_friendly, quick_service. Hours: 07:00-23:00. Rating: 4.3/5. Best time to visit: Morning for fresh pastries",
+    "name": "Al Shurfa Arabic Lounge",
+    "text": "Name: Al Shurfa Arabic Lounge. Category: restaurants. Location: Souq Waqif Boutique Hotels. Description: Rooftop restaurant with panoramic views of Souq Waqif, serving classic Middle Eastern dishes, mezze, and grilled specialties. Known for its shisha and sunset ambiance.. Cuisine: Middle Eastern. Price range: $$. Specialties: Mixed Grill, Hummus, Fattoush, Kunafa. Ambiance: Rooftop, Scenic, Relaxed. Features: rooftop_views, shisha, mezze_specialist, romantic_setting, live_music. Hours: 17:00-01:00. Rating: 4.6/5. Best time to visit: Sunset for city views",
     "metadata": {
       "id": "rest_011",
-      "name": "Paul Bakery & Restaurant",
-      "cuisine_type": "French Bakery",
-      "location": "City Center Mall",
+      "name": "Al Shurfa Arabic Lounge",
+      "cuisine_type": "Middle Eastern",
+      "location": "Souq Waqif Boutique Hotels",
       "coordinates": {
-        "lat": 25.3219,
-        "lng": 51.5068
+        "lat": 25.287,
+        "lng": 51.533
       },
-      "price_range": "$",
-      "avg_cost_per_person": 45,
-      "rating": 4.3,
-      "description": "French bakery chain offering fresh pastries, sandwiches, and light meals in a casual setting.",
+      "price_range": "$$",
+      "avg_cost_per_person": 75,
+      "rating": 4.6,
+      "description": "Rooftop restaurant with panoramic views of Souq Waqif, serving classic Middle Eastern dishes, mezze, and grilled specialties. Known for its shisha and sunset ambiance.",
       "specialties": [
-        "Fresh Croissants",
-        "Sandwiches",
-        "Quiche",
-        "French Pastries",
-        "Coffee"
+        "Mixed Grill",
+        "Hummus",
+        "Fattoush",
+        "Kunafa"
       ],
-      "ambiance": "Casual, French bistro, Family-friendly",
-      "opening_hours": "07:00-23:00",
-      "contact": "+974 4444 0008",
+      "ambiance": "Rooftop, Scenic, Relaxed",
+      "opening_hours": "17:00-01:00",
+      "contact": "+974 4433 6667",
       "features": [
-        "fresh_pastries",
-        "breakfast_all_day",
-        "takeaway",
-        "budget_friendly",
-        "quick_service"
+        "rooftop_views",
+        "shisha",
+        "mezze_specialist",
+        "romantic_setting",
+        "live_music"
       ],
       "dietary_options": [
+        "halal",
         "vegetarian",
-        "some_vegan"
+        "vegan_options"
       ],
       "languages_spoken": [
-        "English",
-        "French",
-        "Arabic"
+        "English"
       ],
-      "dress_code": "Casual",
-      "best_time_to_visit": "Morning for fresh pastries",
-      "booking_required": false,
+      "dress_code": "Smart casual",
+      "best_time_to_visit": "Sunset for city views",
+      "booking_required": true,
       "payment_methods": [
-        "cash",
         "card",
         "digital_wallet"
       ]
@@ -583,51 +563,199 @@
   {
     "id": "rest_012",
     "category": "restaurants",
-    "name": "Subway",
-    "text": "Name: Subway. Category: restaurants. Location: Multiple Locations. Description: International sandwich chain with customizable healthy options and quick service.. Cuisine: American Fast Food. Price range: $. Specialties: Custom Sandwiches, Salads, Healthy Options, Quick Service. Ambiance: Fast casual, Clean, Modern. Features: healthy_options, customizable, quick_service, budget_friendly, multiple_locations. Hours: 07:00-24:00. Rating: 4.0/5. Best time to visit: Lunch for fresh ingredients",
+    "name": "Sakura Sushi Bar",
+    "text": "Name: Sakura Sushi Bar. Category: restaurants. Location: The Pearl Qatar. Description: Authentic Japanese sushi bar with a modern twist, offering fresh sashimi, creative rolls, and a tranquil ambiance. Sushi chefs prepare dishes at the counter.. Cuisine: Japanese. Price range: $$$. Specialties: Sashimi, Dragon Roll, Tempura, Miso Soup. Ambiance: Modern, Tranquil, Intimate. Features: sushi_bar, fresh_fish, chef_counter, private_dining, takeaway. Hours: 12:00-23:00. Rating: 4.7/5. Best time to visit: Dinner for sushi experience",
     "metadata": {
       "id": "rest_012",
-      "name": "Subway",
-      "cuisine_type": "American Fast Food",
-      "location": "Multiple Locations",
+      "name": "Sakura Sushi Bar",
+      "cuisine_type": "Japanese",
+      "location": "The Pearl Qatar",
       "coordinates": {
-        "lat": 25.3,
-        "lng": 51.5
+        "lat": 25.37,
+        "lng": 51.553
       },
-      "price_range": "$",
-      "avg_cost_per_person": 25,
-      "rating": 4.0,
-      "description": "International sandwich chain with customizable healthy options and quick service.",
+      "price_range": "$$$",
+      "avg_cost_per_person": 130,
+      "rating": 4.7,
+      "description": "Authentic Japanese sushi bar with a modern twist, offering fresh sashimi, creative rolls, and a tranquil ambiance. Sushi chefs prepare dishes at the counter.",
       "specialties": [
-        "Custom Sandwiches",
-        "Salads",
-        "Healthy Options",
-        "Quick Service"
+        "Sashimi",
+        "Dragon Roll",
+        "Tempura",
+        "Miso Soup"
       ],
-      "ambiance": "Fast casual, Clean, Modern",
-      "opening_hours": "07:00-24:00",
-      "contact": "+974 4444 0009",
+      "ambiance": "Modern, Tranquil, Intimate",
+      "opening_hours": "12:00-23:00",
+      "contact": "+974 4444 1030",
       "features": [
-        "healthy_options",
-        "customizable",
-        "quick_service",
-        "budget_friendly",
-        "multiple_locations"
+        "sushi_bar",
+        "fresh_fish",
+        "chef_counter",
+        "private_dining",
+        "takeaway"
       ],
       "dietary_options": [
         "vegetarian",
-        "some_vegan",
-        "halal"
+        "gluten_free"
       ],
       "languages_spoken": [
-        "English",
-        "Arabic"
+        "English"
+      ],
+      "dress_code": "Smart casual",
+      "best_time_to_visit": "Dinner for sushi experience",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ]
+    }
+  },
+  {
+    "id": "rest_013",
+    "category": "restaurants",
+    "name": "El Rancho Steakhouse",
+    "text": "Name: El Rancho Steakhouse. Category: restaurants. Location: Radisson Blu Hotel, Doha. Description: Lively South American steakhouse with a focus on grilled meats, live music, and a festive atmosphere. Famous for its churrasco and caipirinhas.. Cuisine: South American. Price range: $$$. Specialties: Churrasco, Ribeye Steak, Empanadas, Caipirinha. Ambiance: Festive, Lively, Family-friendly. Features: live_music, grill_specialist, family_friendly, cocktail_bar, private_events. Hours: 18:00-23:30. Rating: 4.5/5. Best time to visit: Weekend evenings for live music",
+    "metadata": {
+      "id": "rest_013",
+      "name": "El Rancho Steakhouse",
+      "cuisine_type": "South American",
+      "location": "Radisson Blu Hotel, Doha",
+      "coordinates": {
+        "lat": 25.276,
+        "lng": 51.517
+      },
+      "price_range": "$$$",
+      "avg_cost_per_person": 160,
+      "rating": 4.5,
+      "description": "Lively South American steakhouse with a focus on grilled meats, live music, and a festive atmosphere. Famous for its churrasco and caipirinhas.",
+      "specialties": [
+        "Churrasco",
+        "Ribeye Steak",
+        "Empanadas",
+        "Caipirinha"
+      ],
+      "ambiance": "Festive, Lively, Family-friendly",
+      "opening_hours": "18:00-23:30",
+      "contact": "+974 4444 1031",
+      "features": [
+        "live_music",
+        "grill_specialist",
+        "family_friendly",
+        "cocktail_bar",
+        "private_events"
+      ],
+      "dietary_options": [
+        "halal",
+        "vegetarian_options"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Smart casual",
+      "best_time_to_visit": "Weekend evenings for live music",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ]
+    }
+  },
+  {
+    "id": "rest_014",
+    "category": "restaurants",
+    "name": "Little Italy",
+    "text": "Name: Little Italy. Category: restaurants. Location: Al Sadd. Description: Family-friendly Italian trattoria serving wood-fired pizzas, homemade pastas, and classic desserts. Cozy ambiance and open kitchen.. Cuisine: Italian. Price range: $$. Specialties: Margherita Pizza, Lasagna, Tiramisu, Bruschetta. Ambiance: Cozy, Family-friendly, Rustic. Features: wood_fired_oven, open_kitchen, kids_menu, takeaway, dessert_specialist. Hours: 12:00-23:00. Rating: 4.4/5. Best time to visit: Lunch for family meals",
+    "metadata": {
+      "id": "rest_014",
+      "name": "Little Italy",
+      "cuisine_type": "Italian",
+      "location": "Al Sadd",
+      "coordinates": {
+        "lat": 25.277,
+        "lng": 51.507
+      },
+      "price_range": "$$",
+      "avg_cost_per_person": 65,
+      "rating": 4.4,
+      "description": "Family-friendly Italian trattoria serving wood-fired pizzas, homemade pastas, and classic desserts. Cozy ambiance and open kitchen.",
+      "specialties": [
+        "Margherita Pizza",
+        "Lasagna",
+        "Tiramisu",
+        "Bruschetta"
+      ],
+      "ambiance": "Cozy, Family-friendly, Rustic",
+      "opening_hours": "12:00-23:00",
+      "contact": "+974 4444 1032",
+      "features": [
+        "wood_fired_oven",
+        "open_kitchen",
+        "kids_menu",
+        "takeaway",
+        "dessert_specialist"
+      ],
+      "dietary_options": [
+        "vegetarian",
+        "gluten_free"
+      ],
+      "languages_spoken": [
+        "English"
       ],
       "dress_code": "Casual",
-      "best_time_to_visit": "Lunch for fresh ingredients",
+      "best_time_to_visit": "Lunch for family meals",
       "booking_required": false,
       "payment_methods": [
         "cash",
+        "card"
+      ]
+    }
+  },
+  {
+    "id": "rest_015",
+    "category": "restaurants",
+    "name": "Green Garden Vegan Bistro",
+    "text": "Name: Green Garden Vegan Bistro. Category: restaurants. Location: Msheireb Downtown. Description: Modern vegan bistro offering plant-based dishes, fresh juices, and a sustainable dining experience. Known for its creative salads and eco-friendly ethos.. Cuisine: Vegan. Price range: $$. Specialties: Vegan Burger, Quinoa Salad, Smoothie Bowls, Raw Desserts. Ambiance: Modern, Eco-friendly, Bright. Features: plant_based, eco_friendly, fresh_juices, gluten_free_options, takeaway. Hours: 11:00-22:00. Rating: 4.8/5. Best time to visit: Afternoon for healthy lunch",
+    "metadata": {
+      "id": "rest_015",
+      "name": "Green Garden Vegan Bistro",
+      "cuisine_type": "Vegan",
+      "location": "Msheireb Downtown",
+      "coordinates": {
+        "lat": 25.285,
+        "lng": 51.533
+      },
+      "price_range": "$$",
+      "avg_cost_per_person": 55,
+      "rating": 4.8,
+      "description": "Modern vegan bistro offering plant-based dishes, fresh juices, and a sustainable dining experience. Known for its creative salads and eco-friendly ethos.",
+      "specialties": [
+        "Vegan Burger",
+        "Quinoa Salad",
+        "Smoothie Bowls",
+        "Raw Desserts"
+      ],
+      "ambiance": "Modern, Eco-friendly, Bright",
+      "opening_hours": "11:00-22:00",
+      "contact": "+974 4444 1033",
+      "features": [
+        "plant_based",
+        "eco_friendly",
+        "fresh_juices",
+        "gluten_free_options",
+        "takeaway"
+      ],
+      "dietary_options": [
+        "vegan",
+        "vegetarian",
+        "gluten_free"
+      ],
+      "languages_spoken": [
+        "English"
+      ],
+      "dress_code": "Casual",
+      "best_time_to_visit": "Afternoon for healthy lunch",
+      "booking_required": false,
+      "payment_methods": [
         "card",
         "digital_wallet"
       ]
@@ -637,7 +765,7 @@
     "id": "attr_001",
     "category": "attractions",
     "name": "Museum of Islamic Art",
-    "text": "Name: Museum of Islamic Art. Category: attractions. Location: Corniche, Doha. Description: World-class museum showcasing Islamic art spanning 1,400 years from three continents. Designed by I.M. Pei.. Type: Museum. Entry fee: Free. Duration: 2-3 hours. Highlights: 14th-century manuscripts, Ceramic collection, Textiles, Architecture by I.M. Pei. Features: family_friendly, educational, photography_allowed, guided_tours, café, gift_shop. Hours: 09:00-19:00 (Closed Mondays). Rating: 4.9/5. Best time to visit: Morning for fewer crowds",
+    "text": "Name: Museum of Islamic Art. Category: attractions. Location: Corniche, Doha. Description: World-class museum showcasing Islamic art spanning 1,400 years from three continents. Designed by I.M. Pei, it features rare manuscripts, ceramics, textiles, and a stunning waterfront setting.. Type: Museum. Entry fee: Free. Duration: 2-3 hours. Highlights: 14th-century manuscripts, Ceramic collection, Textiles, Architecture by I.M. Pei. Features: family_friendly, educational, photography_allowed, guided_tours, café, gift_shop. Hours: 09:00-19:00 (Closed Mondays). Rating: 4.9/5. Best time to visit: Morning for fewer crowds",
     "metadata": {
       "id": "attr_001",
       "name": "Museum of Islamic Art",
@@ -649,7 +777,7 @@
       },
       "entry_fee": "Free",
       "rating": 4.9,
-      "description": "World-class museum showcasing Islamic art spanning 1,400 years from three continents. Designed by I.M. Pei.",
+      "description": "World-class museum showcasing Islamic art spanning 1,400 years from three continents. Designed by I.M. Pei, it features rare manuscripts, ceramics, textiles, and a stunning waterfront setting.",
       "highlights": [
         "14th-century manuscripts",
         "Ceramic collection",
@@ -672,9 +800,7 @@
         "audio_guides"
       ],
       "languages_available": [
-        "Arabic",
-        "English",
-        "French"
+        "English"
       ],
       "best_time_to_visit": "Morning for fewer crowds",
       "nearby_attractions": [
@@ -691,64 +817,10 @@
   {
     "id": "attr_002",
     "category": "attractions",
-    "name": "Souq Waqif",
-    "text": "Name: Souq Waqif. Category: attractions. Location: Al Souq, Doha. Description: Traditional marketplace rebuilt to retain its original Qatari architectural style. Hub for shopping, dining, and cultural experiences.. Type: Traditional Market. Entry fee: Free. Duration: 2-4 hours. Highlights: Traditional architecture, Spice market, Falcon Souq, Cultural performances. Features: shopping, dining, cultural_experience, evening_entertainment, traditional_crafts. Hours: 10:00-22:00 (Shops vary). Rating: 4.8/5. Best time to visit: Evening for atmosphere and cooler weather",
+    "name": "Katara Cultural Village",
+    "text": "Name: Katara Cultural Village. Category: attractions. Location: Katara, Doha. Description: Qatar's premier destination for arts and culture, featuring galleries, theaters, restaurants, a beach, and regular festivals. Home to the iconic amphitheater and Blue Mosque.. Type: Cultural Complex. Entry fee: Free (Individual attractions may charge). Duration: 3-5 hours. Highlights: Blue Mosque, Pigeon Towers, Beach, Amphitheater, Art galleries. Features: cultural_events, art_galleries, beach_access, restaurants, festivals, family_friendly. Hours: 24/7 (Individual venues vary). Rating: 4.7/5. Best time to visit: Late afternoon and evening",
     "metadata": {
       "id": "attr_002",
-      "name": "Souq Waqif",
-      "category": "Traditional Market",
-      "location": "Al Souq, Doha",
-      "coordinates": {
-        "lat": 25.2867,
-        "lng": 51.5333
-      },
-      "entry_fee": "Free",
-      "rating": 4.8,
-      "description": "Traditional marketplace rebuilt to retain its original Qatari architectural style. Hub for shopping, dining, and cultural experiences.",
-      "highlights": [
-        "Traditional architecture",
-        "Spice market",
-        "Falcon Souq",
-        "Cultural performances"
-      ],
-      "opening_hours": "10:00-22:00 (Shops vary)",
-      "estimated_duration": "2-4 hours",
-      "contact": "+974 4433 3333",
-      "features": [
-        "shopping",
-        "dining",
-        "cultural_experience",
-        "evening_entertainment",
-        "traditional_crafts"
-      ],
-      "accessibility": [
-        "wheelchair_accessible",
-        "family_friendly"
-      ],
-      "languages_available": [
-        "Arabic",
-        "English",
-        "Multiple"
-      ],
-      "best_time_to_visit": "Evening for atmosphere and cooler weather",
-      "nearby_attractions": [
-        "Museum of Islamic Art",
-        "Corniche"
-      ],
-      "transportation": [
-        "metro_station",
-        "taxi_accessible",
-        "walking_distance_corniche"
-      ]
-    }
-  },
-  {
-    "id": "attr_003",
-    "category": "attractions",
-    "name": "Katara Cultural Village",
-    "text": "Name: Katara Cultural Village. Category: attractions. Location: Katara, Doha. Description: Cultural district featuring galleries, theaters, restaurants, and beaches. Qatar's premier destination for arts and culture.. Type: Cultural Complex. Entry fee: Free (Individual attractions may charge). Duration: 3-5 hours. Highlights: Blue Mosque, Pigeon Towers, Beach, Amphitheater, Art galleries. Features: cultural_events, art_galleries, beach_access, restaurants, festivals, family_friendly. Hours: 24/7 (Individual venues vary). Rating: 4.7/5. Best time to visit: Late afternoon and evening",
-    "metadata": {
-      "id": "attr_003",
       "name": "Katara Cultural Village",
       "category": "Cultural Complex",
       "location": "Katara, Doha",
@@ -758,7 +830,7 @@
       },
       "entry_fee": "Free (Individual attractions may charge)",
       "rating": 4.7,
-      "description": "Cultural district featuring galleries, theaters, restaurants, and beaches. Qatar's premier destination for arts and culture.",
+      "description": "Qatar's premier destination for arts and culture, featuring galleries, theaters, restaurants, a beach, and regular festivals. Home to the iconic amphitheater and Blue Mosque.",
       "highlights": [
         "Blue Mosque",
         "Pigeon Towers",
@@ -782,7 +854,6 @@
         "parking_available"
       ],
       "languages_available": [
-        "Arabic",
         "English"
       ],
       "best_time_to_visit": "Late afternoon and evening",
@@ -798,551 +869,998 @@
     }
   },
   {
-    "id": "cafe_001",
-    "category": "cafes",
-    "name": "Karak House",
-    "text": "Name: Karak House. Category: cafes. Location: Souq Waqif. Description: Authentic Qatari tea house serving the perfect blend of karak tea with traditional snacks.. Specialty: Traditional Karak Tea. Specialties: Karak Tea, Arabic Coffee, Traditional Sweets, Sambosas. Ambiance: Traditional, Local experience, Casual. Features: authentic_experience, budget_friendly, outdoor_seating, quick_service. Hours: 06:00-24:00. Rating: 4.5/5. Best time to visit: Early morning or evening",
+    "id": "attr_003",
+    "category": "attractions",
+    "name": "The Pearl Qatar",
+    "text": "Name: The Pearl Qatar. Category: attractions. Location: The Pearl Qatar. Description: Luxury man-made island with marinas, shopping, dining, and residential areas. Known for its Mediterranean-style architecture, waterfront promenades, and vibrant nightlife.. Type: Man-made Island. Entry fee: Free. Duration: 2-4 hours. Highlights: Marina, Shopping, Dining, Waterfront promenades. Features: luxury_living, shopping, dining, marina_views, events. Hours: 24/7. Rating: 4.6/5. Best time to visit: Evening for marina views",
     "metadata": {
-      "id": "cafe_001",
-      "name": "Karak House",
-      "specialty": "Traditional Karak Tea",
-      "location": "Souq Waqif",
+      "id": "attr_003",
+      "name": "The Pearl Qatar",
+      "category": "Man-made Island",
+      "location": "The Pearl Qatar",
+      "coordinates": {
+        "lat": 25.37,
+        "lng": 51.553
+      },
+      "entry_fee": "Free",
+      "rating": 4.6,
+      "description": "Luxury man-made island with marinas, shopping, dining, and residential areas. Known for its Mediterranean-style architecture, waterfront promenades, and vibrant nightlife.",
+      "highlights": [
+        "Marina",
+        "Shopping",
+        "Dining",
+        "Waterfront promenades"
+      ],
+      "opening_hours": "24/7",
+      "estimated_duration": "2-4 hours",
+      "contact": "+974 4409 5155",
+      "features": [
+        "luxury_living",
+        "shopping",
+        "dining",
+        "marina_views",
+        "events"
+      ],
+      "accessibility": [
+        "wheelchair_accessible",
+        "family_friendly"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Evening for marina views",
+      "nearby_attractions": [
+        "Katara Cultural Village",
+        "Lagoona Mall"
+      ],
+      "transportation": [
+        "taxi_accessible",
+        "parking_available",
+        "bus_routes"
+      ]
+    }
+  },
+  {
+    "id": "attr_004",
+    "category": "attractions",
+    "name": "National Museum of Qatar",
+    "text": "Name: National Museum of Qatar. Category: attractions. Location: Corniche, Doha. Description: Architecturally stunning museum telling the story of Qatar's history, culture, and people. Interactive exhibits, immersive galleries, and the iconic Desert Rose design.. Type: Museum. Entry fee: 50 QAR (adults). Duration: 2-4 hours. Highlights: Desert Rose architecture, Interactive exhibits, Heritage galleries, Children's museum. Features: interactive_exhibits, family_friendly, guided_tours, café, gift_shop. Hours: 09:00-19:00 (Closed Tuesdays). Rating: 4.8/5. Best time to visit: Morning for fewer crowds",
+    "metadata": {
+      "id": "attr_004",
+      "name": "National Museum of Qatar",
+      "category": "Museum",
+      "location": "Corniche, Doha",
+      "coordinates": {
+        "lat": 25.285,
+        "lng": 51.536
+      },
+      "entry_fee": "50 QAR (adults)",
+      "rating": 4.8,
+      "description": "Architecturally stunning museum telling the story of Qatar's history, culture, and people. Interactive exhibits, immersive galleries, and the iconic Desert Rose design.",
+      "highlights": [
+        "Desert Rose architecture",
+        "Interactive exhibits",
+        "Heritage galleries",
+        "Children's museum"
+      ],
+      "opening_hours": "09:00-19:00 (Closed Tuesdays)",
+      "estimated_duration": "2-4 hours",
+      "contact": "+974 4452 5555",
+      "features": [
+        "interactive_exhibits",
+        "family_friendly",
+        "guided_tours",
+        "café",
+        "gift_shop"
+      ],
+      "accessibility": [
+        "wheelchair_accessible",
+        "audio_guides"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Morning for fewer crowds",
+      "nearby_attractions": [
+        "Museum of Islamic Art",
+        "Corniche"
+      ],
+      "transportation": [
+        "metro_nearby",
+        "parking_available",
+        "taxi_accessible"
+      ]
+    }
+  },
+  {
+    "id": "attr_005",
+    "category": "attractions",
+    "name": "Imam Muhammad ibn Abd al-Wahhab Mosque",
+    "text": "Name: Imam Muhammad ibn Abd al-Wahhab Mosque. Category: attractions. Location: Al Muhandiseen Street, Doha. Description: Qatar's national mosque, known for its grand architecture, large prayer halls, and cultural events. Open to visitors outside prayer times, with guided tours available.. Type: Grand Mosque. Entry fee: Free. Duration: 1-2 hours. Highlights: Grand architecture, Guided tours, Prayer halls, Library, Cultural events. Features: grand_architecture, guided_tours, prayer_halls, library, cultural_events. Hours: Open for prayers and tours. Rating: 4.8/5. Best time to visit: Morning for guided tours",
+    "metadata": {
+      "id": "attr_005",
+      "name": "Imam Muhammad ibn Abd al-Wahhab Mosque",
+      "category": "Grand Mosque",
+      "location": "Al Muhandiseen Street, Doha",
+      "coordinates": {
+        "lat": 25.304,
+        "lng": 51.493
+      },
+      "entry_fee": "Free",
+      "rating": 4.8,
+      "description": "Qatar's national mosque, known for its grand architecture, large prayer halls, and cultural events. Open to visitors outside prayer times, with guided tours available.",
+      "highlights": [
+        "Grand architecture",
+        "Guided tours",
+        "Prayer halls",
+        "Library",
+        "Cultural events"
+      ],
+      "opening_hours": "Open for prayers and tours",
+      "estimated_duration": "1-2 hours",
+      "contact": "+974 4470 0000",
+      "features": [
+        "grand_architecture",
+        "guided_tours",
+        "prayer_halls",
+        "library",
+        "cultural_events"
+      ],
+      "accessibility": [
+        "wheelchair_accessible"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Morning for guided tours",
+      "nearby_attractions": [
+        "Corniche",
+        "Souq Waqif"
+      ],
+      "transportation": [
+        "taxi_accessible",
+        "parking_available"
+      ]
+    }
+  },
+  {
+    "id": "attr_006",
+    "category": "attractions",
+    "name": "Barzan Towers",
+    "text": "Name: Barzan Towers. Category: attractions. Location: Umm Salal Mohammed. Description: Restored 19th-century watchtowers offering panoramic views and historical exhibits. A symbol of Qatar's heritage and defense history.. Type: Historical Site. Entry fee: Free. Duration: 1 hour. Highlights: Watchtowers, Historical exhibits, Panoramic views, Guided tours, Photography. Features: watchtowers, historical_exhibits, panoramic_views, guided_tours, photography. Hours: 09:00-17:00. Rating: 4.5/5. Best time to visit: Late afternoon for sunset views",
+    "metadata": {
+      "id": "attr_006",
+      "name": "Barzan Towers",
+      "category": "Historical Site",
+      "location": "Umm Salal Mohammed",
+      "coordinates": {
+        "lat": 25.416,
+        "lng": 51.397
+      },
+      "entry_fee": "Free",
+      "rating": 4.5,
+      "description": "Restored 19th-century watchtowers offering panoramic views and historical exhibits. A symbol of Qatar's heritage and defense history.",
+      "highlights": [
+        "Watchtowers",
+        "Historical exhibits",
+        "Panoramic views",
+        "Guided tours",
+        "Photography"
+      ],
+      "opening_hours": "09:00-17:00",
+      "estimated_duration": "1 hour",
+      "contact": "+974 4486 7444",
+      "features": [
+        "watchtowers",
+        "historical_exhibits",
+        "panoramic_views",
+        "guided_tours",
+        "photography"
+      ],
+      "accessibility": [
+        "family_friendly"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Late afternoon for sunset views",
+      "nearby_attractions": [
+        "Al Khor",
+        "Al Zubarah Fort"
+      ],
+      "transportation": [
+        "taxi_accessible",
+        "parking_available"
+      ]
+    }
+  },
+  {
+    "id": "attr_007",
+    "category": "attractions",
+    "name": "Mathaf: Arab Museum of Modern Art",
+    "text": "Name: Mathaf: Arab Museum of Modern Art. Category: attractions. Location: Education City. Description: Museum dedicated to modern and contemporary Arab art, with rotating exhibitions, workshops, and guided tours. Inspiring for art lovers and students.. Type: Art Museum. Entry fee: 30 QAR. Duration: 2 hours. Highlights: Modern art, Exhibitions, Workshops, Guided tours, Café. Features: modern_art, exhibitions, workshops, guided_tours, cafe. Hours: 09:00-19:00 (Closed Mondays). Rating: 4.7/5. Best time to visit: Afternoon for exhibitions",
+    "metadata": {
+      "id": "attr_007",
+      "name": "Mathaf: Arab Museum of Modern Art",
+      "category": "Art Museum",
+      "location": "Education City",
+      "coordinates": {
+        "lat": 25.316,
+        "lng": 51.437
+      },
+      "entry_fee": "30 QAR",
+      "rating": 4.7,
+      "description": "Museum dedicated to modern and contemporary Arab art, with rotating exhibitions, workshops, and guided tours. Inspiring for art lovers and students.",
+      "highlights": [
+        "Modern art",
+        "Exhibitions",
+        "Workshops",
+        "Guided tours",
+        "Café"
+      ],
+      "opening_hours": "09:00-19:00 (Closed Mondays)",
+      "estimated_duration": "2 hours",
+      "contact": "+974 4402 8855",
+      "features": [
+        "modern_art",
+        "exhibitions",
+        "workshops",
+        "guided_tours",
+        "cafe"
+      ],
+      "accessibility": [
+        "wheelchair_accessible"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Afternoon for exhibitions",
+      "nearby_attractions": [
+        "Qatar National Library",
+        "Oxygen Park"
+      ],
+      "transportation": [
+        "metro_nearby",
+        "parking_available"
+      ]
+    }
+  },
+  {
+    "id": "attr_008",
+    "category": "attractions",
+    "name": "Sheikh Faisal Bin Qassim Al Thani Museum",
+    "text": "Name: Sheikh Faisal Bin Qassim Al Thani Museum. Category: attractions. Location: Al Samriya. Description: Extensive private museum with collections of Islamic artifacts, vintage cars, and Qatari heritage. Family-friendly and educational, with guided tours available.. Type: Private Museum. Entry fee: 50 QAR. Duration: 2 hours. Highlights: Private collection, Historic cars, Islamic artifacts, Guided tours, Family-friendly. Features: private_collection, historic_cars, islamic_artifacts, guided_tours, family_friendly. Hours: 10:00-18:00. Rating: 4.6/5. Best time to visit: Morning for guided tours",
+    "metadata": {
+      "id": "attr_008",
+      "name": "Sheikh Faisal Bin Qassim Al Thani Museum",
+      "category": "Private Museum",
+      "location": "Al Samriya",
+      "coordinates": {
+        "lat": 25.384,
+        "lng": 51.187
+      },
+      "entry_fee": "50 QAR",
+      "rating": 4.6,
+      "description": "Extensive private museum with collections of Islamic artifacts, vintage cars, and Qatari heritage. Family-friendly and educational, with guided tours available.",
+      "highlights": [
+        "Private collection",
+        "Historic cars",
+        "Islamic artifacts",
+        "Guided tours",
+        "Family-friendly"
+      ],
+      "opening_hours": "10:00-18:00",
+      "estimated_duration": "2 hours",
+      "contact": "+974 4486 1444",
+      "features": [
+        "private_collection",
+        "historic_cars",
+        "islamic_artifacts",
+        "guided_tours",
+        "family_friendly"
+      ],
+      "accessibility": [
+        "family_friendly"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Morning for guided tours",
+      "nearby_attractions": [
+        "Al Shahaniya Camel Racetrack"
+      ],
+      "transportation": [
+        "taxi_accessible",
+        "parking_available"
+      ]
+    }
+  },
+  {
+    "id": "attr_009",
+    "category": "attractions",
+    "name": "Souq Waqif Art Center",
+    "text": "Name: Souq Waqif Art Center. Category: attractions. Location: Souq Waqif, Old Doha. Description: Vibrant art center in the heart of Souq Waqif, featuring exhibitions, artist studios, workshops, and cultural events. Great for art lovers and tourists.. Type: Art Gallery. Entry fee: Free. Duration: 1-2 hours. Highlights: Art exhibitions, Artist studios, Workshops, Cultural events, Gift shop. Features: art_exhibitions, artist_studios, workshops, cultural_events, gift_shop. Hours: 10:00-22:00. Rating: 4.7/5. Best time to visit: Evening for live art events",
+    "metadata": {
+      "id": "attr_009",
+      "name": "Souq Waqif Art Center",
+      "category": "Art Gallery",
+      "location": "Souq Waqif, Old Doha",
       "coordinates": {
         "lat": 25.2867,
+        "lng": 51.5333
+      },
+      "entry_fee": "Free",
+      "rating": 4.7,
+      "description": "Vibrant art center in the heart of Souq Waqif, featuring exhibitions, artist studios, workshops, and cultural events. Great for art lovers and tourists.",
+      "highlights": [
+        "Art exhibitions",
+        "Artist studios",
+        "Workshops",
+        "Cultural events",
+        "Gift shop"
+      ],
+      "opening_hours": "10:00-22:00",
+      "estimated_duration": "1-2 hours",
+      "contact": "+974 4433 2222",
+      "features": [
+        "art_exhibitions",
+        "artist_studios",
+        "workshops",
+        "cultural_events",
+        "gift_shop"
+      ],
+      "accessibility": [
+        "family_friendly"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Evening for live art events",
+      "nearby_attractions": [
+        "Souq Waqif",
+        "Museum of Islamic Art"
+      ],
+      "transportation": [
+        "metro_nearby",
+        "taxi_accessible"
+      ]
+    }
+  },
+  {
+    "id": "attr_010",
+    "category": "attractions",
+    "name": "Al Zubarah Fort",
+    "text": "Name: Al Zubarah Fort. Category: attractions. Location: Al Zubarah, North Qatar. Description: Historic desert fort and UNESCO World Heritage Site, offering insight into Qatar's trading and pearling past. Features archaeological remains and a small museum.. Type: UNESCO World Heritage Site. Entry fee: Free. Duration: 1-2 hours. Highlights: Desert fort, UNESCO site, Archaeological remains, Museum, Photography. Features: unesco_site, archaeology, museum, guided_tours, photography. Hours: 09:00-17:00. Rating: 4.5/5. Best time to visit: Morning for cooler weather",
+    "metadata": {
+      "id": "attr_010",
+      "name": "Al Zubarah Fort",
+      "category": "UNESCO World Heritage Site",
+      "location": "Al Zubarah, North Qatar",
+      "coordinates": {
+        "lat": 25.981,
+        "lng": 51.026
+      },
+      "entry_fee": "Free",
+      "rating": 4.5,
+      "description": "Historic desert fort and UNESCO World Heritage Site, offering insight into Qatar's trading and pearling past. Features archaeological remains and a small museum.",
+      "highlights": [
+        "Desert fort",
+        "UNESCO site",
+        "Archaeological remains",
+        "Museum",
+        "Photography"
+      ],
+      "opening_hours": "09:00-17:00",
+      "estimated_duration": "1-2 hours",
+      "contact": "+974 4470 4444",
+      "features": [
+        "unesco_site",
+        "archaeology",
+        "museum",
+        "guided_tours",
+        "photography"
+      ],
+      "accessibility": [
+        "family_friendly"
+      ],
+      "languages_available": [
+        "English"
+      ],
+      "best_time_to_visit": "Morning for cooler weather",
+      "nearby_attractions": [
+        "Barzan Towers",
+        "Al Khor"
+      ],
+      "transportation": [
+        "car_required",
+        "parking_available"
+      ]
+    }
+  },
+  {
+    "id": "cafe_001",
+    "category": "cafes",
+    "name": "Flat White Doha",
+    "text": "Name: Flat White Doha. Category: cafes. Location: Msheireb Downtown. Description: Trendy Australian-style café with minimalist decor, serving expertly crafted flat whites, single-origin espresso, and gourmet brunch options. Popular with digital nomads and coffee aficionados.. Specialty: Australian Specialty Coffee. Specialties: Flat White, Avocado Toast, Eggs Benedict, Single-Origin Espresso, Banana Bread. Ambiance: Minimalist, Modern, Work-friendly. Features: australian_coffee, gourmet_brunch, fast_wifi, work_friendly, outdoor_seating. Hours: 07:00-22:00. Rating: 4.7/5. Best time to visit: Morning for brunch",
+    "metadata": {
+      "id": "cafe_001",
+      "name": "Flat White Doha",
+      "specialty": "Australian Specialty Coffee",
+      "location": "Msheireb Downtown",
+      "coordinates": {
+        "lat": 25.285,
         "lng": 51.533
       },
-      "price_range": "$",
-      "avg_cost_per_person": 15,
-      "rating": 4.5,
-      "description": "Authentic Qatari tea house serving the perfect blend of karak tea with traditional snacks.",
+      "price_range": "$$",
+      "avg_cost_per_person": 38,
+      "rating": 4.7,
+      "description": "Trendy Australian-style café with minimalist decor, serving expertly crafted flat whites, single-origin espresso, and gourmet brunch options. Popular with digital nomads and coffee aficionados.",
       "specialties": [
-        "Karak Tea",
-        "Arabic Coffee",
-        "Traditional Sweets",
-        "Sambosas"
+        "Flat White",
+        "Avocado Toast",
+        "Eggs Benedict",
+        "Single-Origin Espresso",
+        "Banana Bread"
       ],
-      "ambiance": "Traditional, Local experience, Casual",
-      "opening_hours": "06:00-24:00",
+      "ambiance": "Minimalist, Modern, Work-friendly",
+      "opening_hours": "07:00-22:00",
+      "contact": "+974 4444 1015",
       "features": [
-        "authentic_experience",
-        "budget_friendly",
-        "outdoor_seating",
-        "quick_service"
+        "australian_coffee",
+        "gourmet_brunch",
+        "fast_wifi",
+        "work_friendly",
+        "outdoor_seating"
       ],
-      "best_time_to_visit": "Early morning or evening"
+      "best_time_to_visit": "Morning for brunch",
+      "wifi": true,
+      "seating": "Modern communal tables and window bar"
     }
   },
   {
     "id": "cafe_002",
     "category": "cafes",
-    "name": "Café Ceramic",
-    "text": "Name: Café Ceramic. Category: cafes. Location: Katara Cultural Village. Description: Unique café combining specialty coffee with pottery in a cultural setting.. Specialty: Artisan Coffee & Pottery. Specialties: Specialty Coffee, Pottery Classes, Artisan Pastries. Ambiance: Artistic, Cultural, Creative. Features: cultural_location, instagram_worthy, creative_experience. Hours: 08:00-22:00. Rating: 4.6/5. Best time to visit: Morning",
+    "name": "Urban Brew Lab",
+    "text": "Name: Urban Brew Lab. Category: cafes. Location: The Pearl Qatar. Description: Innovative café with a focus on experimental brewing methods, molecular gastronomy-inspired pastries, and a rotating menu of global beans. Hosts regular coffee workshops and tastings.. Specialty: Experimental Coffee & Pastries. Specialties: Siphon Brew, Nitro Cold Brew, Matcha Croissant, Coffee Tasting Flights. Ambiance: Futuristic, Creative, Social. Features: experimental_brews, pastry_lab, coffee_workshops, community_events, instagram_worthy. Hours: 08:00-23:00. Rating: 4.8/5. Best time to visit: Evening for workshops",
     "metadata": {
       "id": "cafe_002",
-      "name": "Café Ceramic",
-      "specialty": "Artisan Coffee & Pottery",
-      "location": "Katara Cultural Village",
+      "name": "Urban Brew Lab",
+      "specialty": "Experimental Coffee & Pastries",
+      "location": "The Pearl Qatar",
       "coordinates": {
-        "lat": 25.3792,
-        "lng": 51.5315
+        "lat": 25.372,
+        "lng": 51.553
       },
       "price_range": "$$",
-      "avg_cost_per_person": 35,
-      "rating": 4.6,
-      "description": "Unique café combining specialty coffee with pottery in a cultural setting.",
+      "avg_cost_per_person": 42,
+      "rating": 4.8,
+      "description": "Innovative café with a focus on experimental brewing methods, molecular gastronomy-inspired pastries, and a rotating menu of global beans. Hosts regular coffee workshops and tastings.",
       "specialties": [
-        "Specialty Coffee",
-        "Pottery Classes",
-        "Artisan Pastries"
+        "Siphon Brew",
+        "Nitro Cold Brew",
+        "Matcha Croissant",
+        "Coffee Tasting Flights"
       ],
-      "ambiance": "Artistic, Cultural, Creative",
-      "opening_hours": "08:00-22:00",
+      "ambiance": "Futuristic, Creative, Social",
+      "opening_hours": "08:00-23:00",
+      "contact": "+974 4444 1016",
       "features": [
-        "cultural_location",
-        "instagram_worthy",
-        "creative_experience"
+        "experimental_brews",
+        "pastry_lab",
+        "coffee_workshops",
+        "community_events",
+        "instagram_worthy"
       ],
-      "best_time_to_visit": "Morning"
+      "best_time_to_visit": "Evening for workshops",
+      "wifi": true,
+      "seating": "High-tech bar and lounge chairs"
     }
   },
   {
     "id": "cafe_003",
     "category": "cafes",
-    "name": "Chapati & Karak",
-    "text": "Name: Chapati & Karak. Category: cafes. Location: Souq Waqif. Description: Popular local spot for strong karak tea and Indian-style snacks, beloved by workers and locals.. Specialty: Indian-style Karak & Snacks. Specialties: Strong Karak, Chapati, Paratha, Samosas, Omelette. Ambiance: Local, Casual, No-frills. Features: local_favorite, strong_tea, budget_friendly, quick_service, authentic_taste. Hours: 05:00-24:00. Rating: 4.4/5. Best time to visit: Early morning with workers",
+    "name": "Desert Rose Café",
+    "text": "Name: Desert Rose Café. Category: cafes. Location: Aspire Park. Description: Charming outdoor café nestled in Aspire Park, offering traditional Qatari desserts, herbal teas, and light snacks. Perfect for families and park-goers seeking a relaxing break.. Specialty: Qatari Sweets & Herbal Teas. Specialties: Luqaimat, Saffron Tea, Rosewater Lemonade, Baklava. Ambiance: Garden, Family-friendly, Relaxed. Features: outdoor_seating, park_views, family_friendly, traditional_sweets, pet_friendly. Hours: 09:00-22:00. Rating: 4.5/5. Best time to visit: Afternoon for tea time",
     "metadata": {
       "id": "cafe_003",
-      "name": "Chapati & Karak",
-      "specialty": "Indian-style Karak & Snacks",
-      "location": "Souq Waqif",
+      "name": "Desert Rose Café",
+      "specialty": "Qatari Sweets & Herbal Teas",
+      "location": "Aspire Park",
       "coordinates": {
-        "lat": 25.2865,
-        "lng": 51.5334
+        "lat": 25.262,
+        "lng": 51.441
       },
       "price_range": "$",
-      "avg_cost_per_person": 18,
-      "rating": 4.4,
-      "description": "Popular local spot for strong karak tea and Indian-style snacks, beloved by workers and locals.",
+      "avg_cost_per_person": 22,
+      "rating": 4.5,
+      "description": "Charming outdoor café nestled in Aspire Park, offering traditional Qatari desserts, herbal teas, and light snacks. Perfect for families and park-goers seeking a relaxing break.",
       "specialties": [
-        "Strong Karak",
-        "Chapati",
-        "Paratha",
-        "Samosas",
-        "Omelette"
+        "Luqaimat",
+        "Saffron Tea",
+        "Rosewater Lemonade",
+        "Baklava"
       ],
-      "ambiance": "Local, Casual, No-frills",
-      "opening_hours": "05:00-24:00",
-      "contact": "+974 4444 1003",
+      "ambiance": "Garden, Family-friendly, Relaxed",
+      "opening_hours": "09:00-22:00",
+      "contact": "+974 4444 1017",
       "features": [
-        "local_favorite",
-        "strong_tea",
-        "budget_friendly",
-        "quick_service",
-        "authentic_taste"
+        "outdoor_seating",
+        "park_views",
+        "family_friendly",
+        "traditional_sweets",
+        "pet_friendly"
       ],
-      "best_time_to_visit": "Early morning with workers",
+      "best_time_to_visit": "Afternoon for tea time",
       "wifi": false,
-      "seating": "Simple tables and chairs"
+      "seating": "Garden benches and picnic tables"
     }
   },
   {
     "id": "cafe_004",
     "category": "cafes",
-    "name": "Café Ceramic",
-    "text": "Name: Café Ceramic. Category: cafes. Location: Katara Cultural Village. Description: Unique café combining specialty coffee with pottery workshops in a cultural setting.. Specialty: Artisan Coffee & Pottery. Specialties: Specialty Coffee, Pottery Classes, Artisan Pastries, Fresh Juices, Healthy Bowls. Ambiance: Artistic, Cultural, Creative. Features: art_workshops, cultural_location, instagram_worthy, creative_experience, beach_nearby. Hours: 08:00-22:00. Rating: 4.6/5. Best time to visit: Morning for workshops",
+    "name": "Bean & Quill",
+    "text": "Name: Bean & Quill. Category: cafes. Location: Education City. Description: A haven for book lovers and students, this café offers a curated library, specialty coffee, and quiet study nooks. Regular author events and poetry nights.. Specialty: Book Café & Specialty Coffee. Specialties: Pour Over Coffee, Vegan Brownies, Herbal Teas, Book Club Events. Ambiance: Literary, Quiet, Academic. Features: book_library, study_nooks, author_events, quiet_atmosphere, student_discount. Hours: 08:00-22:00. Rating: 4.9/5. Best time to visit: Evening for book readings",
     "metadata": {
       "id": "cafe_004",
-      "name": "Café Ceramic",
-      "specialty": "Artisan Coffee & Pottery",
-      "location": "Katara Cultural Village",
+      "name": "Bean & Quill",
+      "specialty": "Book Café & Specialty Coffee",
+      "location": "Education City",
       "coordinates": {
-        "lat": 25.3792,
-        "lng": 51.5315
+        "lat": 25.316,
+        "lng": 51.437
       },
-      "price_range": "$",
+      "price_range": "$$",
       "avg_cost_per_person": 35,
-      "rating": 4.6,
-      "description": "Unique café combining specialty coffee with pottery workshops in a cultural setting.",
+      "rating": 4.9,
+      "description": "A haven for book lovers and students, this café offers a curated library, specialty coffee, and quiet study nooks. Regular author events and poetry nights.",
       "specialties": [
-        "Specialty Coffee",
-        "Pottery Classes",
-        "Artisan Pastries",
-        "Fresh Juices",
-        "Healthy Bowls"
+        "Pour Over Coffee",
+        "Vegan Brownies",
+        "Herbal Teas",
+        "Book Club Events"
       ],
-      "ambiance": "Artistic, Cultural, Creative",
+      "ambiance": "Literary, Quiet, Academic",
       "opening_hours": "08:00-22:00",
-      "contact": "+974 4444 1004",
+      "contact": "+974 4444 1018",
       "features": [
-        "art_workshops",
-        "cultural_location",
-        "instagram_worthy",
-        "creative_experience",
-        "beach_nearby"
+        "book_library",
+        "study_nooks",
+        "author_events",
+        "quiet_atmosphere",
+        "student_discount"
       ],
-      "best_time_to_visit": "Morning for workshops",
+      "best_time_to_visit": "Evening for book readings",
       "wifi": true,
-      "seating": "Artistic tables with pottery displays"
+      "seating": "Armchairs, study desks, and reading corners"
     }
   },
   {
     "id": "cafe_005",
     "category": "cafes",
-    "name": "Dose Café",
-    "text": "Name: Dose Café. Category: cafes. Location: The Pearl Qatar. Description: Modern coffee shop focusing on high-quality single-origin beans and artisanal brewing methods.. Specialty: Third Wave Coffee. Specialties: Single Origin Coffee, Cold Brew, Specialty Lattes, Avocado Toast, Acai Bowls. Ambiance: Modern, Trendy, Marina views. Features: third_wave_coffee, marina_view, healthy_options, instagram_worthy, specialty_beans. Hours: 07:00-23:00. Rating: 4.7/5. Best time to visit: Morning for fresh roast",
+    "name": "The Greenhouse Café",
+    "text": "Name: The Greenhouse Café. Category: cafes. Location: Al Bidda Park. Description: Eco-friendly café surrounded by lush greenery, serving organic coffee, vegan pastries, and fresh juices. Focus on sustainability and wellness.. Specialty: Organic Coffee & Vegan Treats. Specialties: Organic Espresso, Vegan Muffins, Green Smoothies, Gluten-Free Cookies. Ambiance: Eco-friendly, Relaxed, Nature-inspired. Features: organic_menu, vegan_options, recycled_materials, outdoor_garden, yoga_events. Hours: 07:30-21:00. Rating: 4.6/5. Best time to visit: Morning for fresh air",
     "metadata": {
       "id": "cafe_005",
-      "name": "Dose Café",
-      "specialty": "Third Wave Coffee",
-      "location": "The Pearl Qatar",
+      "name": "The Greenhouse Café",
+      "specialty": "Organic Coffee & Vegan Treats",
+      "location": "Al Bidda Park",
       "coordinates": {
-        "lat": 25.3713,
-        "lng": 51.552
+        "lat": 25.295,
+        "lng": 51.527
       },
-      "price_range": "$",
-      "avg_cost_per_person": 40,
-      "rating": 4.7,
-      "description": "Modern coffee shop focusing on high-quality single-origin beans and artisanal brewing methods.",
+      "price_range": "$$",
+      "avg_cost_per_person": 30,
+      "rating": 4.6,
+      "description": "Eco-friendly café surrounded by lush greenery, serving organic coffee, vegan pastries, and fresh juices. Focus on sustainability and wellness.",
       "specialties": [
-        "Single Origin Coffee",
-        "Cold Brew",
-        "Specialty Lattes",
-        "Avocado Toast",
-        "Acai Bowls"
+        "Organic Espresso",
+        "Vegan Muffins",
+        "Green Smoothies",
+        "Gluten-Free Cookies"
       ],
-      "ambiance": "Modern, Trendy, Marina views",
-      "opening_hours": "07:00-23:00",
-      "contact": "+974 4444 1005",
+      "ambiance": "Eco-friendly, Relaxed, Nature-inspired",
+      "opening_hours": "07:30-21:00",
+      "contact": "+974 4444 1019",
       "features": [
-        "third_wave_coffee",
-        "marina_view",
-        "healthy_options",
-        "instagram_worthy",
-        "specialty_beans"
+        "organic_menu",
+        "vegan_options",
+        "recycled_materials",
+        "outdoor_garden",
+        "yoga_events"
       ],
-      "best_time_to_visit": "Morning for fresh roast",
+      "best_time_to_visit": "Morning for fresh air",
       "wifi": true,
-      "seating": "Modern furniture with marina views"
+      "seating": "Garden patio and recycled wood tables"
     }
   },
   {
     "id": "cafe_006",
     "category": "cafes",
-    "name": "Project Café",
-    "text": "Name: Project Café. Category: cafes. Location: West Bay. Description: Coffee shop designed for productivity with excellent WiFi, quiet atmosphere, and specialty drinks.. Specialty: Specialty Coffee & Co-working. Specialties: Flat White, Nitro Coffee, Matcha Lattes, Protein Smoothies, Healthy Wraps. Ambiance: Professional, Quiet, Work-friendly. Features: coworking_space, fast_wifi, quiet_atmosphere, charging_stations, meeting_rooms. Hours: 06:30-22:00. Rating: 4.5/5. Best time to visit: Morning for productivity",
+    "name": "Majlis Espresso",
+    "text": "Name: Majlis Espresso. Category: cafes. Location: Souq Waqif. Description: Traditional Qatari majlis experience with specialty Arabic coffee, dates, and local snacks. Decorated with heritage artifacts and textiles.. Specialty: Qatari Coffee & Dates. Specialties: Arabic Coffee, Stuffed Dates, Qatari Sweets, Mint Tea. Ambiance: Traditional, Heritage, Social. Features: majlis_seating, heritage_decor, arabic_coffee, cultural_events, family_friendly. Hours: 10:00-23:00. Rating: 4.4/5. Best time to visit: Evening for social gatherings",
     "metadata": {
       "id": "cafe_006",
-      "name": "Project Café",
-      "specialty": "Specialty Coffee & Co-working",
-      "location": "West Bay",
+      "name": "Majlis Espresso",
+      "specialty": "Qatari Coffee & Dates",
+      "location": "Souq Waqif",
       "coordinates": {
-        "lat": 25.36,
-        "lng": 51.529
+        "lat": 25.287,
+        "lng": 51.534
       },
       "price_range": "$",
-      "avg_cost_per_person": 38,
-      "rating": 4.5,
-      "description": "Coffee shop designed for productivity with excellent WiFi, quiet atmosphere, and specialty drinks.",
+      "avg_cost_per_person": 18,
+      "rating": 4.4,
+      "description": "Traditional Qatari majlis experience with specialty Arabic coffee, dates, and local snacks. Decorated with heritage artifacts and textiles.",
       "specialties": [
-        "Flat White",
-        "Nitro Coffee",
-        "Matcha Lattes",
-        "Protein Smoothies",
-        "Healthy Wraps"
+        "Arabic Coffee",
+        "Stuffed Dates",
+        "Qatari Sweets",
+        "Mint Tea"
       ],
-      "ambiance": "Professional, Quiet, Work-friendly",
-      "opening_hours": "06:30-22:00",
-      "contact": "+974 4444 1006",
+      "ambiance": "Traditional, Heritage, Social",
+      "opening_hours": "10:00-23:00",
+      "contact": "+974 4444 1020",
       "features": [
-        "coworking_space",
-        "fast_wifi",
-        "quiet_atmosphere",
-        "charging_stations",
-        "meeting_rooms"
+        "majlis_seating",
+        "heritage_decor",
+        "arabic_coffee",
+        "cultural_events",
+        "family_friendly"
       ],
-      "best_time_to_visit": "Morning for productivity",
-      "wifi": true,
-      "seating": "Ergonomic chairs and work tables"
+      "best_time_to_visit": "Evening for social gatherings",
+      "wifi": false,
+      "seating": "Majlis cushions and low tables"
     }
   },
   {
     "id": "cafe_007",
     "category": "cafes",
-    "name": "Raw Coffee Company",
-    "text": "Name: Raw Coffee Company. Category: cafes. Location: Msheireb Downtown. Description: Local coffee roastery with freshly roasted beans and expert baristas. Qatar's premier coffee destination.. Specialty: Local Roastery. Specialties: Freshly Roasted Beans, Pour Over, Espresso Drinks, Coffee Tasting, Local Blends. Ambiance: Industrial, Coffee-focused, Local. Features: local_roastery, coffee_education, bean_sales, expert_baristas, tasting_sessions. Hours: 07:00-21:00. Rating: 4.8/5. Best time to visit: Mid-morning for fresh roast",
+    "name": "Skyline Café",
+    "text": "Name: Skyline Café. Category: cafes. Location: West Bay, Rooftop. Description: Rooftop café with breathtaking views of Doha's skyline, offering an international menu, signature mocktails, and live music on weekends.. Specialty: Panoramic Views & International Menu. Specialties: Mocktails, Gourmet Sandwiches, Cheesecake, Signature Coffee Blends. Ambiance: Upscale, Scenic, Lively. Features: rooftop_views, live_music, international_menu, romantic_setting, private_events. Hours: 16:00-01:00. Rating: 4.8/5. Best time to visit: Sunset for city views",
     "metadata": {
       "id": "cafe_007",
-      "name": "Raw Coffee Company",
-      "specialty": "Local Roastery",
-      "location": "Msheireb Downtown",
+      "name": "Skyline Café",
+      "specialty": "Panoramic Views & International Menu",
+      "location": "West Bay, Rooftop",
       "coordinates": {
-        "lat": 25.29,
-        "lng": 51.528
+        "lat": 25.324,
+        "lng": 51.532
       },
-      "price_range": "$",
-      "avg_cost_per_person": 42,
+      "price_range": "$$$",
+      "avg_cost_per_person": 60,
       "rating": 4.8,
-      "description": "Local coffee roastery with freshly roasted beans and expert baristas. Qatar's premier coffee destination.",
+      "description": "Rooftop café with breathtaking views of Doha's skyline, offering an international menu, signature mocktails, and live music on weekends.",
       "specialties": [
-        "Freshly Roasted Beans",
-        "Pour Over",
-        "Espresso Drinks",
-        "Coffee Tasting",
-        "Local Blends"
+        "Mocktails",
+        "Gourmet Sandwiches",
+        "Cheesecake",
+        "Signature Coffee Blends"
       ],
-      "ambiance": "Industrial, Coffee-focused, Local",
-      "opening_hours": "07:00-21:00",
-      "contact": "+974 4444 1007",
+      "ambiance": "Upscale, Scenic, Lively",
+      "opening_hours": "16:00-01:00",
+      "contact": "+974 4444 1021",
       "features": [
-        "local_roastery",
-        "coffee_education",
-        "bean_sales",
-        "expert_baristas",
-        "tasting_sessions"
+        "rooftop_views",
+        "live_music",
+        "international_menu",
+        "romantic_setting",
+        "private_events"
       ],
-      "best_time_to_visit": "Mid-morning for fresh roast",
+      "best_time_to_visit": "Sunset for city views",
       "wifi": true,
-      "seating": "Industrial style with coffee bean displays"
+      "seating": "Rooftop terrace and lounge sofas"
     }
   },
   {
     "id": "cafe_008",
     "category": "cafes",
-    "name": "Starbucks",
-    "text": "Name: Starbucks. Category: cafes. Location: Multiple Locations. Description: International coffee chain with consistent quality and familiar menu items across multiple locations.. Specialty: International Coffee Chain. Specialties: Frappuccinos, Seasonal Drinks, Pastries, Sandwiches, Iced Coffee. Ambiance: Familiar, International, Consistent. Features: multiple_locations, consistent_quality, seasonal_menu, mobile_ordering, loyalty_program. Hours: 06:00-24:00. Rating: 4.2/5. Best time to visit: Any time for consistency",
+    "name": "Palette Café",
+    "text": "Name: Palette Café. Category: cafes. Location: Msheireb Museums. Description: Art-inspired café with a gallery space, creative workshops, and a menu of colorful, healthy dishes. Popular with artists and families.. Specialty: Art Café & Creative Workshops. Specialties: Latte Art, Rainbow Salads, Artisan Sandwiches, Smoothie Bowls. Ambiance: Artistic, Creative, Family-friendly. Features: art_gallery, workshops, healthy_menu, family_events, art_supplies. Hours: 09:00-21:00. Rating: 4.7/5. Best time to visit: Weekend mornings for workshops",
     "metadata": {
       "id": "cafe_008",
-      "name": "Starbucks",
-      "specialty": "International Coffee Chain",
-      "location": "Multiple Locations",
+      "name": "Palette Café",
+      "specialty": "Art Café & Creative Workshops",
+      "location": "Msheireb Museums",
       "coordinates": {
-        "lat": 25.3,
-        "lng": 51.5
+        "lat": 25.284,
+        "lng": 51.532
       },
-      "price_range": "$",
-      "avg_cost_per_person": 28,
-      "rating": 4.2,
-      "description": "International coffee chain with consistent quality and familiar menu items across multiple locations.",
+      "price_range": "$$",
+      "avg_cost_per_person": 32,
+      "rating": 4.7,
+      "description": "Art-inspired café with a gallery space, creative workshops, and a menu of colorful, healthy dishes. Popular with artists and families.",
       "specialties": [
-        "Frappuccinos",
-        "Seasonal Drinks",
-        "Pastries",
-        "Sandwiches",
-        "Iced Coffee"
+        "Latte Art",
+        "Rainbow Salads",
+        "Artisan Sandwiches",
+        "Smoothie Bowls"
       ],
-      "ambiance": "Familiar, International, Consistent",
-      "opening_hours": "06:00-24:00",
-      "contact": "+974 4444 1008",
+      "ambiance": "Artistic, Creative, Family-friendly",
+      "opening_hours": "09:00-21:00",
+      "contact": "+974 4444 1022",
       "features": [
-        "multiple_locations",
-        "consistent_quality",
-        "seasonal_menu",
-        "mobile_ordering",
-        "loyalty_program"
+        "art_gallery",
+        "workshops",
+        "healthy_menu",
+        "family_events",
+        "art_supplies"
       ],
-      "best_time_to_visit": "Any time for consistency",
+      "best_time_to_visit": "Weekend mornings for workshops",
       "wifi": true,
-      "seating": "Standard franchise seating"
+      "seating": "Art tables and gallery benches"
     }
   },
   {
     "id": "cafe_009",
     "category": "cafes",
-    "name": "Costa Coffee",
-    "text": "Name: Costa Coffee. Category: cafes. Location: Multiple Locations. Description: Greate for Studying. Come here to Study. British coffee chain known for their signature blend and comfortable seating areas.. Specialty: British Coffee Chain. Specialties: Flat White, Costa Signature Blend, Paninis, Muffins, Iced Drinks. Ambiance: Comfortable, British style, Relaxed. Features: comfortable_seating, british_style, budget_friendly, multiple_locations, quick_service. Hours: 06:00-24:00. Rating: 4.0/5. Best time to visit: Afternoon for relaxation",
+    "name": "Pearl Lounge Café",
+    "text": "Name: Pearl Lounge Café. Category: cafes. Location: The Pearl Qatar, Porto Arabia. Description: Exclusive lounge café with luxury desserts, premium coffee, and a private, tranquil setting overlooking the marina. Ideal for business meetings and special occasions.. Specialty: Luxury Coffee & Desserts. Specialties: Gold Leaf Cappuccino, French Macarons, Luxury Chocolates, Exotic Teas. Ambiance: Luxury, Private, Elegant. Features: private_lounge, marina_views, luxury_desserts, business_friendly, concierge_service. Hours: 10:00-23:00. Rating: 4.9/5. Best time to visit: Evening for special occasions",
     "metadata": {
       "id": "cafe_009",
-      "name": "Costa Coffee",
-      "specialty": "British Coffee Chain",
-      "location": "Multiple Locations",
+      "name": "Pearl Lounge Café",
+      "specialty": "Luxury Coffee & Desserts",
+      "location": "The Pearl Qatar, Porto Arabia",
       "coordinates": {
-        "lat": 25.31,
-        "lng": 51.51
+        "lat": 25.373,
+        "lng": 51.554
       },
-      "price_range": "$",
-      "avg_cost_per_person": 25,
-      "rating": 4.0,
-      "description": "Greate for Studying. Come here to Study. British coffee chain known for their signature blend and comfortable seating areas.",
+      "price_range": "$$$",
+      "avg_cost_per_person": 70,
+      "rating": 4.9,
+      "description": "Exclusive lounge café with luxury desserts, premium coffee, and a private, tranquil setting overlooking the marina. Ideal for business meetings and special occasions.",
       "specialties": [
-        "Flat White",
-        "Costa Signature Blend",
-        "Paninis",
-        "Muffins",
-        "Iced Drinks"
+        "Gold Leaf Cappuccino",
+        "French Macarons",
+        "Luxury Chocolates",
+        "Exotic Teas"
       ],
-      "ambiance": "Comfortable, British style, Relaxed",
-      "opening_hours": "06:00-24:00",
-      "contact": "+974 4444 1009",
+      "ambiance": "Luxury, Private, Elegant",
+      "opening_hours": "10:00-23:00",
+      "contact": "+974 4444 1023",
       "features": [
-        "comfortable_seating",
-        "british_style",
-        "budget_friendly",
-        "multiple_locations",
-        "quick_service"
+        "private_lounge",
+        "marina_views",
+        "luxury_desserts",
+        "business_friendly",
+        "concierge_service"
       ],
-      "best_time_to_visit": "Afternoon for relaxation",
+      "best_time_to_visit": "Evening for special occasions",
       "wifi": true,
-      "seating": "Comfortable sofas and chairs"
+      "seating": "Velvet armchairs and private booths"
     }
   },
   {
     "id": "cafe_010",
     "category": "cafes",
-    "name": "Shakespeare & Co.",
-    "text": "Name: Shakespeare & Co.. Category: cafes. Location: The Gate Mall. Description: French-inspired café with bookstore atmosphere, serving coffee, pastries, and light meals.. Specialty: French-style Café & Bookstore. Specialties: French Pastries, Café au Lait, Croque Monsieur, Fresh Salads, Quiche. Ambiance: French, Literary, Cozy. Features: bookstore_atmosphere, french_pastries, quiet_reading, literary_theme, all_day_dining. Hours: 08:00-23:00. Rating: 4.4/5. Best time to visit: Afternoon for reading",
+    "name": "Sunset Brews",
+    "text": "Name: Sunset Brews. Category: cafes. Location: Katara Beach. Description: Relaxed beach café with a focus on cold brews, fresh smoothies, and light bites. Perfect for unwinding after a swim or enjoying the sunset.. Specialty: Beachside Coffee & Smoothies. Specialties: Cold Brew, Tropical Smoothies, Acai Bowls, Grilled Paninis. Ambiance: Beachside, Relaxed, Casual. Features: beach_access, sunset_views, healthy_menu, outdoor_seating, pet_friendly. Hours: 08:00-22:00. Rating: 4.6/5. Best time to visit: Sunset for beach views",
     "metadata": {
       "id": "cafe_010",
-      "name": "Shakespeare & Co.",
-      "specialty": "French-style Café & Bookstore",
-      "location": "The Gate Mall",
+      "name": "Sunset Brews",
+      "specialty": "Beachside Coffee & Smoothies",
+      "location": "Katara Beach",
       "coordinates": {
-        "lat": 25.373,
-        "lng": 51.541
+        "lat": 25.381,
+        "lng": 51.532
       },
-      "price_range": "$",
-      "avg_cost_per_person": 45,
-      "rating": 4.4,
-      "description": "French-inspired café with bookstore atmosphere, serving coffee, pastries, and light meals.",
+      "price_range": "$$",
+      "avg_cost_per_person": 36,
+      "rating": 4.6,
+      "description": "Relaxed beach café with a focus on cold brews, fresh smoothies, and light bites. Perfect for unwinding after a swim or enjoying the sunset.",
       "specialties": [
-        "French Pastries",
-        "Café au Lait",
-        "Croque Monsieur",
-        "Fresh Salads",
-        "Quiche"
+        "Cold Brew",
+        "Tropical Smoothies",
+        "Acai Bowls",
+        "Grilled Paninis"
       ],
-      "ambiance": "French, Literary, Cozy",
-      "opening_hours": "08:00-23:00",
-      "contact": "+974 4444 1010",
+      "ambiance": "Beachside, Relaxed, Casual",
+      "opening_hours": "08:00-22:00",
+      "contact": "+974 4444 1024",
       "features": [
-        "bookstore_atmosphere",
-        "french_pastries",
-        "quiet_reading",
-        "literary_theme",
-        "all_day_dining"
+        "beach_access",
+        "sunset_views",
+        "healthy_menu",
+        "outdoor_seating",
+        "pet_friendly"
       ],
-      "best_time_to_visit": "Afternoon for reading",
-      "wifi": true,
-      "seating": "Cozy chairs with books around"
+      "best_time_to_visit": "Sunset for beach views",
+      "wifi": false,
+      "seating": "Beach loungers and picnic tables"
     }
   },
   {
     "id": "cafe_011",
     "category": "cafes",
-    "name": "Tche Tche",
-    "text": "Name: Tche Tche. Category: cafes. Location: Villaggio Mall. Description: Lebanese café famous for traditional sweets, Arabic coffee, and Middle Eastern desserts.. Specialty: Lebanese Café & Sweets. Specialties: Knafeh, Muhallabia, Arabic Coffee, Turkish Delight, Fresh Juices. Ambiance: Lebanese, Sweet-focused, Traditional. Features: traditional_sweets, middle_eastern_desserts, family_friendly, mall_location, takeaway_available. Hours: 10:00-23:00. Rating: 4.5/5. Best time to visit: Evening for fresh sweets",
+    "name": "Brew Society",
+    "text": "Name: Brew Society. Category: cafes. Location: Msheireb Downtown. Description: Trendy café with a focus on single-origin beans, pour-over brews, and gourmet pastries. Popular with young professionals and creatives.. Specialty: Specialty Coffee & Pastries. Specialties: Pour Over, Espresso, Croissants, Vegan Muffins. Ambiance: Modern, Social, Creative. Features: single_origin, gourmet_pastries, fast_wifi, work_friendly, outdoor_seating. Hours: 07:00-22:00. Rating: 4.8/5. Best time to visit: Morning for fresh pastries",
     "metadata": {
       "id": "cafe_011",
-      "name": "Tche Tche",
-      "specialty": "Lebanese Café & Sweets",
-      "location": "Villaggio Mall",
+      "name": "Brew Society",
+      "specialty": "Specialty Coffee & Pastries",
+      "location": "Msheireb Downtown",
       "coordinates": {
-        "lat": 25.2613,
-        "lng": 51.444
+        "lat": 25.286,
+        "lng": 51.533
       },
-      "price_range": "$",
-      "avg_cost_per_person": 35,
-      "rating": 4.5,
-      "description": "Lebanese café famous for traditional sweets, Arabic coffee, and Middle Eastern desserts.",
+      "price_range": "$$",
+      "avg_cost_per_person": 40,
+      "rating": 4.8,
+      "description": "Trendy café with a focus on single-origin beans, pour-over brews, and gourmet pastries. Popular with young professionals and creatives.",
       "specialties": [
-        "Knafeh",
-        "Muhallabia",
-        "Arabic Coffee",
-        "Turkish Delight",
-        "Fresh Juices"
+        "Pour Over",
+        "Espresso",
+        "Croissants",
+        "Vegan Muffins"
       ],
-      "ambiance": "Lebanese, Sweet-focused, Traditional",
-      "opening_hours": "10:00-23:00",
-      "contact": "+974 4444 1011",
+      "ambiance": "Modern, Social, Creative",
+      "opening_hours": "07:00-22:00",
+      "contact": "+974 4444 1025",
       "features": [
-        "traditional_sweets",
-        "middle_eastern_desserts",
-        "family_friendly",
-        "mall_location",
-        "takeaway_available"
+        "single_origin",
+        "gourmet_pastries",
+        "fast_wifi",
+        "work_friendly",
+        "outdoor_seating"
       ],
-      "best_time_to_visit": "Evening for fresh sweets",
+      "best_time_to_visit": "Morning for fresh pastries",
       "wifi": true,
-      "seating": "Traditional Middle Eastern style"
+      "seating": "Communal tables and window bar"
     }
   },
   {
     "id": "cafe_012",
     "category": "cafes",
-    "name": "Tim Hortons",
-    "text": "Name: Tim Hortons. Category: cafes. Location: Multiple Locations. Description: Canadian coffee chain known for fresh donuts, coffee, and casual breakfast items.. Specialty: Canadian Coffee & Donuts. Specialties: Fresh Donuts, Canadian Coffee, Breakfast Sandwiches, Iced Capp, Timbits. Ambiance: Casual, Canadian, Family-friendly. Features: fresh_donuts, canadian_style, breakfast_all_day, budget_friendly, quick_service. Hours: 05:30-24:00. Rating: 4.1/5. Best time to visit: Morning for fresh donuts",
+    "name": "Chai & Chat",
+    "text": "Name: Chai & Chat. Category: cafes. Location: Al Sadd. Description: Cozy spot for authentic Indian chai, street snacks, and friendly conversation. Known for its masala chai and samosas.. Specialty: Indian Chai & Snacks. Specialties: Masala Chai, Samosas, Pakoras, Paratha. Ambiance: Casual, Cozy, Social. Features: authentic_chai, indian_snacks, budget_friendly, casual_seating, takeaway. Hours: 08:00-23:00. Rating: 4.5/5. Best time to visit: Evening for snacks",
     "metadata": {
       "id": "cafe_012",
-      "name": "Tim Hortons",
-      "specialty": "Canadian Coffee & Donuts",
-      "location": "Multiple Locations",
+      "name": "Chai & Chat",
+      "specialty": "Indian Chai & Snacks",
+      "location": "Al Sadd",
       "coordinates": {
-        "lat": 25.32,
-        "lng": 51.52
+        "lat": 25.277,
+        "lng": 51.507
       },
       "price_range": "$",
-      "avg_cost_per_person": 22,
-      "rating": 4.1,
-      "description": "Canadian coffee chain known for fresh donuts, coffee, and casual breakfast items.",
+      "avg_cost_per_person": 18,
+      "rating": 4.5,
+      "description": "Cozy spot for authentic Indian chai, street snacks, and friendly conversation. Known for its masala chai and samosas.",
       "specialties": [
-        "Fresh Donuts",
-        "Canadian Coffee",
-        "Breakfast Sandwiches",
-        "Iced Capp",
-        "Timbits"
+        "Masala Chai",
+        "Samosas",
+        "Pakoras",
+        "Paratha"
       ],
-      "ambiance": "Casual, Canadian, Family-friendly",
-      "opening_hours": "05:30-24:00",
-      "contact": "+974 4444 1012",
+      "ambiance": "Casual, Cozy, Social",
+      "opening_hours": "08:00-23:00",
+      "contact": "+974 4444 1026",
       "features": [
-        "fresh_donuts",
-        "canadian_style",
-        "breakfast_all_day",
+        "authentic_chai",
+        "indian_snacks",
         "budget_friendly",
-        "quick_service"
+        "casual_seating",
+        "takeaway"
       ],
-      "best_time_to_visit": "Morning for fresh donuts",
-      "wifi": true,
-      "seating": "Simple tables and booths"
+      "best_time_to_visit": "Evening for snacks",
+      "wifi": false,
+      "seating": "Cushioned benches and small tables"
     }
   },
   {
     "id": "cafe_013",
     "category": "cafes",
-    "name": "Fresh Express",
-    "text": "Name: Fresh Express. Category: cafes. Location: Multiple Locations. Description: Health-focused café specializing in fresh juices, smoothies, and light healthy meals.. Specialty: Fresh Juices & Smoothies. Specialties: Fresh Juices, Protein Smoothies, Salads, Wraps, Acai Bowls. Ambiance: Health-focused, Fresh, Modern. Features: healthy_options, fresh_ingredients, customizable_drinks, quick_service, multiple_locations. Hours: 07:00-22:00. Rating: 4.3/5. Best time to visit: Post-workout or lunch",
+    "name": "The Reading Room Café",
+    "text": "Name: The Reading Room Café. Category: cafes. Location: Education City. Description: A quiet retreat for book lovers, offering artisan coffee, light bites, and a curated library. Hosts regular book clubs and poetry nights.. Specialty: Book Café & Artisan Coffee. Specialties: Cappuccino, Vegan Brownies, Herbal Teas, Book Club Events. Ambiance: Quiet, Literary, Relaxed. Features: book_library, study_nooks, quiet_atmosphere, events, student_discount. Hours: 09:00-21:00. Rating: 4.7/5. Best time to visit: Afternoon for reading",
     "metadata": {
       "id": "cafe_013",
-      "name": "Fresh Express",
-      "specialty": "Fresh Juices & Smoothies",
-      "location": "Multiple Locations",
+      "name": "The Reading Room Café",
+      "specialty": "Book Café & Artisan Coffee",
+      "location": "Education City",
       "coordinates": {
-        "lat": 25.33,
-        "lng": 51.53
+        "lat": 25.316,
+        "lng": 51.437
       },
-      "price_range": "$",
-      "avg_cost_per_person": 20,
-      "rating": 4.3,
-      "description": "Health-focused café specializing in fresh juices, smoothies, and light healthy meals.",
+      "price_range": "$$",
+      "avg_cost_per_person": 32,
+      "rating": 4.7,
+      "description": "A quiet retreat for book lovers, offering artisan coffee, light bites, and a curated library. Hosts regular book clubs and poetry nights.",
       "specialties": [
-        "Fresh Juices",
-        "Protein Smoothies",
-        "Salads",
-        "Wraps",
-        "Acai Bowls"
+        "Cappuccino",
+        "Vegan Brownies",
+        "Herbal Teas",
+        "Book Club Events"
       ],
-      "ambiance": "Health-focused, Fresh, Modern",
-      "opening_hours": "07:00-22:00",
-      "contact": "+974 4444 1013",
+      "ambiance": "Quiet, Literary, Relaxed",
+      "opening_hours": "09:00-21:00",
+      "contact": "+974 4444 1027",
       "features": [
-        "healthy_options",
-        "fresh_ingredients",
-        "customizable_drinks",
-        "quick_service",
-        "multiple_locations"
+        "book_library",
+        "study_nooks",
+        "quiet_atmosphere",
+        "events",
+        "student_discount"
       ],
-      "best_time_to_visit": "Post-workout or lunch",
+      "best_time_to_visit": "Afternoon for reading",
       "wifi": true,
-      "seating": "Modern healthy café style"
+      "seating": "Armchairs, study desks, and reading corners"
     }
   },
   {
     "id": "cafe_014",
     "category": "cafes",
-    "name": "Boost Juice",
-    "text": "Name: Boost Juice. Category: cafes. Location: City Center Mall. Description: Australian juice bar offering fresh fruit smoothies, protein shakes, and healthy snacks.. Specialty: Australian Juice & Smoothie Bar. Specialties: Fruit Smoothies, Protein Shakes, Fresh Juices, Energy Boosters, Healthy Snacks. Ambiance: Energetic, Australian, Health-conscious. Features: australian_style, energy_drinks, post_workout, fresh_fruit, healthy_lifestyle. Hours: 10:00-22:00. Rating: 4.2/5. Best time to visit: After gym or midday",
+    "name": "Desert Brew",
+    "text": "Name: Desert Brew. Category: cafes. Location: Souq Waqif. Description: Traditional Qatari café serving Arabic coffee, dates, and local sweets in a heritage-inspired setting. Great for cultural experiences.. Specialty: Qatari Coffee & Dates. Specialties: Arabic Coffee, Stuffed Dates, Luqaimat, Mint Tea. Ambiance: Traditional, Heritage, Social. Features: heritage_decor, arabic_coffee, cultural_events, family_friendly, pet_friendly. Hours: 10:00-23:00. Rating: 4.6/5. Best time to visit: Evening for social gatherings",
     "metadata": {
       "id": "cafe_014",
-      "name": "Boost Juice",
-      "specialty": "Australian Juice & Smoothie Bar",
-      "location": "City Center Mall",
+      "name": "Desert Brew",
+      "specialty": "Qatari Coffee & Dates",
+      "location": "Souq Waqif",
       "coordinates": {
-        "lat": 25.3219,
-        "lng": 51.507
+        "lat": 25.287,
+        "lng": 51.534
       },
       "price_range": "$",
-      "avg_cost_per_person": 25,
-      "rating": 4.2,
-      "description": "Australian juice bar offering fresh fruit smoothies, protein shakes, and healthy snacks.",
+      "avg_cost_per_person": 20,
+      "rating": 4.6,
+      "description": "Traditional Qatari café serving Arabic coffee, dates, and local sweets in a heritage-inspired setting. Great for cultural experiences.",
       "specialties": [
-        "Fruit Smoothies",
-        "Protein Shakes",
-        "Fresh Juices",
-        "Energy Boosters",
-        "Healthy Snacks"
+        "Arabic Coffee",
+        "Stuffed Dates",
+        "Luqaimat",
+        "Mint Tea"
       ],
-      "ambiance": "Energetic, Australian, Health-conscious",
-      "opening_hours": "10:00-22:00",
-      "contact": "+974 4444 1014",
+      "ambiance": "Traditional, Heritage, Social",
+      "opening_hours": "10:00-23:00",
+      "contact": "+974 4444 1028",
       "features": [
-        "australian_style",
-        "energy_drinks",
-        "post_workout",
-        "fresh_fruit",
-        "healthy_lifestyle"
+        "heritage_decor",
+        "arabic_coffee",
+        "cultural_events",
+        "family_friendly",
+        "pet_friendly"
       ],
-      "best_time_to_visit": "After gym or midday",
+      "best_time_to_visit": "Evening for social gatherings",
+      "wifi": false,
+      "seating": "Majlis cushions and low tables"
+    }
+  },
+  {
+    "id": "cafe_015",
+    "category": "cafes",
+    "name": "Marina Mocha",
+    "text": "Name: Marina Mocha. Category: cafes. Location: The Pearl Qatar, Porto Arabia. Description: Seaside café with a focus on specialty coffee, decadent desserts, and marina views. Perfect for relaxing after a stroll along the promenade.. Specialty: Coffee & Desserts by the Sea. Specialties: Mocha, Cheesecake, Gelato, Iced Lattes. Ambiance: Seaside, Relaxed, Modern. Features: marina_views, dessert_specialist, outdoor_seating, romantic_setting, wifi. Hours: 08:00-23:00. Rating: 4.7/5. Best time to visit: Sunset for marina views",
+    "metadata": {
+      "id": "cafe_015",
+      "name": "Marina Mocha",
+      "specialty": "Coffee & Desserts by the Sea",
+      "location": "The Pearl Qatar, Porto Arabia",
+      "coordinates": {
+        "lat": 25.373,
+        "lng": 51.554
+      },
+      "price_range": "$$",
+      "avg_cost_per_person": 45,
+      "rating": 4.7,
+      "description": "Seaside café with a focus on specialty coffee, decadent desserts, and marina views. Perfect for relaxing after a stroll along the promenade.",
+      "specialties": [
+        "Mocha",
+        "Cheesecake",
+        "Gelato",
+        "Iced Lattes"
+      ],
+      "ambiance": "Seaside, Relaxed, Modern",
+      "opening_hours": "08:00-23:00",
+      "contact": "+974 4444 1029",
+      "features": [
+        "marina_views",
+        "dessert_specialist",
+        "outdoor_seating",
+        "romantic_setting",
+        "wifi"
+      ],
+      "best_time_to_visit": "Sunset for marina views",
       "wifi": true,
-      "seating": "High tables and bar stools"
+      "seating": "Outdoor terrace and indoor lounge"
     }
   },
   {
@@ -1385,10 +1903,200 @@
   {
     "id": "shop_002",
     "category": "shopping",
-    "name": "Gold Souq",
-    "text": "Name: Gold Souq. Category: shopping. Location: Souq Waqif. Description: Traditional gold and jewelry market with competitive prices and custom designs.. Features: traditional_shopping, negotiable_prices, custom_jewelry, authentic_experience. Hours: 09:00-22:00. Best time to visit: Evening when less crowded",
+    "name": "Doha Festival City",
+    "text": "Name: Doha Festival City. Category: shopping. Location: Umm Salal Mohammed. Description: Qatar's largest mall with over 400 stores, an indoor theme park, snow park, and a wide range of dining options. Family-friendly and great for all ages.. Features: largest_mall, theme_park, snow_park, family_friendly, dining_options. Hours: 10:00-23:00. Best time to visit: Weekend for family fun",
     "metadata": {
       "id": "shop_002",
+      "name": "Doha Festival City",
+      "category": "Shopping Mall",
+      "location": "Umm Salal Mohammed",
+      "coordinates": {
+        "lat": 25.415,
+        "lng": 51.451
+      },
+      "description": "Qatar's largest mall with over 400 stores, an indoor theme park, snow park, and a wide range of dining options. Family-friendly and great for all ages.",
+      "highlights": [
+        "Indoor theme park",
+        "Snow Dunes",
+        "Luxury brands",
+        "Food court"
+      ],
+      "opening_hours": "10:00-23:00",
+      "features": [
+        "largest_mall",
+        "theme_park",
+        "snow_park",
+        "family_friendly",
+        "dining_options"
+      ],
+      "brands": [
+        "International brands",
+        "Luxury",
+        "Electronics",
+        "Fashion"
+      ],
+      "best_time_to_visit": "Weekend for family fun"
+    }
+  },
+  {
+    "id": "shop_003",
+    "category": "shopping",
+    "name": "The Gate Mall",
+    "text": "Name: The Gate Mall. Category: shopping. Location: West Bay. Description: Upscale shopping destination with designer boutiques, gourmet restaurants, and art installations. Known for its elegant architecture and exclusive brands.. Features: luxury_brands, art_gallery, fine_dining, exclusive_experience, valet_parking. Hours: 10:00-22:00. Best time to visit: Evening for upscale shopping",
+    "metadata": {
+      "id": "shop_003",
+      "name": "The Gate Mall",
+      "category": "Luxury Shopping Mall",
+      "location": "West Bay",
+      "coordinates": {
+        "lat": 25.324,
+        "lng": 51.532
+      },
+      "description": "Upscale shopping destination with designer boutiques, gourmet restaurants, and art installations. Known for its elegant architecture and exclusive brands.",
+      "highlights": [
+        "Designer boutiques",
+        "Art installations",
+        "Gourmet dining",
+        "Luxury brands"
+      ],
+      "opening_hours": "10:00-22:00",
+      "features": [
+        "luxury_brands",
+        "art_gallery",
+        "fine_dining",
+        "exclusive_experience",
+        "valet_parking"
+      ],
+      "brands": [
+        "Designer",
+        "Jewelry",
+        "Fashion",
+        "Perfume"
+      ],
+      "best_time_to_visit": "Evening for upscale shopping"
+    }
+  },
+  {
+    "id": "shop_004",
+    "category": "shopping",
+    "name": "Souq Waqif",
+    "text": "Name: Souq Waqif. Category: shopping. Location: Old Doha. Description: Historic market with traditional Qatari architecture, offering spices, textiles, souvenirs, and local crafts. A must-visit for cultural immersion.. Features: historic_market, cultural_experience, local_products, street_food, bargain_shopping. Hours: 10:00-22:00. Best time to visit: Evening for atmosphere",
+    "metadata": {
+      "id": "shop_004",
+      "name": "Souq Waqif",
+      "category": "Traditional Market",
+      "location": "Old Doha",
+      "coordinates": {
+        "lat": 25.2867,
+        "lng": 51.5333
+      },
+      "description": "Historic market with traditional Qatari architecture, offering spices, textiles, souvenirs, and local crafts. A must-visit for cultural immersion.",
+      "highlights": [
+        "Spice market",
+        "Handicrafts",
+        "Falcon Souq",
+        "Street food"
+      ],
+      "opening_hours": "10:00-22:00",
+      "features": [
+        "historic_market",
+        "cultural_experience",
+        "local_products",
+        "street_food",
+        "bargain_shopping"
+      ],
+      "brands": [
+        "Local artisans",
+        "Spices",
+        "Textiles",
+        "Souvenirs"
+      ],
+      "best_time_to_visit": "Evening for atmosphere"
+    }
+  },
+  {
+    "id": "shop_005",
+    "category": "shopping",
+    "name": "City Center Mall",
+    "text": "Name: City Center Mall. Category: shopping. Location: West Bay. Description: One of Doha's oldest and largest malls, featuring a wide range of shops, an ice rink, cinema, and food court. Conveniently located in the business district.. Features: central_location, entertainment, family_friendly, dining, parking. Hours: 10:00-22:00. Best time to visit: Afternoon for shopping and entertainment",
+    "metadata": {
+      "id": "shop_005",
+      "name": "City Center Mall",
+      "category": "Shopping Mall",
+      "location": "West Bay",
+      "coordinates": {
+        "lat": 25.3219,
+        "lng": 51.5068
+      },
+      "description": "One of Doha's oldest and largest malls, featuring a wide range of shops, an ice rink, cinema, and food court. Conveniently located in the business district.",
+      "highlights": [
+        "Ice rink",
+        "Cinema",
+        "Food court",
+        "Variety of shops"
+      ],
+      "opening_hours": "10:00-22:00",
+      "features": [
+        "central_location",
+        "entertainment",
+        "family_friendly",
+        "dining",
+        "parking"
+      ],
+      "brands": [
+        "International",
+        "Electronics",
+        "Fashion",
+        "Toys"
+      ],
+      "best_time_to_visit": "Afternoon for shopping and entertainment"
+    }
+  },
+  {
+    "id": "shop_006",
+    "category": "shopping",
+    "name": "Lagoona Mall",
+    "text": "Name: Lagoona Mall. Category: shopping. Location: West Bay Lagoon. Description: Luxury mall with a serene ambiance, high-end boutiques, gourmet cafes, and regular fashion events. Popular with expats and locals alike.. Features: luxury_boutiques, fashion_events, gourmet_cafes, serene_ambiance, valet_parking. Hours: 10:00-22:00. Best time to visit: Evening for events",
+    "metadata": {
+      "id": "shop_006",
+      "name": "Lagoona Mall",
+      "category": "Luxury Shopping Mall",
+      "location": "West Bay Lagoon",
+      "coordinates": {
+        "lat": 25.367,
+        "lng": 51.54
+      },
+      "description": "Luxury mall with a serene ambiance, high-end boutiques, gourmet cafes, and regular fashion events. Popular with expats and locals alike.",
+      "highlights": [
+        "Fashion events",
+        "Boutiques",
+        "Gourmet cafes",
+        "Luxury brands"
+      ],
+      "opening_hours": "10:00-22:00",
+      "features": [
+        "luxury_boutiques",
+        "fashion_events",
+        "gourmet_cafes",
+        "serene_ambiance",
+        "valet_parking"
+      ],
+      "brands": [
+        "Luxury",
+        "Fashion",
+        "Jewelry",
+        "Cafes"
+      ],
+      "best_time_to_visit": "Evening for events"
+    }
+  },
+  {
+    "id": "shop_007",
+    "category": "shopping",
+    "name": "Gold Souq",
+    "text": "Name: Gold Souq. Category: shopping. Location: Souq Waqif. Description: Traditional gold and jewelry market with competitive prices and custom designs. A favorite for wedding shopping and unique gifts.. Features: traditional_shopping, negotiable_prices, custom_jewelry, authentic_experience. Hours: 09:00-22:00. Best time to visit: Evening when less crowded",
+    "metadata": {
+      "id": "shop_007",
       "name": "Gold Souq",
       "category": "Traditional Market",
       "location": "Souq Waqif",
@@ -1396,7 +2104,7 @@
         "lat": 25.2867,
         "lng": 51.5335
       },
-      "description": "Traditional gold and jewelry market with competitive prices and custom designs.",
+      "description": "Traditional gold and jewelry market with competitive prices and custom designs. A favorite for wedding shopping and unique gifts.",
       "highlights": [
         "Gold jewelry",
         "Custom designs",
@@ -1410,7 +2118,585 @@
         "custom_jewelry",
         "authentic_experience"
       ],
+      "brands": [
+        "Gold",
+        "Jewelry",
+        "Custom"
+      ],
       "best_time_to_visit": "Evening when less crowded"
+    }
+  },
+  {
+    "id": "shop_008",
+    "category": "shopping",
+    "name": "Mall of Qatar",
+    "text": "Name: Mall of Qatar. Category: shopping. Location: Al Rayyan. Description: Massive shopping and entertainment complex with over 500 stores, a luxury hotel, and a family entertainment center. Hosts regular live shows and events.. Features: entertainment_center, live_events, family_friendly, luxury_hotel, dining_options. Hours: 10:00-23:00. Best time to visit: Evening for live shows",
+    "metadata": {
+      "id": "shop_008",
+      "name": "Mall of Qatar",
+      "category": "Shopping Mall",
+      "location": "Al Rayyan",
+      "coordinates": {
+        "lat": 25.354,
+        "lng": 51.395
+      },
+      "description": "Massive shopping and entertainment complex with over 500 stores, a luxury hotel, and a family entertainment center. Hosts regular live shows and events.",
+      "highlights": [
+        "500+ stores",
+        "Live shows",
+        "Family entertainment",
+        "Luxury hotel"
+      ],
+      "opening_hours": "10:00-23:00",
+      "features": [
+        "entertainment_center",
+        "live_events",
+        "family_friendly",
+        "luxury_hotel",
+        "dining_options"
+      ],
+      "brands": [
+        "International",
+        "Luxury",
+        "Fashion",
+        "Electronics"
+      ],
+      "best_time_to_visit": "Evening for live shows"
+    }
+  },
+  {
+    "id": "shop_009",
+    "category": "shopping",
+    "name": "Ezdan Mall",
+    "text": "Name: Ezdan Mall. Category: shopping. Location: Gharrafa. Description: Popular mall in the Gharrafa area with a variety of retail stores, cafes, and a children's play area. Known for its convenience and family-friendly atmosphere.. Features: family_friendly, convenient_location, cafes, retail_variety, parking. Hours: 10:00-22:00. Best time to visit: Morning for less crowd",
+    "metadata": {
+      "id": "shop_009",
+      "name": "Ezdan Mall",
+      "category": "Shopping Mall",
+      "location": "Gharrafa",
+      "coordinates": {
+        "lat": 25.332,
+        "lng": 51.466
+      },
+      "description": "Popular mall in the Gharrafa area with a variety of retail stores, cafes, and a children's play area. Known for its convenience and family-friendly atmosphere.",
+      "highlights": [
+        "Children's play area",
+        "Cafes",
+        "Retail stores",
+        "Convenient location"
+      ],
+      "opening_hours": "10:00-22:00",
+      "features": [
+        "family_friendly",
+        "convenient_location",
+        "cafes",
+        "retail_variety",
+        "parking"
+      ],
+      "brands": [
+        "Fashion",
+        "Toys",
+        "Electronics",
+        "Cafes"
+      ],
+      "best_time_to_visit": "Morning for less crowd"
+    }
+  },
+  {
+    "id": "shop_010",
+    "category": "shopping",
+    "name": "Royal Plaza",
+    "text": "Name: Royal Plaza. Category: shopping. Location: Al Sadd. Description: Boutique shopping mall with a focus on luxury brands, designer boutiques, and gourmet dining. Elegant interiors and a relaxed shopping experience.. Features: boutique_mall, luxury_brands, gourmet_dining, elegant_interiors, valet_parking. Hours: 10:00-22:00. Best time to visit: Afternoon for relaxed shopping",
+    "metadata": {
+      "id": "shop_010",
+      "name": "Royal Plaza",
+      "category": "Boutique Mall",
+      "location": "Al Sadd",
+      "coordinates": {
+        "lat": 25.277,
+        "lng": 51.507
+      },
+      "description": "Boutique shopping mall with a focus on luxury brands, designer boutiques, and gourmet dining. Elegant interiors and a relaxed shopping experience.",
+      "highlights": [
+        "Designer boutiques",
+        "Gourmet dining",
+        "Luxury brands",
+        "Elegant interiors"
+      ],
+      "opening_hours": "10:00-22:00",
+      "features": [
+        "boutique_mall",
+        "luxury_brands",
+        "gourmet_dining",
+        "elegant_interiors",
+        "valet_parking"
+      ],
+      "brands": [
+        "Designer",
+        "Luxury",
+        "Fashion",
+        "Dining"
+      ],
+      "best_time_to_visit": "Afternoon for relaxed shopping"
+    }
+  },
+  {
+    "id": "hotel_001",
+    "category": "hotels",
+    "name": "The Ritz-Carlton Doha",
+    "text": "Name: The Ritz-Carlton Doha. Category: hotels. Location: West Bay Lagoon. Description: Iconic 5-star hotel with luxurious rooms, world-class dining, a private marina, and a lavish spa. Renowned for its impeccable service and stunning views of the Arabian Gulf.. Features: private_marina, luxury_spa, fine_dining, pool, gulf_views. Rating: 4.8/5. Best time to visit: Winter for outdoor activities",
+    "metadata": {
+      "id": "hotel_001",
+      "name": "The Ritz-Carlton Doha",
+      "category": "Luxury Hotel",
+      "location": "West Bay Lagoon",
+      "coordinates": {
+        "lat": 25.367,
+        "lng": 51.54
+      },
+      "rating": 4.8,
+      "description": "Iconic 5-star hotel with luxurious rooms, world-class dining, a private marina, and a lavish spa. Renowned for its impeccable service and stunning views of the Arabian Gulf.",
+      "features": [
+        "private_marina",
+        "luxury_spa",
+        "fine_dining",
+        "pool",
+        "gulf_views"
+      ],
+      "amenities": [
+        "spa",
+        "pool",
+        "fitness_center",
+        "kids_club",
+        "business_center"
+      ],
+      "room_types": [
+        "Deluxe Room",
+        "Club Suite",
+        "Executive Suite",
+        "Presidential Suite"
+      ],
+      "price_range": "$$$$",
+      "contact": "+974 4484 8000",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Winter for outdoor activities"
+    }
+  },
+  {
+    "id": "hotel_002",
+    "category": "hotels",
+    "name": "Mandarin Oriental Doha",
+    "text": "Name: Mandarin Oriental Doha. Category: hotels. Location: Msheireb Downtown. Description: Elegant hotel blending Qatari heritage with modern luxury. Features rooftop pools, award-winning restaurants, and a holistic spa. Located in the heart of the city.. Features: rooftop_pools, award_winning_restaurants, holistic_spa, heritage_design, central_location. Rating: 4.9/5. Best time to visit: Spring for city events",
+    "metadata": {
+      "id": "hotel_002",
+      "name": "Mandarin Oriental Doha",
+      "category": "Luxury Hotel",
+      "location": "Msheireb Downtown",
+      "coordinates": {
+        "lat": 25.285,
+        "lng": 51.533
+      },
+      "rating": 4.9,
+      "description": "Elegant hotel blending Qatari heritage with modern luxury. Features rooftop pools, award-winning restaurants, and a holistic spa. Located in the heart of the city.",
+      "features": [
+        "rooftop_pools",
+        "award_winning_restaurants",
+        "holistic_spa",
+        "heritage_design",
+        "central_location"
+      ],
+      "amenities": [
+        "spa",
+        "pool",
+        "fitness_center",
+        "concierge",
+        "event_spaces"
+      ],
+      "room_types": [
+        "Superior Room",
+        "Deluxe Suite",
+        "Royal Suite",
+        "Penthouse"
+      ],
+      "price_range": "$$$$",
+      "contact": "+974 4008 8888",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Spring for city events"
+    }
+  },
+  {
+    "id": "hotel_003",
+    "category": "hotels",
+    "name": "W Doha Hotel & Residences",
+    "text": "Name: W Doha Hotel & Residences. Category: hotels. Location: West Bay. Description: Trendy 5-star hotel with vibrant nightlife, celebrity chef restaurants, and a luxurious spa. Known for its modern design and lively atmosphere.. Features: nightlife, celebrity_chefs, luxury_spa, modern_design, event_spaces. Rating: 4.7/5. Best time to visit: Weekend for nightlife",
+    "metadata": {
+      "id": "hotel_003",
+      "name": "W Doha Hotel & Residences",
+      "category": "Luxury Hotel",
+      "location": "West Bay",
+      "coordinates": {
+        "lat": 25.324,
+        "lng": 51.532
+      },
+      "rating": 4.7,
+      "description": "Trendy 5-star hotel with vibrant nightlife, celebrity chef restaurants, and a luxurious spa. Known for its modern design and lively atmosphere.",
+      "features": [
+        "nightlife",
+        "celebrity_chefs",
+        "luxury_spa",
+        "modern_design",
+        "event_spaces"
+      ],
+      "amenities": [
+        "spa",
+        "pool",
+        "fitness_center",
+        "nightclub",
+        "meeting_rooms"
+      ],
+      "room_types": [
+        "Wonderful Room",
+        "Fabulous Suite",
+        "Marvelous Suite",
+        "Extreme WOW Suite"
+      ],
+      "price_range": "$$$",
+      "contact": "+974 4453 5000",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Weekend for nightlife"
+    }
+  },
+  {
+    "id": "hotel_004",
+    "category": "hotels",
+    "name": "InterContinental Doha Beach & Spa",
+    "text": "Name: InterContinental Doha Beach & Spa. Category: hotels. Location: West Bay Lagoon. Description: Beachfront resort with a private beach, multiple pools, award-winning restaurants, and a luxurious spa. Perfect for families and leisure travelers.. Features: private_beach, multiple_pools, award_winning_restaurants, family_friendly, spa. Rating: 4.6/5. Best time to visit: Summer for beach activities",
+    "metadata": {
+      "id": "hotel_004",
+      "name": "InterContinental Doha Beach & Spa",
+      "category": "Resort Hotel",
+      "location": "West Bay Lagoon",
+      "coordinates": {
+        "lat": 25.348,
+        "lng": 51.52
+      },
+      "rating": 4.6,
+      "description": "Beachfront resort with a private beach, multiple pools, award-winning restaurants, and a luxurious spa. Perfect for families and leisure travelers.",
+      "features": [
+        "private_beach",
+        "multiple_pools",
+        "award_winning_restaurants",
+        "family_friendly",
+        "spa"
+      ],
+      "amenities": [
+        "spa",
+        "pool",
+        "fitness_center",
+        "kids_club",
+        "water_sports"
+      ],
+      "room_types": [
+        "Classic Room",
+        "Club Room",
+        "Executive Suite",
+        "Family Suite"
+      ],
+      "price_range": "$$$",
+      "contact": "+974 4484 4444",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Summer for beach activities"
+    }
+  },
+  {
+    "id": "hotel_005",
+    "category": "hotels",
+    "name": "Souq Waqif Boutique Hotels",
+    "text": "Name: Souq Waqif Boutique Hotels. Category: hotels. Location: Souq Waqif. Description: Collection of boutique hotels in the heart of Souq Waqif, each with unique decor and personalized service. Ideal for cultural immersion and authentic experiences.. Features: unique_decor, personalized_service, cultural_experience, central_location, heritage_buildings. Rating: 4.5/5. Best time to visit: Autumn for cultural festivals",
+    "metadata": {
+      "id": "hotel_005",
+      "name": "Souq Waqif Boutique Hotels",
+      "category": "Boutique Hotel",
+      "location": "Souq Waqif",
+      "coordinates": {
+        "lat": 25.287,
+        "lng": 51.533
+      },
+      "rating": 4.5,
+      "description": "Collection of boutique hotels in the heart of Souq Waqif, each with unique decor and personalized service. Ideal for cultural immersion and authentic experiences.",
+      "features": [
+        "unique_decor",
+        "personalized_service",
+        "cultural_experience",
+        "central_location",
+        "heritage_buildings"
+      ],
+      "amenities": [
+        "spa",
+        "restaurant",
+        "concierge",
+        "airport_transfer",
+        "event_spaces"
+      ],
+      "room_types": [
+        "Deluxe Room",
+        "Heritage Suite",
+        "Royal Suite"
+      ],
+      "price_range": "$$",
+      "contact": "+974 4433 6666",
+      "booking_required": true,
+      "payment_methods": [
+        "cash",
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Autumn for cultural festivals"
+    }
+  },
+  {
+    "id": "hotel_006",
+    "category": "hotels",
+    "name": "Oryx Airport Hotel",
+    "text": "Name: Oryx Airport Hotel. Category: hotels. Location: Hamad International Airport. Description: Convenient hotel inside Hamad International Airport, offering comfortable rooms, a wellness center, and 24-hour dining. Perfect for transit passengers.. Features: airport_location, wellness_center, 24hr_dining, transit_friendly, soundproof_rooms. Rating: 4.4/5. Best time to visit: Any time for layovers",
+    "metadata": {
+      "id": "hotel_006",
+      "name": "Oryx Airport Hotel",
+      "category": "Airport Hotel",
+      "location": "Hamad International Airport",
+      "coordinates": {
+        "lat": 25.273,
+        "lng": 51.608
+      },
+      "rating": 4.4,
+      "description": "Convenient hotel inside Hamad International Airport, offering comfortable rooms, a wellness center, and 24-hour dining. Perfect for transit passengers.",
+      "features": [
+        "airport_location",
+        "wellness_center",
+        "24hr_dining",
+        "transit_friendly",
+        "soundproof_rooms"
+      ],
+      "amenities": [
+        "spa",
+        "pool",
+        "fitness_center",
+        "business_center",
+        "room_service"
+      ],
+      "room_types": [
+        "Standard Room",
+        "Family Room",
+        "Executive Suite"
+      ],
+      "price_range": "$$$",
+      "contact": "+974 4010 8100",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Any time for layovers"
+    }
+  },
+  {
+    "id": "hotel_007",
+    "category": "hotels",
+    "name": "Ezdan Hotel Doha",
+    "text": "Name: Ezdan Hotel Doha. Category: hotels. Location: West Bay. Description: Large business hotel with extensive conference facilities, serviced apartments, and a variety of dining options. Popular with business travelers and long-stay guests.. Features: conference_facilities, serviced_apartments, dining_options, pool, fitness_center. Rating: 4.2/5. Best time to visit: Business season (Sept-May)",
+    "metadata": {
+      "id": "hotel_007",
+      "name": "Ezdan Hotel Doha",
+      "category": "Business Hotel",
+      "location": "West Bay",
+      "coordinates": {
+        "lat": 25.327,
+        "lng": 51.527
+      },
+      "rating": 4.2,
+      "description": "Large business hotel with extensive conference facilities, serviced apartments, and a variety of dining options. Popular with business travelers and long-stay guests.",
+      "features": [
+        "conference_facilities",
+        "serviced_apartments",
+        "dining_options",
+        "pool",
+        "fitness_center"
+      ],
+      "amenities": [
+        "pool",
+        "fitness_center",
+        "business_center",
+        "restaurant",
+        "kids_play_area"
+      ],
+      "room_types": [
+        "Standard Room",
+        "Studio",
+        "Apartment Suite"
+      ],
+      "price_range": "$$",
+      "contact": "+974 4496 9111",
+      "booking_required": true,
+      "payment_methods": [
+        "cash",
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Business season (Sept-May)"
+    }
+  },
+  {
+    "id": "hotel_008",
+    "category": "hotels",
+    "name": "Premier Inn Doha Education City",
+    "text": "Name: Premier Inn Doha Education City. Category: hotels. Location: Education City. Description: Affordable hotel with modern amenities, a rooftop pool, and easy access to Education City's universities and attractions. Great for students and families.. Features: budget_friendly, rooftop_pool, modern_amenities, family_friendly, free_parking. Rating: 4.1/5. Best time to visit: Exam season for students",
+    "metadata": {
+      "id": "hotel_008",
+      "name": "Premier Inn Doha Education City",
+      "category": "Budget Hotel",
+      "location": "Education City",
+      "coordinates": {
+        "lat": 25.316,
+        "lng": 51.437
+      },
+      "rating": 4.1,
+      "description": "Affordable hotel with modern amenities, a rooftop pool, and easy access to Education City's universities and attractions. Great for students and families.",
+      "features": [
+        "budget_friendly",
+        "rooftop_pool",
+        "modern_amenities",
+        "family_friendly",
+        "free_parking"
+      ],
+      "amenities": [
+        "pool",
+        "restaurant",
+        "fitness_center",
+        "free_wifi",
+        "parking"
+      ],
+      "room_types": [
+        "Standard Room",
+        "Family Room",
+        "Accessible Room"
+      ],
+      "price_range": "$",
+      "contact": "+974 4007 8333",
+      "booking_required": true,
+      "payment_methods": [
+        "cash",
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Exam season for students"
+    }
+  },
+  {
+    "id": "hotel_009",
+    "category": "hotels",
+    "name": "Marsa Malaz Kempinski",
+    "text": "Name: Marsa Malaz Kempinski. Category: hotels. Location: The Pearl Qatar. Description: Palatial resort on its own island at The Pearl, featuring private beaches, a world-class spa, and multiple fine dining restaurants. Perfect for a luxury getaway.. Features: private_island, fine_dining, luxury_spa, private_beach, family_friendly. Rating: 4.7/5. Best time to visit: Winter for beach weather",
+    "metadata": {
+      "id": "hotel_009",
+      "name": "Marsa Malaz Kempinski",
+      "category": "Luxury Resort",
+      "location": "The Pearl Qatar",
+      "coordinates": {
+        "lat": 25.37,
+        "lng": 51.553
+      },
+      "rating": 4.7,
+      "description": "Palatial resort on its own island at The Pearl, featuring private beaches, a world-class spa, and multiple fine dining restaurants. Perfect for a luxury getaway.",
+      "features": [
+        "private_island",
+        "fine_dining",
+        "luxury_spa",
+        "private_beach",
+        "family_friendly"
+      ],
+      "amenities": [
+        "spa",
+        "pool",
+        "fitness_center",
+        "kids_club",
+        "event_spaces"
+      ],
+      "room_types": [
+        "Deluxe Room",
+        "Junior Suite",
+        "Presidential Suite",
+        "Royal Suite"
+      ],
+      "price_range": "$$$$",
+      "contact": "+974 4035 5555",
+      "booking_required": true,
+      "payment_methods": [
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Winter for beach weather"
+    }
+  },
+  {
+    "id": "hotel_010",
+    "category": "hotels",
+    "name": "Holiday Villa Hotel & Residence City Centre",
+    "text": "Name: Holiday Villa Hotel & Residence City Centre. Category: hotels. Location: Al Muntazah. Description: Comfortable mid-range hotel with spacious rooms, a pool, and easy access to the city center. Popular with families and business travelers.. Features: spacious_rooms, pool, city_center_access, family_friendly, affordable_rates. Rating: 4.0/5. Best time to visit: Summer for city deals",
+    "metadata": {
+      "id": "hotel_010",
+      "name": "Holiday Villa Hotel & Residence City Centre",
+      "category": "Mid-range Hotel",
+      "location": "Al Muntazah",
+      "coordinates": {
+        "lat": 25.276,
+        "lng": 51.533
+      },
+      "rating": 4.0,
+      "description": "Comfortable mid-range hotel with spacious rooms, a pool, and easy access to the city center. Popular with families and business travelers.",
+      "features": [
+        "spacious_rooms",
+        "pool",
+        "city_center_access",
+        "family_friendly",
+        "affordable_rates"
+      ],
+      "amenities": [
+        "pool",
+        "restaurant",
+        "fitness_center",
+        "free_wifi",
+        "parking"
+      ],
+      "room_types": [
+        "Standard Room",
+        "Family Suite",
+        "Executive Suite"
+      ],
+      "price_range": "$$",
+      "contact": "+974 4408 4888",
+      "booking_required": true,
+      "payment_methods": [
+        "cash",
+        "card",
+        "digital_wallet"
+      ],
+      "best_time_to_visit": "Summer for city deals"
     }
   },
   {
