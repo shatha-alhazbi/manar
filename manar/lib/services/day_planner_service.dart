@@ -124,7 +124,7 @@ class AIDayPlannerService extends ChangeNotifier {
       case 2: // Interests
         return ['Cultural & Historic', 'Food & Dining', 'Modern & Shopping', 'Mix of everything'];
       case 3: // Budget
-        return ['Budget-friendly (\$50-100)', 'Moderate (\$100-200)', 'Premium (\$200+)'];
+        return ['Budget-friendly (QAR 50-100)', 'Moderate (QAR 100-200)', 'Premium (QAR 200+)'];
       case 4: // Special requirements
         return ['No special requirements', 'Accessibility needs', 'Dietary restrictions', 'Family-friendly only'];
       case 5: // Must-visit
@@ -182,7 +182,7 @@ class AIDayPlannerService extends ChangeNotifier {
       PlannerQuestion(
         id: 'budget',
         question: 'What\'s your budget range for today\'s adventure?',
-        options: ['Budget-friendly (\$50-100)', 'Moderate (\$100-200)', 'Premium (\$200+)'],
+        options: ['Budget-friendly (QAR 50-100)', 'Moderate (QAR 100-200)', 'Premium (QAR 200+)'],
         followUp: 'Great! Any specific places you definitely want to visit?',
         responseKey: 'budget',
       ),

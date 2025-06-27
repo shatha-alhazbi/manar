@@ -1007,7 +1007,7 @@ async def create_day_plan(request: PlanningRequest):
         print(f"🎯 Activity types: {user_profile.activity_types}")
         
         # Use enhanced day planning with FANAR API
-        result = await manar_ai.rag_system.create_enhanced_day_plan(request.query, user_profile, parsed_preferences)
+        result = manar_ai.rag_system.create_enhanced_day_plan(request.query, user_profile, parsed_preferences)
         
         activities_count = len(result.get('day_plan', {}).get('activities', []))
         total_cost = result.get('day_plan', {}).get('total_estimated_cost', 'Not calculated')
