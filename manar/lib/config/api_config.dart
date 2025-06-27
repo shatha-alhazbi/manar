@@ -31,8 +31,8 @@ class ApiConfig {
   static const String FANAR_API_KEY = 'fmFrMl3wHnB9SFnb8bzxNFpGCVE18Wcz';
   
   // Request timeouts
-  static const Duration REQUEST_TIMEOUT = Duration(seconds: 30);
-  static const Duration CONNECTION_TIMEOUT = Duration(seconds: 10);
+  static const Duration REQUEST_TIMEOUT = Duration(seconds: 60);
+  static const Duration CONNECTION_TIMEOUT = Duration(seconds: 60);
   
   // Retry configuration
   static const int MAX_RETRIES = 3;
