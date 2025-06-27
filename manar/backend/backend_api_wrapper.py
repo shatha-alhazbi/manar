@@ -684,9 +684,12 @@ import uvicorn
 import json
 from datetime import datetime
 import uuid
+import logging
+
 
 # Import your fixed FANAR integration
 from fanar_api_integration import ManarAI, UserProfile
+logger = logging.getLogger(__name__)
 
 # Pydantic models
 class ChatRequest(BaseModel):
@@ -1334,6 +1337,158 @@ async def get_user_profile(user_id: str):
         return profile
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+# chatbot part
+class ChatRequest(BaseModel):
+    message: str
+    conversation_id: Optional[str] = "default"
+
+class ChatResponse(BaseModel):
+    success: bool
+    response: Optional[str] = None
+    error: Optional[str] = None
+    timestamp: str
+    conversation_id: Optional[str] = None
+
+class ClearChatRequest(BaseModel):
+    conversation_id: Optional[str] = "default"
+
+class QatarChatbot:
+    def __init__(self):
+        self.model_name = "Fanar"
+        self.conversation_history = {}
+        
+    def get_system_prompt(self):
+        return """You are a helpful AI assistant specialized in Qatar tourism, culture, and local information. 
+        You help visitors and residents discover the best of Qatar including:
+        - Restaurants and local cuisine
+        - Cultural attractions and museums
+        - Shopping destinations
+        - Family-friendly activities
+        - Budget-friendly options
+        - Traditional experiences
+        - Transportation guidance
+        - Weather and seasonal information
+        
+        Provide helpful, accurate, and engaging responses about Qatar. 
+        Use emojis appropriately and format responses in a clear, readable way.
+        Always be respectful of Qatari culture and Islamic values.
+        If you don't know something specific about Qatar, suggest reliable local sources or official websites."""
+
+    def generate_response(self, user_message: str, conversation_id: str = "default"):
+        try:
+            # Get or create conversation history
+            if conversation_id not in self.conversation_history:
+                self.conversation_history[conversation_id] = [
+                    {"role": "system", "content": self.get_system_prompt()}
+                ]
+            
+            # Add user message to history
+            self.conversation_history[conversation_id].append({
+                "role": "user", 
+                "content": user_message
+            })
+            
+            # Generate response using Fanar API
+            response = manar_ai.rag_system.fanar_client.chat.completions.create(
+                model=self.model_name,
+                messages=self.conversation_history[conversation_id],
+                max_tokens=800,
+                temperature=0.7
+            )
+            
+            ai_response = response.choices[0].message.content
+            
+            # Add AI response to history
+            self.conversation_history[conversation_id].append({
+                "role": "assistant",
+                "content": ai_response
+            })
+            
+            # Limit conversation history to last 20 messages to prevent token overflow
+            if len(self.conversation_history[conversation_id]) > 21:  # 1 system + 20 messages
+                self.conversation_history[conversation_id] = (
+                    [self.conversation_history[conversation_id][0]] +  # Keep system message
+                    self.conversation_history[conversation_id][-20:]   # Keep last 20
+                )
+            
+            return ChatResponse(
+                success=True,
+                response=ai_response,
+                timestamp=datetime.now().isoformat(),
+                conversation_id=conversation_id
+            )
+            
+        except Exception as e:
+            logger.error(f"Error generating response: {str(e)}")
+            return ChatResponse(
+                success=False,
+                error="Failed to generate response. Please try again.",
+                timestamp=datetime.now().isoformat()
+            )
+
+    def clear_conversation(self, conversation_id: str):
+        """Clear conversation history for a specific user"""
+        if conversation_id in self.conversation_history:
+            del self.conversation_history[conversation_id]
+
+# Initialize chatbot
+chatbot = QatarChatbot()
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    """Main chat endpoint"""
+    try:
+        if not request.message or not request.message.strip():
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        
+        user_message = request.message.strip()
+        conversation_id = request.conversation_id or "default"
+        
+        # Generate response
+        result = chatbot.generate_response(user_message, conversation_id)
+        
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.error)
+            
+        return result
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in chat endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/clear_chat")
+async def clear_chat(request: ClearChatRequest):
+    """Clear conversation history"""
+    try:
+        conversation_id = request.conversation_id or "default"
+        chatbot.clear_conversation(conversation_id)
+        
+        return {
+            "success": True,
+            "message": "Conversation history cleared"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error clearing chat: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to clear conversation")
+
+@app.get("/conversation_status")
+async def conversation_status(conversation_id: str = "default"):
+    """Get conversation status and message count"""
+    message_count = 0
+    if conversation_id in chatbot.conversation_history:
+        # Subtract 1 for system message
+        message_count = len(chatbot.conversation_history[conversation_id]) - 1
+    
+    return {
+        "conversation_id": conversation_id,
+        "message_count": message_count,
+        "has_history": message_count > 0
+    }
+
 
 # Run the server
 if __name__ == "__main__":

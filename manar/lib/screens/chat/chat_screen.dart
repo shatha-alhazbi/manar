@@ -1,5 +1,6 @@
 // screens/chat/chat_screen.dart
 import 'package:flutter/material.dart';
+import 'package:manara/services/chat_service.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
@@ -8,9 +9,123 @@ import 'package:manara/services/user_services.dart';
 class ChatScreen extends StatefulWidget {
   @override
   _ChatScreenState createState() => _ChatScreenState();
+  
 }
 
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
+  late ChatService _chatService;
+
+@override
+void initState() {
+  super.initState();
+  
+  // Initialize chat service
+  _chatService = ChatService();
+  
+  // Your existing initialization code...
+  _animationController = AnimationController(
+    duration: AppDurations.medium,
+    vsync: this,
+  );
+  
+  _fadeAnimation = Tween<double>(
+    begin: 0.0,
+    end: 1.0,
+  ).animate(CurvedAnimation(
+    parent: _animationController,
+    curve: Curves.easeInOut,
+  ));
+  
+  _animationController.forward();
+  
+  // Check backend health on startup
+  _checkBackendHealth();
+}
+
+@override
+void dispose() {
+  _messageController.dispose();
+  _scrollController.dispose();
+  _animationController.dispose();
+  _chatService.dispose(); // Add this line
+  super.dispose();
+}
+
+// Replace your existing _simulateAIResponse method with this:
+void _simulateAIResponse(String userMessage) async {
+  setState(() => _isLoading = true);
+  
+  try {
+    final response = await _chatService.sendMessage(userMessage);
+    
+    setState(() => _isLoading = false);
+    
+    if (response.isSuccess) {
+      _addMessage('ai', response.message!);
+    } else {
+      _addMessage('ai', 'Sorry, ${response.error}');
+    }
+  } catch (e) {
+    setState(() => _isLoading = false);
+    _addMessage('ai', 'I\'m having trouble connecting. Please try again.');
+  }
+}
+
+// Add this new method to check backend health:
+void _checkBackendHealth() async {
+  final isHealthy = await _chatService.checkHealth();
+  if (!isHealthy) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('AI service is currently unavailable'),
+        backgroundColor: AppColors.error,
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+}
+
+// Update your _clearChatHistory method:
+void _clearChatHistory() {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: AppColors.darkNavy,
+      title: Text('Clear Chat History', style: TextStyle(color: Colors.white)),
+      content: Text(
+        'Are you sure you want to clear all messages? This action cannot be undone.',
+        style: TextStyle(color: Colors.white70)
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel', style: TextStyle(color: Colors.white70)),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            // Clear backend conversation
+            await _chatService.clearConversation();
+            
+            // Clear local messages
+            setState(() {
+              _messages.clear();
+              _messages.add({
+                'sender': 'ai',
+                'message': 'Chat history cleared. How can I help you explore Qatar today?',
+                'timestamp': DateTime.now(),
+                'type': 'text',
+              });
+            });
+            Navigator.pop(context);
+          },
+          style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+          child: Text('Clear'),
+        ),
+      ],
+    ),
+  );
+}
+
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   late AnimationController _animationController;
@@ -36,33 +151,33 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     {'text': 'Traditional experiences', 'icon': '🕌'},
   ];
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
     
-    _animationController = AnimationController(
-      duration: AppDurations.medium,
-      vsync: this,
-    );
+  //   _animationController = AnimationController(
+  //     duration: AppDurations.medium,
+  //     vsync: this,
+  //   );
     
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+  //   _fadeAnimation = Tween<double>(
+  //     begin: 0.0,
+  //     end: 1.0,
+  //   ).animate(CurvedAnimation(
+  //     parent: _animationController,
+  //     curve: Curves.easeInOut,
+  //   ));
     
-    _animationController.forward();
-  }
+  //   _animationController.forward();
+  // }
 
-  @override
-  void dispose() {
-    _messageController.dispose();
-    _scrollController.dispose();
-    _animationController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _messageController.dispose();
+  //   _scrollController.dispose();
+  //   _animationController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -538,18 +653,18 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     _scrollToBottom();
   }
 
-  void _simulateAIResponse(String userMessage) async {
-    setState(() => _isLoading = true);
+  // void _simulateAIResponse(String userMessage) async {
+  //   setState(() => _isLoading = true);
     
-    // Simulate AI processing time
-    await Future.delayed(Duration(seconds: 2));
+  //   // Simulate AI processing time
+  //   await Future.delayed(Duration(seconds: 2));
     
-    // Generate response based on user message
-    String response = _generateAIResponse(userMessage);
+  //   // Generate response based on user message
+  //   String response = _generateAIResponse(userMessage);
     
-    setState(() => _isLoading = false);
-    _addMessage('ai', response);
-  }
+  //   setState(() => _isLoading = false);
+  //   _addMessage('ai', response);
+  // }
 
   String _generateAIResponse(String userMessage) {
     final message = userMessage.toLowerCase();
@@ -786,38 +901,38 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     );
   }
 
-  void _clearChatHistory() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text('Clear Chat History', style: TextStyle(color: Colors.white)),
-        content: Text('Are you sure you want to clear all messages? This action cannot be undone.', style: TextStyle(color: Colors.white70)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Cancel', style: TextStyle(color: Colors.white70)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _messages.clear();
-                _messages.add({
-                  'sender': 'ai',
-                  'message': 'Chat history cleared. How can I help you explore Qatar today?',
-                  'timestamp': DateTime.now(),
-                  'type': 'text',
-                });
-              });
-              Navigator.pop(context);
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: Text('Clear'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _clearChatHistory() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       backgroundColor: AppColors.darkNavy,
+  //       title: Text('Clear Chat History', style: TextStyle(color: Colors.white)),
+  //       content: Text('Are you sure you want to clear all messages? This action cannot be undone.', style: TextStyle(color: Colors.white70)),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context),
+  //           child: Text('Cancel', style: TextStyle(color: Colors.white70)),
+  //         ),
+  //         ElevatedButton(
+  //           onPressed: () {
+  //             setState(() {
+  //               _messages.clear();
+  //               _messages.add({
+  //                 'sender': 'ai',
+  //                 'message': 'Chat history cleared. How can I help you explore Qatar today?',
+  //                 'timestamp': DateTime.now(),
+  //                 'type': 'text',
+  //               });
+  //             });
+  //             Navigator.pop(context);
+  //           },
+  //           style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+  //           child: Text('Clear'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void _exportChat() {
     // Implement chat export functionality
