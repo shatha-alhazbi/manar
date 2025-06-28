@@ -4,41 +4,28 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Import Firebase options
 import 'firebase_options.dart';
-
-// Import existing screens
 import 'screens/welcome_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/onboarding/onboarding_flow.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/splash_screen.dart';
-
-// Import the AI planner screens
 import 'screens/planner/booking_agent_screen.dart';
 import 'screens/planner/day_planner_screen.dart';
 import 'screens/planner/generated_plan_screen.dart';
-
-// Import services
 import 'services/auth_services.dart';
 import 'services/user_services.dart';
 import 'services/ai_recommendation_service.dart';
 import 'services/day_planner_service.dart';
 import 'services/booking_service.dart';
-
-// Import models
 import 'models/day_planner_model.dart';
-
-// Import constants
 import 'constants/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   try {
-    // Initialize Firebase with proper options
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -47,23 +34,20 @@ void main() async {
     print('Firebase initialization error: $e');
   }
   
-  runApp(ManaraApp());
+  runApp(manarApp());
 }
 
-class ManaraApp extends StatelessWidget {
+class manarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Core services
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => UserService()),
         
-        // AI and planning services
         ChangeNotifierProvider(create: (_) => AIDayPlannerService()),
         ChangeNotifierProvider(create: (_) => BookingService()),
         
-        // Dependent services
         ChangeNotifierProxyProvider2<UserService, AuthService, AIRecommendationService>(
           create: (context) => AIRecommendationService(
             Provider.of<UserService>(context, listen: false),
@@ -78,10 +62,8 @@ class ManaraApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
         
-        // Initial route based on auth state
         home: AuthStateWrapper(),
         
-        // Define all routes
         routes: {
           '/welcome': (context) => WelcomeScreen(),
           '/login': (context) => LoginScreen(),
@@ -91,7 +73,6 @@ class ManaraApp extends StatelessWidget {
           '/ai-day-planner': (context) => AIDayPlannerScreen(),
         },
         onGenerateRoute: (settings) {
-          // Handle routes that need parameters
           switch (settings.name) {
             case '/generated-plan':
               final args = settings.arguments as Map<String, dynamic>?;
@@ -126,12 +107,10 @@ class AuthStateWrapper extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // Show splash while checking auth state
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SplashScreen();
         }
         
-        // User is logged in
         if (snapshot.hasData) {
           return FutureBuilder<bool>(
             future: UserService().hasCompletedOnboarding(snapshot.data!.uid),
@@ -140,9 +119,7 @@ class AuthStateWrapper extends StatelessWidget {
                 return SplashScreen();
               }
               
-              // Check if user completed onboarding
               if (onboardingSnapshot.data == true) {
-                // Initialize all AI services when navigating to home
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   _initializeAIServices(context, snapshot.data!.uid);
                 });
@@ -154,7 +131,6 @@ class AuthStateWrapper extends StatelessWidget {
           );
         }
         
-        // User is not logged in
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
         });
@@ -165,11 +141,9 @@ class AuthStateWrapper extends StatelessWidget {
 
   void _initializeAIServices(BuildContext context, String userId) async {
     try {
-      // Initialize AI recommendation service
       final aiService = context.read<AIRecommendationService>();
       aiService.loadAllRecommendations();
       
-      // Initialize booking service
       final bookingService = context.read<BookingService>();
       await bookingService.initialize(userId);
       
@@ -180,7 +154,6 @@ class AuthStateWrapper extends StatelessWidget {
   }
 }
 
-// Navigation helpers for AI day planner
 class AIPlannerRoutes {
   static const String aiDayPlanner = '/ai-day-planner';
   static const String generatedPlan = '/generated-plan';
@@ -221,9 +194,7 @@ class AIPlannerRoutes {
   }
 }
 
-// Updated dashboard integration example
 class DashboardAIIntegration {
-  // How to integrate the AI Day Planner button in your dashboard
   static Widget buildAIDayPlannerCard(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(16),
@@ -362,17 +333,12 @@ class DashboardAIIntegration {
     );
   }
 
-  // Example integration in dashboard screen
   static Widget buildDashboardWithAI(BuildContext context) {
     return Column(
       children: [
-        // Existing dashboard content
-        // ...
         
-        // AI Day Planner Section
         buildAIDayPlannerCard(context),
         
-        // Recent AI Activities
         Consumer2<AIDayPlannerService, BookingService>(
           builder: (context, plannerService, bookingService, child) {
             return Container(
@@ -398,7 +364,6 @@ class DashboardAIIntegration {
                   ),
                   SizedBox(height: 12),
                   
-                  // Show recent AI bookings
                   if (bookingService.upcomingBookings.any((b) => b['created_by_ai'] == true)) ...[
                     ...bookingService.upcomingBookings
                         .where((b) => b['created_by_ai'] == true)
@@ -456,15 +421,11 @@ class DashboardAIIntegration {
             );
           },
         ),
-        
-        // More dashboard content
-        // ...
       ],
     );
   }
 }
 
-// Error handling and fallback systems
 class AIServiceErrorHandler {
   static void handleAIError(BuildContext context, String error) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -494,7 +455,6 @@ class AIServiceErrorHandler {
           label: 'Retry',
           textColor: Colors.white,
           onPressed: () {
-            // Retry logic here
           },
         ),
       ),
@@ -543,7 +503,6 @@ class AIServiceErrorHandler {
   }
 }
 
-// Performance monitoring for AI services
 class AIPerformanceMonitor {
   static void trackAIResponse(String endpoint, Duration responseTime) {
     print('AI Endpoint: $endpoint - Response Time: ${responseTime.inMilliseconds}ms');

@@ -1,7 +1,4 @@
-// lib/models/day_planner_model.dart
-import 'package:flutter/foundation.dart';
 
-// Shared coordinate model
 class LatLng {
   final double latitude;
   final double longitude;
@@ -23,7 +20,6 @@ class LatLng {
   int get hashCode => latitude.hashCode ^ longitude.hashCode;
 }
 
-// Plan stop model
 class PlanStop {
   final String id;
   final String name;
@@ -97,7 +93,6 @@ class PlanStop {
     };
   }
 
-  // Create a copy with updated values
   PlanStop copyWith({
     String? id,
     String? name,
@@ -131,7 +126,6 @@ class PlanStop {
   }
 }
 
-// Booking status enum
 enum BookingStatus {
   pending,
   processing,
@@ -139,7 +133,6 @@ enum BookingStatus {
   failed,
 }
 
-// Booking step model
 class BookingStep {
   final String id;
   String stopName;
@@ -161,10 +154,8 @@ class BookingStep {
     this.confirmationNumber,
   }) : details = details ?? {};
 
-  // Get error message from details if booking failed
   String? get errorMessage => details['error_message'];
 
-  // Set error message in details
   set errorMessage(String? message) {
     if (message != null) {
       details['error_message'] = message;
@@ -203,7 +194,6 @@ class BookingStep {
   }
 }
 
-// Chat message models
 class ChatMessage {
   final String text;
   final bool isUser;
@@ -260,7 +250,6 @@ class ChatMessage {
   }
 }
 
-// Planner question model
 class PlannerQuestion {
   final String id;
   final String question;
@@ -297,7 +286,6 @@ class PlannerQuestion {
   }
 }
 
-// Enhanced recommendation item model
 class RecommendationItem {
   final String name;
   final String type;
@@ -361,7 +349,6 @@ class RecommendationItem {
     };
   }
 
-  // Convert to PlanStop for adding to day plan
   PlanStop toPlanStop({
     required String startTime,
     String? travelToNext,

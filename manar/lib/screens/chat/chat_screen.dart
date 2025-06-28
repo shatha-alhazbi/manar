@@ -1,10 +1,8 @@
 // screens/chat/chat_screen.dart
 import 'package:flutter/material.dart';
-import 'package:manara/services/chat_service.dart';
-import 'package:provider/provider.dart';
+import 'package:manar/services/chat_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/user_services.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -19,10 +17,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 void initState() {
   super.initState();
   
-  // Initialize chat service
   _chatService = ChatService();
   
-  // Your existing initialization code...
   _animationController = AnimationController(
     duration: AppDurations.medium,
     vsync: this,
@@ -38,7 +34,6 @@ void initState() {
   
   _animationController.forward();
   
-  // Check backend health on startup
   _checkBackendHealth();
 }
 
@@ -47,11 +42,10 @@ void dispose() {
   _messageController.dispose();
   _scrollController.dispose();
   _animationController.dispose();
-  _chatService.dispose(); // Add this line
+  _chatService.dispose(); 
   super.dispose();
 }
 
-// Replace your existing _simulateAIResponse method with this:
 void _simulateAIResponse(String userMessage) async {
   setState(() => _isLoading = true);
   
@@ -85,7 +79,6 @@ void _checkBackendHealth() async {
   }
 }
 
-// Update your _clearChatHistory method:
 void _clearChatHistory() {
   showDialog(
     context: context,
@@ -143,41 +136,13 @@ void _clearChatHistory() {
   ];
 
   final List<Map<String, String>> _quickQuestions = [
-    {'text': 'Best restaurants nearby', 'icon': '🍽️'},
-    {'text': 'Cultural attractions', 'icon': '🏛️'},
-    {'text': 'Shopping destinations', 'icon': '🛍️'},
-    {'text': 'Family-friendly activities', 'icon': '👨‍👩‍👧‍👦'},
-    {'text': 'Budget-friendly options', 'icon': '💰'},
-    {'text': 'Traditional experiences', 'icon': '🕌'},
+    {'text': 'Best restaurants nearby'},
+    {'text': 'Cultural   attractions'},
+    {'text': 'Shopping destinations'},
+    {'text': 'Family-friendly activities'},
+    {'text': 'Budget-friendly options'},
+    {'text': 'Traditional experiences'},
   ];
-
-  // @override
-  // void initState() {
-  //   super.initState();
-    
-  //   _animationController = AnimationController(
-  //     duration: AppDurations.medium,
-  //     vsync: this,
-  //   );
-    
-  //   _fadeAnimation = Tween<double>(
-  //     begin: 0.0,
-  //     end: 1.0,
-  //   ).animate(CurvedAnimation(
-  //     parent: _animationController,
-  //     curve: Curves.easeInOut,
-  //   ));
-    
-  //   _animationController.forward();
-  // }
-
-  // @override
-  // void dispose() {
-  //   _messageController.dispose();
-  //   _scrollController.dispose();
-  //   _animationController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +171,6 @@ void _clearChatHistory() {
                   : _buildMessagesList(),
             ),
             
-            // Quick questions (show when no messages or few messages)
             if (_messages.length <= 2) _buildQuickQuestions(),
             
             // Input area
@@ -488,65 +452,82 @@ void _clearChatHistory() {
   }
 
   Widget _buildQuickQuestions() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Quick questions to get you started:',
-            style: GoogleFonts.inter(
-              fontSize: 14,
-              color: Colors.white70,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: _quickQuestions.map((question) {
-              return _buildQuickQuestionChip(question);
-            }).toList(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildQuickQuestionChip(Map<String, String> question) {
-    return GestureDetector(
-      onTap: () => _sendQuickQuestion(question['text']!),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1,
+  return Container(
+    padding: EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Quick questions to get you started:',
+          style: GoogleFonts.inter(
+            fontSize: 14,
+            color: Colors.white70,
+            fontWeight: FontWeight.w500,
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        SizedBox(height: 12),
+        // Create a 2x3 grid layout for 6 items
+        Column(
           children: [
-            Text(
-              question['icon']!,
-              style: TextStyle(fontSize: 14),
+            // First row - 3 items
+            Row(
+              children: [
+                Expanded(child: _buildQuickQuestionChip(_quickQuestions[0])),
+                SizedBox(width: 8),
+                Expanded(child: _buildQuickQuestionChip(_quickQuestions[1])),
+                SizedBox(width: 8),
+                Expanded(child: _buildQuickQuestionChip(_quickQuestions[2])),
+              ],
             ),
-            SizedBox(width: 6),
-            Text(
-              question['text']!,
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                color: Colors.white,
-              ),
+            SizedBox(height: 8),
+            // Second row - 3 items
+            Row(
+              children: [
+                Expanded(child: _buildQuickQuestionChip(_quickQuestions[3])),
+                SizedBox(width: 8),
+                Expanded(child: _buildQuickQuestionChip(_quickQuestions[4])),
+                SizedBox(width: 8),
+                Expanded(child: _buildQuickQuestionChip(_quickQuestions[5])),
+              ],
             ),
           ],
         ),
+      ],
+    ),
+  );
+}
+
+Widget _buildQuickQuestionChip(Map<String, String> question) {
+  return GestureDetector(
+    onTap: () => _sendQuickQuestion(question['text']!),
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.2),
+          width: 1,
+        ),
       ),
-    );
-  }
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            question['text']!,
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    ),
+  );
+}
 
   Widget _buildInputArea() {
     return Container(
@@ -574,16 +555,6 @@ void _clearChatHistory() {
             
             // Text input
             Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.2),
-                    width: 1,
-                  ),
-                ),
                 child: TextField(
                   controller: _messageController,
                   style: TextStyle(color: Colors.white),
@@ -598,7 +569,7 @@ void _clearChatHistory() {
                   maxLines: null,
                   onSubmitted: (_) => _sendMessage(),
                 ),
-              ),
+              // ),
             ),
             
             SizedBox(width: 8),
@@ -651,49 +622,6 @@ void _clearChatHistory() {
     });
     
     _scrollToBottom();
-  }
-
-  // void _simulateAIResponse(String userMessage) async {
-  //   setState(() => _isLoading = true);
-    
-  //   // Simulate AI processing time
-  //   await Future.delayed(Duration(seconds: 2));
-    
-  //   // Generate response based on user message
-  //   String response = _generateAIResponse(userMessage);
-    
-  //   setState(() => _isLoading = false);
-  //   _addMessage('ai', response);
-  // }
-
-  String _generateAIResponse(String userMessage) {
-    final message = userMessage.toLowerCase();
-    
-    if (message.contains('restaurant') || message.contains('food') || message.contains('eat')) {
-      return "🍽️ Great! Here are some fantastic dining options in Qatar:\n\n• **Souq Waqif** - Traditional Qatari cuisine and street food\n• **The Pearl-Qatar** - International fine dining with waterfront views\n• **Al Mourjan** - Authentic Middle Eastern flavors\n• **Katara Cultural Village** - Various cuisines in a cultural setting\n\nWhat type of cuisine are you in the mood for? I can provide more specific recommendations!";
-    } else if (message.contains('cultural') || message.contains('museum') || message.contains('heritage')) {
-      return "🏛️ Qatar has amazing cultural attractions! Here are must-visit places:\n\n• **Museum of Islamic Art** - World-class collection with stunning architecture\n• **National Museum of Qatar** - Qatar's history and heritage\n• **Souq Waqif** - Traditional marketplace with authentic atmosphere\n• **Katara Cultural Village** - Arts, culture, and entertainment hub\n• **Al Zubarah Fort** - UNESCO World Heritage site\n\nWould you like detailed information about any of these places?";
-    } else if (message.contains('shopping') || message.contains('mall') || message.contains('buy')) {
-      return "🛍️ Perfect! Qatar offers great shopping experiences:\n\n• **The Pearl-Qatar** - Luxury brands and waterfront shopping\n• **Villaggio Mall** - Italian-themed with gondola rides\n• **City Center Doha** - Large mall with entertainment\n• **Souq Waqif** - Traditional crafts and souvenirs\n• **Mall of Qatar** - One of the largest malls in the region\n\nAre you looking for luxury items, local crafts, or general shopping?";
-    } else if (message.contains('family') || message.contains('kids') || message.contains('children')) {
-      return "👨‍👩‍👧‍👦 Excellent! Qatar is very family-friendly. Here are top family activities:\n\n• **Aspire Park** - Large park with playgrounds and lake\n• **Katara Beach** - Family beach with facilities\n• **Aqua Park Qatar** - Water park with slides and pools\n• **Gondolania Theme Park** - Indoor amusement park\n• **MIA Park** - Great for picnics with museum views\n• **The Pearl beaches** - Clean, safe beaches for families\n\nWhat ages are the children? I can suggest more specific activities!";
-    } else if (message.contains('budget') || message.contains('cheap') || message.contains('affordable')) {
-      return "💰 Great question! Here are budget-friendly options in Qatar:\n\n**Free Activities:**\n• Corniche waterfront walk\n• MIA Park and outdoor areas\n• Souq Waqif browsing\n• Public beaches\n\n**Low-cost Options:**\n• Street food at Souq Waqif (QR 10-30)\n• Public transport via Metro\n• Local cafes and karak tea\n• Traditional restaurants (QR 30-60)\n\nWhat's your approximate daily budget? I can create a cost-effective itinerary!";
-    } else if (message.contains('traditional') || message.contains('authentic') || message.contains('local')) {
-      return "🕌 Wonderful! For authentic Qatari experiences, I recommend:\n\n• **Souq Waqif** - Traditional architecture, spices, and crafts\n• **Falcon Souq** - See Qatar's national bird up close\n• **Traditional dhow cruise** - Historic boats on the bay\n• **Camel racing** - Unique local sport (seasonal)\n• **Bedouin camps** - Desert experiences with traditional activities\n• **Local majlis** - Traditional meeting places in neighborhoods\n\nWould you like help planning a traditional Qatari day experience?";
-    } else if (message.contains('weather') || message.contains('temperature') || message.contains('climate')) {
-      return "🌤️ Qatar's weather varies by season:\n\n**Current Season Tips:**\n• **Winter (Nov-Mar)**: Perfect weather, 18-28°C, ideal for outdoor activities\n• **Summer (Jun-Sep)**: Very hot, 35-45°C, focus on indoor attractions\n• **Spring/Fall**: Warm but manageable, 25-35°C\n\n**Today's Recommendations:**\nBased on current weather, I'd suggest indoor attractions during midday and outdoor activities in the evening. Would you like a weather-appropriate itinerary?";
-    } else if (message.contains('transport') || message.contains('metro') || message.contains('taxi') || message.contains('uber')) {
-      return "🚇 Getting around Qatar is easy! Here are your options:\n\n• **Doha Metro** - Clean, efficient, covers major areas (QR 2-6)\n• **Karwa Taxi** - Official taxis, reliable and safe\n• **Uber/Careem** - Ride-sharing apps, widely available\n• **Rental cars** - Good for exploring, right-hand driving\n• **Buses** - Extensive network, very affordable\n\n**Metro Lines:** Red (major attractions), Gold (airport), Green (education city)\n\nWhere would you like to go? I can suggest the best transport option!";
-    } else if (message.contains('hotel') || message.contains('stay') || message.contains('accommodation')) {
-      return "🏨 Qatar has excellent accommodation options:\n\n**Luxury Hotels:**\n• Four Seasons, St. Regis, Ritz-Carlton\n• The Pearl and West Bay areas\n\n**Mid-range Options:**\n• Souq Waqif Boutique Hotels\n• City center business hotels\n\n**Budget-friendly:**\n• Hostels in Mushayreb area\n• Apartment hotels for longer stays\n\n**Areas to Consider:**\n• **West Bay**: Modern, close to business district\n• **The Pearl**: Luxury, waterfront\n• **Souq Waqif**: Traditional, cultural\n\nWhat's your budget range and preferred area?";
-    } else if (message.contains('hello') || message.contains('hi') || message.contains('مرحبا')) {
-      return "مرحباً! Welcome to Qatar! 🇶🇦\n\nI'm here to help you discover the best of Qatar. I can assist you with:\n\n• 🍽️ Restaurant recommendations\n• 🏛️ Cultural attractions and museums\n• 🛍️ Shopping destinations\n• 👨‍👩‍👧‍👦 Family-friendly activities\n• 💰 Budget-friendly options\n• 🚇 Transportation guidance\n• 🗺️ Creating personalized itineraries\n\nWhat would you like to explore today?";
-    } else if (message.contains('help') || message.contains('what can you do')) {
-      return "I'm your AI guide for Qatar! Here's how I can help:\n\n🔍 **Ask me about:**\n• Best places to visit\n• Restaurant recommendations\n• Cultural experiences\n• Shopping locations\n• Transportation options\n• Budget planning\n• Family activities\n• Traditional experiences\n\n📍 **I can create:**\n• Custom itineraries\n• Route suggestions\n• Budget estimates\n• Time-optimized plans\n\n💬 **Just ask naturally!** For example:\n\"Best restaurants near me\" or \"Plan a cultural day\" or \"Family activities under QR 200\"\n\nWhat would you like to know about Qatar?";
-    } else {
-      return "I'd love to help you explore Qatar! 🇶🇦\n\nI didn't quite understand your question, but I can assist you with:\n\n• Finding great restaurants and local food\n• Discovering cultural attractions and museums\n• Planning shopping trips\n• Suggesting family-friendly activities\n• Creating budget-friendly itineraries\n• Transportation and getting around\n\nCould you please rephrase your question or let me know what specific aspect of Qatar you'd like to explore?";
-    }
   }
 
   void _scrollToBottom() {
@@ -900,40 +828,6 @@ void _clearChatHistory() {
       ),
     );
   }
-
-  // void _clearChatHistory() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //       backgroundColor: AppColors.darkNavy,
-  //       title: Text('Clear Chat History', style: TextStyle(color: Colors.white)),
-  //       content: Text('Are you sure you want to clear all messages? This action cannot be undone.', style: TextStyle(color: Colors.white70)),
-  //       actions: [
-  //         TextButton(
-  //           onPressed: () => Navigator.pop(context),
-  //           child: Text('Cancel', style: TextStyle(color: Colors.white70)),
-  //         ),
-  //         ElevatedButton(
-  //           onPressed: () {
-  //             setState(() {
-  //               _messages.clear();
-  //               _messages.add({
-  //                 'sender': 'ai',
-  //                 'message': 'Chat history cleared. How can I help you explore Qatar today?',
-  //                 'timestamp': DateTime.now(),
-  //                 'type': 'text',
-  //               });
-  //             });
-  //             Navigator.pop(context);
-  //           },
-  //           style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-  //           child: Text('Clear'),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   void _exportChat() {
     // Implement chat export functionality
     ScaffoldMessenger.of(context).showSnackBar(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/auth_services.dart';
+import 'package:manar/services/auth_services.dart';
 import '../../widgets/common/loading_overlay.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -155,47 +155,6 @@ AppBar _buildHeader() {
     ),
   );
 }
-  // Widget _buildHeader() {
-  //   return Container(
-  //     padding: EdgeInsets.all(24),
-  //     child: Column(
-  //       children: [
-  //         // Back button and title
-  //         Row(
-  //           children: [
-  //             IconButton(
-  //               onPressed: () => Navigator.pop(context),
-  //               icon: Icon(
-  //                 Icons.arrow_back_ios,
-  //                 color: Colors.white,
-  //               ),
-  //             ),
-  //             Expanded(
-  //               child: Text(
-  //                 'Create Account',
-  //                 style: Theme.of(context).textTheme.headlineMedium,
-  //                 textAlign: TextAlign.center,
-  //               ),
-  //             ),
-  //             SizedBox(width: 48), // Balance the back button
-  //           ],
-  //         ),
-          
-  //         SizedBox(height: 16),
-          
-  //         // Subtitle
-  //         Text(
-  //           'Join us and start exploring Qatar',
-  //           style: GoogleFonts.inter(
-  //             fontSize: 16,
-  //             color: Colors.white70,
-  //           ),
-  //           textAlign: TextAlign.center,
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _buildRegistrationForm(AuthService authService) {
     return Form(
@@ -438,29 +397,6 @@ AppBar _buildHeader() {
               ),
             ),
           
-          // Create Account button
-          // SizedBox(
-          //   height: 56,
-          //   child: ElevatedButton(
-          //     onPressed: (authService.isLoading || !_acceptTerms) 
-          //         ? null 
-          //         : () => _handleRegistration(authService),
-          //     style: ElevatedButton.styleFrom(
-          //       backgroundColor: AppColors.gold,
-          //       foregroundColor: AppColors.maroon,
-          //       shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.circular(16),
-          //       ),
-          //     ),
-          //     child: Text(
-          //       'Create Account',
-          //       style: GoogleFonts.inter(
-          //         fontSize: 18,
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(
   height: 56,
   child: ElevatedButton(

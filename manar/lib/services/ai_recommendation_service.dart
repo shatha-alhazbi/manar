@@ -1,4 +1,3 @@
-// Updated AI Recommendation Service with better error handling and mock personalization
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -8,77 +7,63 @@ import 'auth_services.dart';
 import 'package:logger/logger.dart';
 
 var logger = Logger();
-final allMockData = [
-      //       RecommendationItem(
-      //     id: "101",
-      //     name: "La Spiga by Paper Moon",
-      //     type: "Restaurant",
-      //     description: "Italian restaurant offering a luxurious dining experience.",
-      //     location: "W Doha Hotel",
-      //     priceRange: r"$$$",
-      //     rating: 4.8,
-      //     estimatedDuration: "2 hours",
-      //     whyRecommended: "Perfect for a romantic dinner with authentic Italian cuisine.",
-      //     bookingAvailable: true,
-      //     bestTimeToVisit: "Evening",
-      //     features: ["Outdoor seating", "Valet parking"]
-      // ),
-      // RecommendationItem(
-      //     id: "102",
-      //     name: "Museum of Islamic Art",
-      //     type: "Attraction",
-      //     description: "A stunning museum showcasing Islamic art and architecture.",
-      //     location: "Corniche",
-      //     priceRange: r"$",
-      //     rating: 4.9,
-      //     estimatedDuration: "4 hours",
-      //     whyRecommended: "A must-visit for art and history enthusiasts.",
-      //     bookingAvailable: false,
-      //     bestTimeToVisit: "Afternoon",
-      //     features: ["Guided tours", "Cafe"]
-      // ),
-      // RecommendationItem(
-      //     id: "103",
-      //     name: "Katara Cultural Village",
-      //     type: "Attraction",
-      //     description: "A cultural hub with theaters, galleries, and restaurants.",
-      //     location: "Katara",
-      //     priceRange: r"$",
-      //     rating: 4.7,
-      //     estimatedDuration: "5 hours",
-      //     whyRecommended: "Ideal for exploring Qatar's rich cultural heritage.",
-      //     bookingAvailable: false,
-      //     bestTimeToVisit: "Evening",
-      //     features: ["Live performances", "Beach access"]
-      // ),
-      // RecommendationItem(
-      //     id: "104",
-      //     name: "The Pearl-Qatar",
-      //     type: "Shopping",
-      //     description: "An upscale shopping and dining destination on an artificial island.",
-      //     location: "The Pearl",
-      //     priceRange: r"$$$",
-      //     rating: 4.6,
-      //     estimatedDuration: "3 hours",
-      //     whyRecommended: "Great for luxury shopping and waterfront dining.",
-      //     bookingAvailable: false,
-      //     bestTimeToVisit: "Afternoon",
-      //     features: ["Waterfront views", "Luxury brands"]
-      // ),
-      RecommendationItem(
-          id: "105",
-          name: "Arwa",
-          type: "Shopping",
-          description: "A traditional market offering local goods and souvenirs.",
-          location: "Downtown Doha",
-          priceRange: r"$",
+final mockData = [
+            RecommendationItem(
+          id: "101",
+          name: "La Spiga by Paper Moon",
+          type: "Restaurant",
+          description: "Italian restaurant offering a luxurious dining experience.",
+          location: "W Doha Hotel",
+          priceRange: r"$$$",
           rating: 4.8,
-          estimatedDuration: "3 hours",
-          whyRecommended: "Experience authentic Qatari culture and shop for unique items.",
+          estimatedDuration: "2 hours",
+          whyRecommended: "Perfect for a romantic dinner with authentic Italian cuisine.",
+          bookingAvailable: true,
+          bestTimeToVisit: "Evening",
+          features: ["Outdoor seating", "Valet parking"]
+      ),
+      RecommendationItem(
+          id: "102",
+          name: "Museum of Islamic Art",
+          type: "Attraction",
+          description: "A stunning museum showcasing Islamic art and architecture.",
+          location: "Corniche",
+          priceRange: r"$",
+          rating: 4.9,
+          estimatedDuration: "4 hours",
+          whyRecommended: "A must-visit for art and history enthusiasts.",
           bookingAvailable: false,
-          bestTimeToVisit: "Morning",
-          features: ["Street food", "Handicrafts"]
-      )
+          bestTimeToVisit: "Afternoon",
+          features: ["Guided tours", "Cafe"]
+      ),
+      RecommendationItem(
+          id: "103",
+          name: "Katara Cultural Village",
+          type: "Attraction",
+          description: "A cultural hub with theaters, galleries, and restaurants.",
+          location: "Katara",
+          priceRange: r"$",
+          rating: 4.7,
+          estimatedDuration: "5 hours",
+          whyRecommended: "Ideal for exploring Qatar's rich cultural heritage.",
+          bookingAvailable: false,
+          bestTimeToVisit: "Evening",
+          features: ["Live performances", "Beach access"]
+      ),
+        RecommendationItem(
+          id: "104",
+          name: "Fabio's",
+          type: "Restaurant",
+          description: "An upscale restaurant serving Italian cuisine.",
+          location: "The Pearl",
+          priceRange: r"$$$",
+          rating: 4.5,
+          estimatedDuration: "3 hours",
+          whyRecommended: "Great for enjoying authentic Italian dishes in a luxurious setting with stunning waterfront views.",
+          bookingAvailable: false,
+          bestTimeToVisit: "Afternoon",
+          features: ["Waterfront views", "Luxury brands"]
+        )
     ];
     
 class AIRecommendationService extends ChangeNotifier {
@@ -223,9 +208,9 @@ class AIRecommendationService extends ChangeNotifier {
     final preferences = _userService.userPreferences;
     
     // PERSONALIZE based on user preferences
-    _personalizedRecommendations = _filterAndPersonalize(allMockData, preferences);
-    _trendingRecommendations = _getTrendingRecommendations(allMockData);
-    _nearbyRecommendations = _getNearbyRecommendations(allMockData, preferences);
+    _personalizedRecommendations = _filterAndPersonalize(mockData, preferences);
+    _trendingRecommendations = _getTrendingRecommendations(mockData);
+    _nearbyRecommendations = _getNearbyRecommendations(mockData, preferences);
     
     print('Loaded personalized recommendations: ${_personalizedRecommendations.length}');
     notifyListeners();
@@ -415,6 +400,7 @@ class AIRecommendationService extends ChangeNotifier {
             .map((item) => RecommendationItem.fromJson(item))
             .toList();
       }
+
     } catch (e) {
       print('Error loading trending recommendations: $e');
     }
@@ -563,24 +549,6 @@ class AIRecommendationService extends ChangeNotifier {
   Future<void> refreshRecommendations() async {
     await loadAllRecommendations();
   }
-
-  String getPersonalizedSectionTitle() {
-    final preferences = _userService.userPreferences;
-    if (preferences == null) return 'Recommended for You';
-    
-    if (preferences.interests.contains('food')) {
-      return 'Perfect Dining Spots';
-    } else if (preferences.interests.contains('culture')) {
-      return 'Cultural Experiences';
-    } else if (preferences.visitPurpose == 'business') {
-      return 'Business-Friendly Places';
-    } else if (preferences.visitPurpose == 'family') {
-      return 'Family Activities';
-    } else {
-      return 'Personalized for You';
-    }
-  }
-
   @override
   void dispose() {
     _httpClient.close();

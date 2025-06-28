@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/auth_services.dart';
+import 'package:manar/services/auth_services.dart';
 import '../../widgets/common/loading_overlay.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -149,48 +149,6 @@ AppBar _buildHeader() {
     ),
   );
 }
-  // Widget _buildHeader() {
-  //   return Container(
-  //     padding: EdgeInsets.all(24),
-  //     child: Column(
-  //       children: [
-  //         // Back button and title
-  //         Row(
-  //           children: [
-  //             IconButton(
-  //               onPressed: () => Navigator.pop(context),
-  //               icon: Icon(
-  //                 Icons.arrow_back_ios,
-  //                 color: Colors.white,
-  //               ),
-  //             ),
-  //             Expanded(
-  //               child: Text(
-  //                 'Welcome Back',
-  //                 style: Theme.of(context).textTheme.headlineMedium,
-  //                 textAlign: TextAlign.center,
-  //               ),
-  //             ),
-  //             SizedBox(width: 48), // Balance the back button
-  //           ],
-  //         ),
-          
-  //         SizedBox(height: 16),
-          
-  //         // Subtitle
-  //         Text(
-  //           'Sign in to continue your Qatar journey',
-  //           style: GoogleFonts.inter(
-  //             fontSize: 16,
-  //             color: Colors.white70,
-  //           ),
-  //           textAlign: TextAlign.center,
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _buildLoginForm(AuthService authService) {
     return Form(
       key: _formKey,

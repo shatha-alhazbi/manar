@@ -30,7 +30,7 @@ class QatarRAGSystem:
         """
         Initialize the complete RAG system with FANAR API and vector database
         """
-        print("🚀 Initializing Qatar RAG System...")
+        print(" Initializing Qatar RAG System...")
         
         # Initialize FANAR client with improved error handling
         self.fanar_client = OpenAI(
@@ -44,9 +44,9 @@ class QatarRAGSystem:
         
         try:
             self.collection = self.chroma_client.get_collection("qatar_tourism")
-            print(f"✅ Loaded vector database with {self.collection.count()} items")
+            print(f"Loaded vector database with {self.collection.count()} items")
         except Exception as e:
-            print(f"❌ Error loading vector database: {e}")
+            print(f" Error loading vector database: {e}")
             print("Please run Step 2 first to create the vector database")
             raise
     
@@ -167,7 +167,7 @@ Respond with ONLY the category name (recommendation/planning/booking/chat)."""
             return intent
             
         except Exception as e:
-            print(f"❌ Error classifying intent: {e}")
+            print(f" Error classifying intent: {e}")
             # Simple fallback classification
             user_input_lower = user_input.lower()
             if any(word in user_input_lower for word in ['recommend', 'suggest', 'show me', 'find me']):
@@ -210,7 +210,7 @@ Available places in Qatar:
 
 User request: "{user_input}"
 
-Provide 3-4 personalized recommendations in this EXACT JSON format:
+Provide 7-8 personalized recommendations in this EXACT JSON format, stick to the prompt and do not generate random words:
 {{
     "recommendations": [
         {{
@@ -252,7 +252,7 @@ Respond with valid JSON only. Do not include any comments or explanations outsid
                 return self._create_rag_recommendations(context_results, user_profile)
                 
         except Exception as e:
-            print(f"❌ Error generating recommendations: {e}")
+            print(f" Error generating recommendations: {e}")
             # Ultimate fallback
             return {
                 "recommendations": [
@@ -381,7 +381,7 @@ Include 4-5 activities covering breakfast, main attractions, lunch/cafe, and din
                 return self.create_enhanced_day_plan(context_results, user_profile,{})
                 
         except Exception as e:
-            print(f"❌ Error creating day plan: {e}")
+            print(f" Error creating day plan: {e}")
             return self.create_enhanced_day_plan([], user_profile, {})
         
     def _generate_day_plan_fallback(self, prompt: str) -> str:
@@ -391,18 +391,18 @@ Include 4-5 activities covering breakfast, main attractions, lunch/cafe, and din
             "day_plan": {
                 "title": "Your Perfect Day in Qatar",
                 "date": "2025-06-27",
-                "total_estimated_cost": "$150-200",
-                "total_duration": "10 hours",
+                "total_estimated_cost": "QAR 200+",
+                "total_duration": "6 hours",
                 "activities": [
                     {
                         "time": "10:00",
                         "activity": "Breakfast at Reem Al Bawadi",
                         "location": "West Bay, Doha",
                         "duration": "1 hour",
-                        "estimated_cost": "$25",
+                        "estimated_cost": "25",
                         "description": "Cozy, traditional Arabic breakfast with foul, shakshouka, and fresh bread. Sit by the window for diffused morning light.",
                         "transportation": "Taxi from hotel",
-                        "booking_required": false,
+                        "booking_required": true,
                         "tips": "Order the foul with tahini, shakshouka, and hot mint tea. Perfect place to soft launch the day."
                     },
                     {
@@ -410,7 +410,7 @@ Include 4-5 activities covering breakfast, main attractions, lunch/cafe, and din
                         "activity": "Fire Station Gallery + Café 999",
                         "location": "Al Bidda Area",
                         "duration": "1 hour",
-                        "estimated_cost": "$15",
+                        "estimated_cost": "15",
                         "description": "Contemporary Qatari art gallery with industrial chic vibe. Explore temporary exhibitions from Qatari artists-in-residence.",
                         "transportation": "10-minute drive from West Bay",
                         "booking_required": false,
@@ -432,7 +432,7 @@ Include 4-5 activities covering breakfast, main attractions, lunch/cafe, and din
                         "activity": "Artisanal Lunch at Dukkan Falafel",
                         "location": "Education City",
                         "duration": "1 hour",
-                        "estimated_cost": "$20",
+                        "estimated_cost": "20",
                         "description": "Underground Qatari-modern sandwich spot - tiny, cool, and hidden. Perfect light lunch option.",
                         "transportation": "Walking distance from Mathaf",
                         "booking_required": false,
@@ -454,7 +454,7 @@ Include 4-5 activities covering breakfast, main attractions, lunch/cafe, and din
                         "activity": "Golden Hour Boat Ride at Corniche",
                         "location": "MIA Park Boat Dock",
                         "duration": "45 minutes",
-                        "estimated_cost": "$30",
+                        "estimated_cost": "30",
                         "description": "Romantic dhow boat ride during golden hour. Skyline glows, sea breeze hits different, perfect ending to the day.",
                         "transportation": "15-minute drive to MIA Park",
                         "booking_required": false,
@@ -465,9 +465,9 @@ Include 4-5 activities covering breakfast, main attractions, lunch/cafe, and din
                 "total_walking_distance": "1.5 km",
                 "weather_tips": "Bring sunscreen, comfortable walking shoes, and a light jacket for the boat ride. Stay hydrated throughout the day.",
                 "budget_breakdown": {
-                    "food": "$60",
-                    "attractions": "$0",
-                    "transportation": "$45"
+                    "food": "60",
+                    "attractions": "0",
+                    "transportation": "45"
                 }
             }
         }
@@ -519,7 +519,7 @@ Respond with valid JSON only."""
                 return self._create_booking_fallback(booking_query, user_profile)
                 
         except Exception as e:
-            print(f"❌ Error processing booking: {e}")
+            print(f" Error processing booking: {e}")
             return self._create_booking_fallback(booking_query, user_profile)
     
     def _create_booking_fallback(self, booking_query: str, user_profile: UserProfile) -> Dict:
@@ -832,20 +832,14 @@ Respond with valid JSON only."""
             "transportation": f"${transportation_cost}"
         }
 
-
-   
-
-      
-
-
-class ManarAI:
+class manarAI:
     """
     Main class that combines FANAR API with RAG system
     """
     def __init__(self, fanar_api_key: str, vector_db_path: str = "./chroma_db"):
-        print("🚀 Initializing ManarAI system...")
+        print("Initializing manarI system...")
         self.rag_system = QatarRAGSystem(fanar_api_key, vector_db_path)
-        print("✅ ManarAI system ready!")
+        print("manarI system ready!")
     
     async def process_user_request(self, user_input: str, user_profile: UserProfile, context: str = "dashboard") -> Dict:
         """
@@ -909,7 +903,7 @@ Provide a helpful, conversational response about Qatar tourism."""
                     }
                 
         except Exception as e:
-            print(f"❌ Error processing user request: {e}")
+            print(f" Error processing user request: {e}")
             return {
                 "type": "error",
                 "data": {

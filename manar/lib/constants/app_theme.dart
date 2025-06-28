@@ -1,18 +1,15 @@
-// constants/app_theme.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppColors {
-  // Qatar-inspired color palette
-  static const Color maroon = Color(0xFF800020);          // Primary maroon
-  static const Color gold = Color(0xFFD4AF37);            // Qatar gold
-  static const Color darkNavy = Color(0xFF191943);        // Dark background
-  static const Color primaryBlue = Color(0xFF344D80);     // Blue accent
-  static const Color lightGray = Color(0xFFDBDEE6);       // Light elements
-  static const Color mediumGray = Color(0xFF7B829E);      // Medium gray
-  static const Color darkPurple = Color(0xFF1C1B49);      // Dark purple
+class AppColors {      
+  static const Color maroon = Color.fromARGB(255, 118, 37, 37);
+  static const Color gold = Color.fromARGB(255, 191, 170, 102);
+  static const Color darkNavy = Color(0xFF191943);        
+  static const Color primaryBlue = Color(0xFF344D80);     
+  static const Color lightGray = Color(0xFFDBDEE6);       
+  static const Color mediumGray = Color(0xFF7B829E);      
+  static const Color darkPurple = Color(0xFF1C1B49);    
   
-  // Semantic colors
   static const Color success = Color(0xFF4CAF50);
   static const Color error = Color(0xFFE53E3E);
   static const Color warning = Color(0xFFFF9800);
@@ -26,7 +23,6 @@ class AppTheme {
       primaryColor: AppColors.maroon,
       scaffoldBackgroundColor: AppColors.darkNavy,
       
-      // Typography
       textTheme: GoogleFonts.interTextTheme().copyWith(
         displayLarge: GoogleFonts.amiri(
           fontSize: 32,
@@ -63,7 +59,6 @@ class AppTheme {
         ),
       ),
       
-      // App Bar Theme
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.maroon,
         elevation: 0,
@@ -75,7 +70,6 @@ class AppTheme {
         iconTheme: IconThemeData(color: Colors.white),
       ),
       
-      // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.gold,
@@ -91,7 +85,6 @@ class AppTheme {
         ),
       ),
       
-      // Outlined Button Theme
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.white,
@@ -107,7 +100,6 @@ class AppTheme {
         ),
       ),
       
-      // Text Button Theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.gold,
@@ -118,7 +110,6 @@ class AppTheme {
         ),
       ),
       
-      // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.white.withOpacity(0.1),
@@ -155,7 +146,6 @@ class AppTheme {
         ),
       ),
       
-      // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColors.darkPurple,
         selectedItemColor: Colors.white,
@@ -166,7 +156,6 @@ class AppTheme {
         unselectedLabelStyle: GoogleFonts.inter(fontSize: 12),
       ),
       
-      // Card Theme
       cardTheme: CardThemeData(
           color: AppColors.primaryBlue,
           elevation: 4,
@@ -175,14 +164,12 @@ class AppTheme {
           ),
         ),
       
-      // Icon Theme
       iconTheme: IconThemeData(
         color: Colors.white,
       ),
     );
   }
   
-  // Helper method to create MaterialColor from Color
   static MaterialColor _createMaterialColor(Color color) {
     List strengths = <double>[.05];
     Map<int, Color> swatch = <int, Color>{};
@@ -204,7 +191,6 @@ class AppTheme {
   }
 }
 
-// Common widgets and styles
 class AppStyles {
   static BoxDecoration gradientContainer = BoxDecoration(
     gradient: LinearGradient(
@@ -237,14 +223,12 @@ class AppStyles {
   static EdgeInsets verticalPadding = EdgeInsets.symmetric(vertical: 24);
 }
 
-// Animation durations
 class AppDurations {
   static const Duration short = Duration(milliseconds: 200);
   static const Duration medium = Duration(milliseconds: 400);
   static const Duration long = Duration(milliseconds: 600);
 }
 
-// Text styles shortcuts
 extension TextStyleExtensions on TextTheme {
   TextStyle get arabicTitle => GoogleFonts.amiri(
     fontSize: 32,

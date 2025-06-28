@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/user_services.dart';
-import 'package:manara/services/auth_services.dart';
+import 'package:manar/services/user_services.dart';
+import 'package:manar/services/auth_services.dart';
 import '../../services/ai_recommendation_service.dart';
-import 'package:manara/screens/planner/day_planner_screen.dart';
+import 'package:manar/screens/planner/day_planner_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -139,7 +139,7 @@ void _navigateToTripPlanner() {
                           // Personalized Recommendations (Main feature)
                           if (_aiService?.personalizedRecommendations.isNotEmpty == true)
                             _buildRecommendationSection(
-                              _aiService?.getPersonalizedSectionTitle() ?? 'Recommended for You',
+                              'Personalized for You',
                               _aiService!.personalizedRecommendations,
                             ),
                           
@@ -183,66 +183,7 @@ void _navigateToTripPlanner() {
     return Container(
       padding: EdgeInsets.all(24),
       child: Column(
-        children: [
-          // Top row with logo and profile
-          // Row(
-          //   children: [
-              // App logo and title
-          //     Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Text(
-          //           'مَنار',
-          //           style: GoogleFonts.amiri(
-          //             fontSize: 30,
-          //             fontWeight: FontWeight.bold,
-          //             color: AppColors.gold,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-              
-          //     Spacer(),
-              
-          //     // Profile button
-          //     Consumer<AuthService>(
-          //       builder: (context, authService, child) {
-          //         final user = authService.currentUser;
-          //         return GestureDetector(
-          //           onTap: () => _showProfileMenu(),
-          //           child: Container(
-          //             width: 48,
-          //             height: 48,
-          //             decoration: BoxDecoration(
-          //               color: AppColors.gold,
-          //               borderRadius: BorderRadius.circular(12),
-          //               boxShadow: [
-          //                 BoxShadow(
-          //                   color: AppColors.gold.withOpacity(0.3),
-          //                   blurRadius: 8,
-          //                   offset: Offset(0, 4),
-          //                 ),
-          //               ],
-          //             ),
-          //             child: Center(
-          //               child: Text(
-          //                 user?.displayName?.substring(0, 1).toUpperCase() ?? 'U',
-          //                 style: GoogleFonts.inter(
-          //                   fontSize: 18,
-          //                   fontWeight: FontWeight.bold,
-          //                   color: AppColors.maroon,
-          //                 ),
-          //               ),
-          //             ),
-          //           ),
-          //         );
-          //       },
-          //     ),
-          //   ],
-          // ),
-          
-          // SizedBox(height: 20),
-          
+        children: [          
           // Search bar
           Container(
             decoration: BoxDecoration(
@@ -351,68 +292,6 @@ void _navigateToTripPlanner() {
     );
   }
 
-  // Widget _buildQuickActions() {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Text(
-  //         'Explore Qatar',
-  //         style: GoogleFonts.inter(
-  //           fontSize: 20,
-  //           fontWeight: FontWeight.bold,
-  //           color: Colors.white,
-  //         ),
-  //       ),
-  //       SizedBox(height: 16),
-  //       Row(
-  //         children: [
-  //           Expanded(child: _buildActionButton(Icons.restaurant_outlined, 'Restaurants')),
-  //           SizedBox(width: 12),
-  //           Expanded(child: _buildActionButton(Icons.account_balance, 'Attractions')),
-  //           SizedBox(width: 12),
-  //           Expanded(child: _buildActionButton(Icons.shopping_bag_outlined, 'Shopping')),
-  //           SizedBox(width: 12),
-  //           Expanded(child: _buildActionButton(Icons.local_cafe_outlined, 'Cafés')),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  // Widget _buildActionButton(IconData icon, String label) {
-  //   return Container(
-  //     child: Material(
-  //       color: Colors.transparent,
-  //       child: InkWell(
-  //         onTap: () => _navigateToCategory(label.toLowerCase()),
-  //         borderRadius: BorderRadius.circular(16),
-  //         child: Container(
-  //           decoration: AppStyles.gradientContainer,
-  //           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-  //           child: Column(
-  //             children: [
-  //               Icon(
-  //                 icon,
-  //                 color: AppColors.gold,
-  //                 size: 28,
-  //               ),
-  //               SizedBox(height: 8),
-  //               Text(
-  //                 label,
-  //                 style: TextStyle(
-  //                   color: Colors.white,
-  //                   fontSize: 12,
-  //                   fontWeight: FontWeight.w600,
-  //                 ),
-  //                 textAlign: TextAlign.center,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
 Widget _buildDayPlanningSection() {
   return Container(

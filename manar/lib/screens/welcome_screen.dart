@@ -195,7 +195,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         
         // Arabic title
         Text(
-          'مَنارة',
+          'مَنار',
           style: Theme.of(context).textTheme.displayLarge,
         ),
         
@@ -203,7 +203,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         
         // English subtitle
         Text(
-          'MANARA',
+          'Manar',
           style: GoogleFonts.inter(
             fontSize: 24,
             fontWeight: FontWeight.w300,
@@ -216,7 +216,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         
         // Tagline
         Text(
-          'Your AI-Powered Guide to Qatar',
+          'Your light to the heart of Qatar',
           style: GoogleFonts.inter(
             fontSize: 16,
             color: Colors.white70,
@@ -229,7 +229,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         
         // Arabic tagline
         Text(
-          'دليلك الذكي لاستكشاف قطر',
+          'نورك إلى قلب قطر',
           style: GoogleFonts.amiri(
             fontSize: 18,
             color: AppColors.gold.withOpacity(0.8),

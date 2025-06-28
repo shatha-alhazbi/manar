@@ -1,4 +1,3 @@
-// screens/splash_screen.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_theme.dart';
@@ -82,14 +81,14 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.maroon,
+      backgroundColor: AppColors.primaryBlue,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppColors.maroon,
+              AppColors.primaryBlue,
               AppColors.darkNavy,
             ],
           ),
@@ -148,7 +147,7 @@ class _SplashScreenState extends State<SplashScreen>
                         children: [
                           // Arabic title
                           Text(
-                            'مَنارة',
+                            'مَنار',
                             style: GoogleFonts.amiri(
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
@@ -160,7 +159,7 @@ class _SplashScreenState extends State<SplashScreen>
                           
                           // English title
                           Text(
-                            'MANARA',
+                            'manar',
                             style: GoogleFonts.inter(
                               fontSize: 24,
                               fontWeight: FontWeight.w300,

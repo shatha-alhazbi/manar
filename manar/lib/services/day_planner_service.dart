@@ -1,4 +1,3 @@
-// lib/services/day_planner_service.dart - Fixed to use FANAR API with RAG
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -120,7 +119,7 @@ class AIDayPlannerService extends ChangeNotifier {
   List<String> _getOptionsForQuestionType(int questionType) {
     switch (questionType) {
       case 1: // Duration
-        return ['Half day (4 hours)', 'Full day (8 hours)', 'Extended day (12 hours)'];
+        return ['4 hours', '6 hours', '12 hours'];
       case 2: // Interests
         return ['Cultural & Historic', 'Food & Dining', 'Modern & Shopping', 'Mix of everything'];
       case 3: // Budget
@@ -161,7 +160,7 @@ class AIDayPlannerService extends ChangeNotifier {
       PlannerQuestion(
         id: 'time_available',
         question: 'How much time do you have for your Qatar adventure today?',
-        options: ['Half day (4 hours)', 'Full day (8 hours)', 'Extended day (12 hours)'],
+        options: ['4 hours', '6 hours', '10 hours'],
         followUp: 'Perfect! What time would you like to start?',
         responseKey: 'duration',
       ),
@@ -196,7 +195,6 @@ class AIDayPlannerService extends ChangeNotifier {
     ];
   }
 
-  // Generate AI-powered day plan using FANAR API with RAG
   Future<List<PlanStop>?> generateDayPlan({
     required String userId,
     required Map<String, dynamic> planningData,
@@ -205,7 +203,6 @@ class AIDayPlannerService extends ChangeNotifier {
     _planningData = planningData;
     
     try {
-      // Use the /plan endpoint which uses your RAG system
       final response = await http.post(
         Uri.parse('$baseUrl/plan'),
         headers: {'Content-Type': 'application/json'},
@@ -362,7 +359,6 @@ class AIDayPlannerService extends ChangeNotifier {
       }
     }
     
-    // Extract venue name before location indicators
     if (cleaned.contains(' in ')) {
       cleaned = cleaned.split(' in ')[0].trim();
     }
@@ -377,7 +373,6 @@ class AIDayPlannerService extends ChangeNotifier {
   }
 
   String _extractLocationFromActivity(String activity) {
-    // Extract location from activity description
     List<String> qatarLocations = [
       'Souq Waqif', 'West Bay', 'The Pearl', 'Katara', 'Corniche',
       'Museum District', 'Doha', 'Education City', 'Aspire Zone'
@@ -396,7 +391,6 @@ class AIDayPlannerService extends ChangeNotifier {
   String _buildDetailedPlanningQuery(Map<String, dynamic> data) {
     List<String> queryParts = [];
     
-    // Build comprehensive query for RAG system
     queryParts.add('Create a detailed Qatar day plan');
     
     if (data['duration'] != null) {
@@ -419,7 +413,6 @@ class AIDayPlannerService extends ChangeNotifier {
       queryParts.add('including ${data['special_preferences']}');
     }
     
-    // Add specific requirements for good planning
     queryParts.add('Include restaurants, attractions, and cultural sites');
     queryParts.add('Optimize travel time and create a logical route');
     queryParts.add('Provide specific venue names and locations in Qatar');
@@ -428,14 +421,12 @@ class AIDayPlannerService extends ChangeNotifier {
   }
 
   List<PlanStop> _createFallbackPlan(Map<String, dynamic> planningData) {
-    // Create a basic plan based on user preferences when AI fails
     List<PlanStop> fallbackStops = [];
     
     String budget = _extractBudgetRange(planningData);
     List<String> interests = _extractActivityTypes(planningData);
     String startTime = _extractStartTime(planningData);
     
-    // Morning activity
     if (interests.contains('Cultural') || interests.contains('Cultural & Historic')) {
       fallbackStops.add(_createCulturalStop(startTime, budget));
     } else if (interests.contains('Food')) {
@@ -444,7 +435,6 @@ class AIDayPlannerService extends ChangeNotifier {
       fallbackStops.add(_createGeneralStop(startTime, budget));
     }
     
-    // Afternoon activity
     String afternoonTime = _addHoursToTime(startTime, 3);
     if (interests.contains('Shopping') || interests.contains('Modern')) {
       fallbackStops.add(_createShoppingStop(afternoonTime, budget));
@@ -452,7 +442,6 @@ class AIDayPlannerService extends ChangeNotifier {
       fallbackStops.add(_createAttractionStop(afternoonTime, budget));
     }
     
-    // Evening activity
     String eveningTime = _addHoursToTime(afternoonTime, 2);
     fallbackStops.add(_createDinnerStop(eveningTime, budget));
     
@@ -593,7 +582,6 @@ class AIDayPlannerService extends ChangeNotifier {
     }
   }
 
-  // Utility methods (keeping existing implementations)
   String _parseTime(dynamic timeValue) {
     if (timeValue == null) return '09:00';
     
@@ -681,11 +669,11 @@ class AIDayPlannerService extends ChangeNotifier {
   }
 
   String _parseCost(dynamic costValue) {
-    if (costValue == null) return '\$30';
+    if (costValue == null) return '30';
     
     String cost = costValue.toString();
     
-    if (cost.contains('\$') || cost.toLowerCase() == 'free') {
+    if (cost.toLowerCase() == 'free') {
       return cost;
     }
     
@@ -693,10 +681,10 @@ class AIDayPlannerService extends ChangeNotifier {
     Match? match = numberRegex.firstMatch(cost);
     
     if (match != null) {
-      return '\$${match.group(1)}';
+      return '${match.group(1)}';
     }
     
-    return '\$30';
+    return '30';
   }
 
   double _parseRating(Map<String, dynamic> activity) {
@@ -837,7 +825,6 @@ class AIDayPlannerService extends ChangeNotifier {
     return 'attraction';
   }
 
-  // AI-powered booking agent using your RAG + FANAR system
   Future<List<BookingStep>> processBookingsWithAI({
     required List<PlanStop> dayPlan,
     required String userId,
@@ -863,7 +850,6 @@ class AIDayPlannerService extends ChangeNotifier {
         _currentBookings = bookingSteps;
         notifyListeners();
         
-        // Process booking with your RAG + FANAR system
         await _processIndividualBookingWithRAG(bookingStep, userId);
       }
       
@@ -879,7 +865,6 @@ class AIDayPlannerService extends ChangeNotifier {
 
   Future<void> _processIndividualBookingWithRAG(BookingStep booking, String userId) async {
     try {
-      // Use your backend's booking endpoint which uses RAG + FANAR
       final response = await http.post(
         Uri.parse('$baseUrl/book'),
         headers: {'Content-Type': 'application/json'},
@@ -899,7 +884,6 @@ class AIDayPlannerService extends ChangeNotifier {
           booking.status = BookingStatus.confirmed;
           booking.confirmationNumber = data['data']['booking']['confirmation_number'];
           
-          // Parse booking details from your RAG-enhanced response
           Map<String, dynamic> bookingDetails = data['data']['booking'];
           booking.details = {
             'confirmation_number': bookingDetails['confirmation_number'],
@@ -910,7 +894,7 @@ class AIDayPlannerService extends ChangeNotifier {
             'special_instructions': bookingDetails['notes'] ?? bookingDetails['rag_insights'],
             'party_size': bookingDetails['party_size'],
             'booking_time': DateTime.now().toIso8601String(),
-            'rag_insights': bookingDetails['rag_insights'], // AI insights from your RAG system
+            'rag_insights': bookingDetails['rag_insights'],
           };
           
         } else {
@@ -932,14 +916,12 @@ class AIDayPlannerService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // AI Chat for planning assistance using your FANAR + RAG system
   Future<String> chatWithPlanningAI({
     required String message,
     required String userId,
     List<ChatMessage>? conversationHistory,
   }) async {
     try {
-      // Use your chat endpoint which has RAG integration
       final response = await http.post(
         Uri.parse('$baseUrl/chat'),
         headers: {'Content-Type': 'application/json'},
@@ -971,7 +953,6 @@ class AIDayPlannerService extends ChangeNotifier {
   }
 
   String _parseRAGChatResponse(Map<String, dynamic> ragData) {
-    // Parse different types of responses from your RAG system
     if (ragData['message'] != null) {
       return ragData['message'];
     } else if (ragData['recommendations'] != null) {
@@ -983,13 +964,11 @@ class AIDayPlannerService extends ChangeNotifier {
     return 'I\'m here to help with your Qatar adventure planning!';
   }
 
-  // Get real-time recommendations from your RAG system
   Future<List<RecommendationItem>> getAIRecommendations({
     required String query,
     required String userId,
   }) async {
     try {
-      // Use your recommendations endpoint
       final response = await http.post(
         Uri.parse('$baseUrl/recommendations'),
         headers: {'Content-Type': 'application/json'},
@@ -1049,7 +1028,6 @@ class AIDayPlannerService extends ChangeNotifier {
     return items;
   }
 
-  // Plan management methods
   void updatePlanStop(String stopId, PlanStop updatedStop) {
     int index = _currentPlan.indexWhere((stop) => stop.id == stopId);
     if (index != -1) {
@@ -1068,10 +1046,8 @@ class AIDayPlannerService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Save/Load plans (optional - can integrate with local storage or backend)
   Future<void> savePlan(String planName) async {
     try {
-      // Save plan to backend or local storage
       Map<String, dynamic> planData = {
         'name': planName,
         'created_at': DateTime.now().toIso8601String(),
@@ -1096,7 +1072,6 @@ class AIDayPlannerService extends ChangeNotifier {
         }).toList(),
       };
       
-      // Save logic here - could be local storage, Firebase, or your backend
       print('Plan saved: $planName');
       
     } catch (e) {
@@ -1104,7 +1079,6 @@ class AIDayPlannerService extends ChangeNotifier {
     }
   }
 
-  // Clear current state
   void clearCurrentPlan() {
     _currentPlan.clear();
     _currentBookings.clear();
@@ -1113,7 +1087,6 @@ class AIDayPlannerService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Get plan statistics
   Map<String, dynamic> getPlanStatistics() {
     if (_currentPlan.isEmpty) return {};
     
@@ -1123,12 +1096,10 @@ class AIDayPlannerService extends ChangeNotifier {
     int bookableStops = 0;
     
     for (PlanStop stop in _currentPlan) {
-      // Calculate cost
       String costStr = stop.estimatedCost.replaceAll(RegExp(r'[^\d]'), '');
       int cost = int.tryParse(costStr) ?? 0;
       totalCost += cost;
       
-      // Calculate duration (simplified)
       if (stop.duration.contains('hour')) {
         int hours = int.tryParse(stop.duration.split(' ')[0]) ?? 1;
         totalDuration += hours * 60;
@@ -1137,10 +1108,8 @@ class AIDayPlannerService extends ChangeNotifier {
         totalDuration += minutes;
       }
       
-      // Count activity types
       activityTypes[stop.type] = (activityTypes[stop.type] ?? 0) + 1;
       
-      // Count bookable stops
       if (stop.bookingRequired) bookableStops++;
     }
     

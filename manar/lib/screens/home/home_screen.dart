@@ -1,12 +1,12 @@
 // screens/home/home_screen.dart (Updated Main Navigation)
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:manara/constants/app_theme.dart';
-import 'package:manara/screens/profile/profile_screen.dart';
-import 'package:manara/screens/bookings/bookings_screen.dart';  
-import 'package:manara/screens/chat/chat_screen.dart';  
-import 'package:manara/screens/home/dashboard_screen.dart';
-import 'package:manara/services/auth_services.dart';
+import 'package:manar/constants/app_theme.dart';
+import 'package:manar/screens/profile/profile_screen.dart';
+import 'package:manar/screens/bookings/bookings_screen.dart';  
+import 'package:manar/screens/chat/chat_screen.dart';  
+import 'package:manar/screens/home/dashboard_screen.dart';
+import 'package:manar/services/auth_services.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -98,8 +98,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       ),
       
-      // Floating Action Button for Quick Actions (only on home screen)
-      floatingActionButton: _selectedIndex == 0 ? _buildQuickActionFAB() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       
       // Bottom Navigation
@@ -107,18 +105,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildQuickActionFAB() {
-    return ScaleTransition(
-      scale: _fabAnimation,
-      child: FloatingActionButton(
-        onPressed: _showQuickActions,
-        backgroundColor: AppColors.gold,
-        foregroundColor: AppColors.maroon,
-        elevation: 8,
-        child: Icon(Icons.add, size: 28),
-      ),
-    );
-  }
 
   Widget _buildBottomNavigation() {
     return Container(
@@ -276,212 +262,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  void _showQuickActions() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.darkNavy,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Handle bar
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            SizedBox(height: 20),
-            
-            Text(
-              'Quick Actions',
-              style: GoogleFonts.inter(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 24),
-            
-            // Quick action buttons
-            GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              childAspectRatio: 1.2,
-              children: [
-                _buildQuickActionButton(
-                  '🗺️', 
-                  'Plan Trip', 
-                  'Create AI itinerary',
-                  () {
-                    Navigator.pop(context);
-                    _navigateToPlanner();
-                  },
-                ),
-                _buildQuickActionButton(
-                  '💬', 
-                  'Ask AI', 
-                  'Get recommendations',
-                  () {
-                    Navigator.pop(context);
-                    _navigateToChat();
-                  },
-                ),
-                _buildQuickActionButton(
-                  '📖', 
-                  'My Bookings', 
-                  'View reservations',
-                  () {
-                    Navigator.pop(context);
-                    _navigateToBookings();
-                  },
-                ),
-                _buildQuickActionButton(
-                  '⭐', 
-                  'Favorites', 
-                  'Saved places',
-                  () {
-                    Navigator.pop(context);
-                    _showFavorites();
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuickActionButton(
-    String emoji, 
-    String title, 
-    String subtitle, 
-    VoidCallback onTap
-  ) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.primaryBlue,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.1),
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              emoji, 
-              style: TextStyle(fontSize: 32),
-            ),
-            SizedBox(height: 8),
-            Text(
-              title,
-              style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 4),
-            Text(
-              subtitle,
-              style: GoogleFonts.inter(
-                fontSize: 11,
-                color: Colors.white70,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Navigation helpers
-  void _navigateToPlanner() {
-    // This will trigger the day planner functionality
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text('AI Trip Planner', style: TextStyle(color: Colors.white)),
-        content: Text(
-          'This would open the AI-powered trip planning interface where you can create personalized itineraries.',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close', style: TextStyle(color: AppColors.gold)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _navigateToChat() {
-    _onNavItemTapped(2);
-  }
-
-  void _navigateToBookings() {
-    _onNavItemTapped(1);
-  }
-
-  void _showFavorites() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text(
-          'Your Favorites',
-          style: TextStyle(color: Colors.white),
-        ),
-        content: Container(
-          width: double.maxFinite,
-          height: 200,
-          child: Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.restaurant, color: AppColors.gold),
-                title: Text('Souq Waqif', style: TextStyle(color: Colors.white)),
-                subtitle: Text('Traditional Market', style: TextStyle(color: Colors.white70)),
-              ),
-              ListTile(
-                leading: Icon(Icons.museum, color: AppColors.gold),
-                title: Text('Museum of Islamic Art', style: TextStyle(color: Colors.white)),
-                subtitle: Text('Cultural Heritage', style: TextStyle(color: Colors.white70)),
-              ),
-              ListTile(
-                leading: Icon(Icons.location_city, color: AppColors.gold),
-                title: Text('The Pearl-Qatar', style: TextStyle(color: Colors.white)),
-                subtitle: Text('Luxury Shopping', style: TextStyle(color: Colors.white70)),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close', style: TextStyle(color: AppColors.gold)),
-          ),
-        ],
-      ),
-    );
-  }
   void _showProfileMenu() {
     showModalBottomSheet(
       context: context,

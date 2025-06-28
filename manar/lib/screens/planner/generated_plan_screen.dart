@@ -13,7 +13,7 @@ class GeneratedPlanScreen extends StatefulWidget {
   final List<PlanStop>? generatedStops;
 
   const GeneratedPlanScreen({
-    Key? key, 
+    Key? key,
     required this.planningData,
     this.generatedStops,
   }) : super(key: key);
@@ -27,7 +27,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  
+
   List<PlanStop> dayPlan = [];
   bool isLoading = true;
   PageController _pageController = PageController();
@@ -37,20 +37,21 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
   @override
   void initState() {
     super.initState();
-    
+
     _animationController = AnimationController(
       duration: Duration(milliseconds: 1200),
       vsync: this,
     );
-    
+
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
-    
-    _slideAnimation = Tween<Offset>(begin: Offset(0, 0.3), end: Offset.zero).animate(
+
+    _slideAnimation =
+        Tween<Offset>(begin: Offset(0, 0.3), end: Offset.zero).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
     );
-    
+
     _initializePlan();
   }
 
@@ -116,7 +117,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.darkNavy,
-        title: Text('Plan Generation Failed', style: TextStyle(color: Colors.white)),
+        title: Text('Plan Generation Failed',
+            style: TextStyle(color: Colors.white)),
         content: Text(
           'I\'m having trouble creating your plan right now. Would you like to try again?',
           style: TextStyle(color: Colors.white70),
@@ -162,7 +164,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
           dayPlan = newPlan;
           isRegenerating = false;
         });
-        
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('New plan generated successfully!'),
@@ -173,7 +175,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
         setState(() {
           isRegenerating = false;
         });
-        
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to generate new plan. Please try again.'),
@@ -185,7 +187,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       setState(() {
         isRegenerating = false;
       });
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error: $e'),
@@ -198,11 +200,11 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
   void _removeStop(String stopId) async {
     final plannerService = context.read<AIDayPlannerService>();
     plannerService.removePlanStop(stopId);
-    
+
     setState(() {
       dayPlan.removeWhere((stop) => stop.id == stopId);
     });
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Stop removed from your plan'),
@@ -225,7 +227,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
 
     try {
       // Get AI suggestions for replacement
-      List<RecommendationItem> suggestions = await plannerService.getAIRecommendations(
+      List<RecommendationItem> suggestions =
+          await plannerService.getAIRecommendations(
         query: 'Suggest alternatives for my Qatar day plan',
         userId: userId,
       );
@@ -259,36 +262,41 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
               ),
             ),
             SizedBox(height: 16),
-            ...suggestions.take(3).map((suggestion) => ListTile(
-              leading: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.gold,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(Icons.location_on, color: AppColors.maroon),
-              ),
-              title: Text(
-                suggestion.name,
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              ),
-              subtitle: Text(
-                suggestion.location,
-                style: TextStyle(color: Colors.white70),
-              ),
-              trailing: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _addSuggestionToPlan(suggestion);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.gold,
-                  minimumSize: Size(60, 32),
-                ),
-                child: Text('Add', style: TextStyle(color: AppColors.maroon)),
-              ),
-            )).toList(),
+            ...suggestions
+                .take(3)
+                .map((suggestion) => ListTile(
+                      leading: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.gold,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(Icons.location_on, color: AppColors.maroon),
+                      ),
+                      title: Text(
+                        suggestion.name,
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w600),
+                      ),
+                      subtitle: Text(
+                        suggestion.location,
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _addSuggestionToPlan(suggestion);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.gold,
+                          minimumSize: Size(60, 32),
+                        ),
+                        child: Text('Add',
+                            style: TextStyle(color: AppColors.maroon)),
+                      ),
+                    ))
+                .toList(),
           ],
         ),
       ),
@@ -330,7 +338,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
 
   String _getNextAvailableTime() {
     if (dayPlan.isEmpty) return '09:00';
-    
+
     // Get the last stop's time and add duration
     PlanStop lastStop = dayPlan.last;
     // This is a simplified time calculation
@@ -427,7 +435,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
           children: [
             // Header
             _buildHeader(),
-            
+
             // Plan content
             Expanded(
               child: Column(
@@ -437,16 +445,10 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                     flex: 6,
                     child: _buildTimelineView(),
                   ),
-                  
-                  // Map view
-                  Expanded(
-                    flex: 4,
-                    child: _buildMapView(),
-                  ),
                 ],
               ),
             ),
-            
+
             // Book plan button
             _buildBookButton(),
           ],
@@ -456,7 +458,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
   }
 
   Widget _buildHeader() {
-    final totalCost = dayPlan.fold<int>(0, (sum, stop) {
+    int totalCost = dayPlan.fold<int>(0, (sum, stop) {
       final cost = stop.estimatedCost.replaceAll(RegExp(r'[^\d]'), '');
       return sum + (int.tryParse(cost) ?? 0);
     });
@@ -511,7 +513,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       children: [
                         Icon(Icons.refresh, color: Colors.white, size: 20),
                         SizedBox(width: 8),
-                        Text('Regenerate Plan', style: TextStyle(color: Colors.white)),
+                        Text('Regenerate Plan',
+                            style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ),
@@ -521,7 +524,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       children: [
                         Icon(Icons.share, color: Colors.white, size: 20),
                         SizedBox(width: 8),
-                        Text('Share Plan', style: TextStyle(color: Colors.white)),
+                        Text('Share Plan',
+                            style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ),
@@ -531,7 +535,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       children: [
                         Icon(Icons.bookmark, color: Colors.white, size: 20),
                         SizedBox(width: 8),
-                        Text('Save Plan', style: TextStyle(color: Colors.white)),
+                        Text('Save Plan',
+                            style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ),
@@ -549,9 +554,11 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildStatItem(Icons.schedule, '${dayPlan.length} stops', 'Total Stops'),
+                _buildStatItem(
+                    Icons.schedule, '${dayPlan.length} stops', 'Total Stops'),
                 _buildStatItem(Icons.access_time, totalDuration, 'Duration'),
-                _buildStatItem(Icons.attach_money, '\$${totalCost}', 'Est. Cost'),
+                _buildStatItem(
+                    Icons.attach_money, 'QAR $totalCost', 'Est. Cost'),
               ],
             ),
           ),
@@ -593,10 +600,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
 
   String _calculateTotalDuration() {
     if (dayPlan.isEmpty) return '0 hours';
-    
-    // Calculate from first start time to last end time
-    // This is simplified - in a real app you'd parse times properly
-    int totalHours = dayPlan.length * 2; // Rough estimate
+    int totalHours = dayPlan.length * 2; 
     return '$totalHours hours';
   }
 
@@ -631,7 +635,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       itemBuilder: (context, index) {
         final stop = dayPlan[index];
         final isLast = index == dayPlan.length - 1;
-        
+
         return _buildStopCard(stop, isLast, index);
       },
     );
@@ -683,16 +687,20 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                 ),
             ],
           ),
-          
+
           SizedBox(width: 16),
-          
+
           // Stop card
           Expanded(
             child: Container(
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.grey[800]!, Colors.grey[700]!],
+                  // colors: [Colors.grey[800]!, Colors.grey[700]!],
+                  colors: [
+                    Colors.grey[500]!.withOpacity(0.2),
+                    Colors.grey[400]!.withOpacity(0.2)
+                  ],
                 ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
@@ -730,7 +738,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                         ),
                       ),
                       PopupMenuButton<String>(
-                        icon: Icon(Icons.more_vert, color: Colors.white54, size: 20),
+                        icon: Icon(Icons.more_vert,
+                            color: Colors.white54, size: 20),
                         color: AppColors.darkNavy,
                         onSelected: (value) {
                           switch (value) {
@@ -748,23 +757,26 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                         itemBuilder: (context) => [
                           PopupMenuItem(
                             value: 'modify',
-                            child: Text('Modify Time', style: TextStyle(color: Colors.white)),
+                            child: Text('Modify Time',
+                                style: TextStyle(color: Colors.white)),
                           ),
                           PopupMenuItem(
                             value: 'alternatives',
-                            child: Text('Find Alternatives', style: TextStyle(color: Colors.white)),
+                            child: Text('Find Alternatives',
+                                style: TextStyle(color: Colors.white)),
                           ),
                           PopupMenuItem(
                             value: 'remove',
-                            child: Text('Remove', style: TextStyle(color: AppColors.error)),
+                            child: Text('Remove',
+                                style: TextStyle(color: AppColors.error)),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  
+
                   SizedBox(height: 12),
-                  
+
                   // Location and type
                   Row(
                     children: [
@@ -785,9 +797,9 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       ),
                     ],
                   ),
-                  
+
                   SizedBox(height: 8),
-                  
+
                   // Description
                   Text(
                     stop.description,
@@ -796,9 +808,9 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       color: Colors.white,
                     ),
                   ),
-                  
+
                   SizedBox(height: 16),
-                  
+
                   // Stats row
                   Row(
                     children: [
@@ -810,7 +822,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       if (stop.bookingRequired) ...[
                         SizedBox(width: 16),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.warning.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(4),
@@ -827,7 +840,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       ],
                     ],
                   ),
-                  
+
                   if (stop.tips.isNotEmpty) ...[
                     SizedBox(height: 12),
                     Container(
@@ -857,14 +870,15 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                       ),
                     ),
                   ],
-                  
+
                   // Travel to next
                   if (!isLast && stop.travelToNext != 'Trip complete') ...[
                     SizedBox(height: 16),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryBlue.withOpacity(0.2),
+                        color: AppColors.primaryBlue.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -872,7 +886,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                         children: [
                           Icon(
                             Icons.directions_walk,
-                            color: AppColors.primaryBlue,
+                            color: Colors.white,
                             size: 16,
                           ),
                           SizedBox(width: 6),
@@ -880,7 +894,7 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                             stop.travelToNext,
                             style: GoogleFonts.inter(
                               fontSize: 12,
-                              color: AppColors.primaryBlue,
+                              color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -923,7 +937,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
             ListTile(
               leading: Icon(Icons.access_time, color: AppColors.gold),
               title: Text('Change Time', style: TextStyle(color: Colors.white)),
-              subtitle: Text('Current: ${stop.startTime}', style: TextStyle(color: Colors.white70)),
+              subtitle: Text('Current: ${stop.startTime}',
+                  style: TextStyle(color: Colors.white70)),
               onTap: () {
                 Navigator.pop(context);
                 _changeStopTime(stop);
@@ -931,8 +946,10 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
             ),
             ListTile(
               leading: Icon(Icons.schedule, color: AppColors.gold),
-              title: Text('Adjust Duration', style: TextStyle(color: Colors.white)),
-              subtitle: Text('Current: ${stop.duration}', style: TextStyle(color: Colors.white70)),
+              title: Text('Adjust Duration',
+                  style: TextStyle(color: Colors.white)),
+              subtitle: Text('Current: ${stop.duration}',
+                  style: TextStyle(color: Colors.white70)),
               onTap: () {
                 Navigator.pop(context);
                 _changeStopDuration(stop);
@@ -940,7 +957,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
             ),
             ListTile(
               leading: Icon(Icons.edit_note, color: AppColors.gold),
-              title: Text('Add Personal Notes', style: TextStyle(color: Colors.white)),
+              title: Text('Add Personal Notes',
+                  style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 _addPersonalNotes(stop);
@@ -974,8 +992,9 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       },
     ).then((TimeOfDay? newTime) {
       if (newTime != null) {
-        String newTimeString = '${newTime.hour.toString().padLeft(2, '0')}:${newTime.minute.toString().padLeft(2, '0')}';
-        
+        String newTimeString =
+            '${newTime.hour.toString().padLeft(2, '0')}:${newTime.minute.toString().padLeft(2, '0')}';
+
         PlanStop updatedStop = PlanStop(
           id: stop.id,
           name: stop.name,
@@ -991,16 +1010,18 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
           rating: stop.rating,
           bookingRequired: stop.bookingRequired,
         );
-        
+
         setState(() {
           int index = dayPlan.indexWhere((s) => s.id == stop.id);
           if (index != -1) {
             dayPlan[index] = updatedStop;
           }
         });
-        
-        context.read<AIDayPlannerService>().updatePlanStop(stop.id, updatedStop);
-        
+
+        context
+            .read<AIDayPlannerService>()
+            .updatePlanStop(stop.id, updatedStop);
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Time updated to $newTimeString'),
@@ -1012,8 +1033,15 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
   }
 
   void _changeStopDuration(PlanStop stop) {
-    List<String> durationOptions = ['30 min', '1 hour', '1h 30min', '2 hours', '2h 30min', '3 hours'];
-    
+    List<String> durationOptions = [
+      '30 min',
+      '1 hour',
+      '1h 30min',
+      '2 hours',
+      '2h 30min',
+      '3 hours'
+    ];
+
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.darkNavy,
@@ -1034,16 +1062,19 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
               ),
             ),
             SizedBox(height: 16),
-            ...durationOptions.map((duration) => ListTile(
-              title: Text(duration, style: TextStyle(color: Colors.white)),
-              trailing: stop.duration == duration 
-                  ? Icon(Icons.check, color: AppColors.gold)
-                  : null,
-              onTap: () {
-                Navigator.pop(context);
-                _updateStopDuration(stop, duration);
-              },
-            )).toList(),
+            ...durationOptions
+                .map((duration) => ListTile(
+                      title:
+                          Text(duration, style: TextStyle(color: Colors.white)),
+                      trailing: stop.duration == duration
+                          ? Icon(Icons.check, color: AppColors.gold)
+                          : null,
+                      onTap: () {
+                        Navigator.pop(context);
+                        _updateStopDuration(stop, duration);
+                      },
+                    ))
+                .toList(),
           ],
         ),
       ),
@@ -1066,16 +1097,16 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       rating: stop.rating,
       bookingRequired: stop.bookingRequired,
     );
-    
+
     setState(() {
       int index = dayPlan.indexWhere((s) => s.id == stop.id);
       if (index != -1) {
         dayPlan[index] = updatedStop;
       }
     });
-    
+
     context.read<AIDayPlannerService>().updatePlanStop(stop.id, updatedStop);
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Duration updated to $newDuration'),
@@ -1085,13 +1116,15 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
   }
 
   void _addPersonalNotes(PlanStop stop) {
-    TextEditingController notesController = TextEditingController(text: stop.tips);
-    
+    TextEditingController notesController =
+        TextEditingController(text: stop.tips);
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.darkNavy,
-        title: Text('Add Personal Notes', style: TextStyle(color: Colors.white)),
+        title:
+            Text('Add Personal Notes', style: TextStyle(color: Colors.white)),
         content: TextField(
           controller: notesController,
           style: TextStyle(color: Colors.white),
@@ -1144,16 +1177,16 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       rating: stop.rating,
       bookingRequired: stop.bookingRequired,
     );
-    
+
     setState(() {
       int index = dayPlan.indexWhere((s) => s.id == stop.id);
       if (index != -1) {
         dayPlan[index] = updatedStop;
       }
     });
-    
+
     context.read<AIDayPlannerService>().updatePlanStop(stop.id, updatedStop);
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Notes updated successfully'),
@@ -1168,7 +1201,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
     final userId = authService.currentUser?.uid ?? 'guest';
 
     try {
-      List<RecommendationItem> alternatives = await plannerService.getAIRecommendations(
+      List<RecommendationItem> alternatives =
+          await plannerService.getAIRecommendations(
         query: 'Find alternatives to ${stop.name} in ${stop.location}',
         userId: userId,
       );
@@ -1193,7 +1227,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
     }
   }
 
-  void _showAlternatives(PlanStop originalStop, List<RecommendationItem> alternatives) {
+  void _showAlternatives(
+      PlanStop originalStop, List<RecommendationItem> alternatives) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.darkNavy,
@@ -1256,7 +1291,8 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
                             ),
                             Row(
                               children: [
-                                Icon(Icons.star, color: AppColors.gold, size: 16),
+                                Icon(Icons.star,
+                                    color: AppColors.gold, size: 16),
                                 SizedBox(width: 4),
                                 Text(
                                   '${alternative.rating}',
@@ -1326,21 +1362,23 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
       description: replacement.description,
       estimatedCost: replacement.priceRange,
       travelToNext: originalStop.travelToNext,
-      coordinates: originalStop.coordinates, // Keep original coordinates for now
+      coordinates: originalStop.coordinates, 
       tips: replacement.whyRecommended,
       rating: replacement.rating,
       bookingRequired: replacement.bookingAvailable,
     );
-    
+
     setState(() {
       int index = dayPlan.indexWhere((s) => s.id == originalStop.id);
       if (index != -1) {
         dayPlan[index] = newStop;
       }
     });
-    
-    context.read<AIDayPlannerService>().updatePlanStop(originalStop.id, newStop);
-    
+
+    context
+        .read<AIDayPlannerService>()
+        .updatePlanStop(originalStop.id, newStop);
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('${originalStop.name} replaced with ${replacement.name}'),
@@ -1381,247 +1419,9 @@ class _GeneratedPlanScreenState extends State<GeneratedPlanScreen>
     }
   }
 
-  Widget _buildMapView() {
-    return Container(
-      margin: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Stack(
-          children: [
-            // Dynamic map view based on actual coordinates
-            Container(
-              color: Colors.grey[300],
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.map,
-                            size: 48,
-                            color: Colors.grey[600],
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'Interactive Route Map',
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            'AI-optimized route through Qatar',
-                            style: GoogleFonts.inter(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(12),
-                    color: Colors.black54,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildMapStat('Distance', _calculateTotalDistance()),
-                        _buildMapStat('Travel Time', _calculateTravelTime()),
-                        _buildMapStat('Stops', '${dayPlan.length}'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            // Map overlay with dynamic route info
-            Positioned(
-              top: 16,
-              left: 16,
-              right: 16,
-              child: Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.route, color: AppColors.primaryBlue),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'AI-optimized route • ${_calculateTotalDistance()} • ${_calculateTravelTime()}',
-                        style: GoogleFonts.inter(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            
-            // Dynamic route markers based on actual coordinates
-            ...dayPlan.asMap().entries.map((entry) {
-              final index = entry.key;
-              final stop = entry.value;
-              
-              // Calculate position based on normalized coordinates
-              double left = 40.0 + (index * 60.0).clamp(0.0, 200.0);
-              double top = 80.0 + (index * 25.0).clamp(0.0, 100.0);
-              
-              return Positioned(
-                left: left,
-                top: top,
-                child: GestureDetector(
-                  onTap: () => _showStopOnMap(stop),
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: AppColors.gold,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${index + 1}',
-                        style: GoogleFonts.inter(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.maroon,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMapStat(String label, String value) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          value,
-          style: GoogleFonts.inter(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        Text(
-          label,
-          style: GoogleFonts.inter(
-            fontSize: 12,
-            color: Colors.white70,
-          ),
-        ),
-      ],
-    );
-  }
-
-  String _calculateTotalDistance() {
-    // Calculate based on actual coordinates
-    double totalDistance = 0.0;
-    for (int i = 0; i < dayPlan.length - 1; i++) {
-      // Simple distance calculation (in a real app, use proper geolocation formulas)
-      totalDistance += 2.5; // Average distance between stops in Qatar
-    }
-    return '${totalDistance.toStringAsFixed(1)} km';
-  }
-
-  String _calculateTravelTime() {
-    int totalMinutes = dayPlan.length * 15; // Average 15 minutes between stops
-    int hours = totalMinutes ~/ 60;
-    int minutes = totalMinutes % 60;
-    return hours > 0 ? '${hours}h ${minutes}m' : '${minutes}m';
-  }
-
-  void _showStopOnMap(PlanStop stop) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkNavy,
-        title: Text(stop.name, style: TextStyle(color: Colors.white)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              stop.location,
-              style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '${stop.startTime} • ${stop.duration}',
-              style: TextStyle(color: Colors.white70),
-            ),
-            SizedBox(height: 8),
-            Text(
-              stop.description,
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close', style: TextStyle(color: Colors.white70)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // In a real app, this would open navigation
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Navigation to ${stop.name} would open here'),
-                  backgroundColor: AppColors.info,
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.gold),
-            child: Text('Navigate', style: TextStyle(color: AppColors.maroon)),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildBookButton() {
     int bookableStops = dayPlan.where((stop) => stop.bookingRequired).length;
-    
+
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(

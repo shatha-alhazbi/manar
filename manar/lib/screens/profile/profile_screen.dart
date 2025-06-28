@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/user_services.dart';
-import 'package:manara/services/auth_services.dart';
+import 'package:manar/services/user_services.dart';
+import 'package:manar/services/auth_services.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -513,7 +513,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         
         _buildSettingsItem(Icons.help_outline, 'Help Center', 'Get support and answers', () => _showHelpCenter()),
         _buildSettingsItem(Icons.feedback_outlined, 'Send Feedback', 'Help us improve', () => _sendFeedback()),
-        _buildSettingsItem(Icons.info_outline, 'About Manara', 'App version and info', () => _showAbout()),
+        _buildSettingsItem(Icons.info_outline, 'About manar', 'App version and info', () => _showAbout()),
         _buildSettingsItem(Icons.description_outlined, 'Terms & Privacy', 'Legal information', () => _showTerms()),
         
         SizedBox(height: 24),
@@ -644,7 +644,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     switch (transport) {
       case 'public': return 'Public Transport';
       case 'taxi': return 'Taxi/Ride-sharing';
-      case 'car': return 'Rental Car';
+      case 'car': return 'Car';
       case 'tour': return 'Tour Groups';
       default: return transport;
     }
@@ -879,7 +879,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         content: TextField(
           style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
-            hintText: 'Tell us how we can improve Manara...',
+            hintText: 'Tell us how we can improve manar...',
             hintStyle: TextStyle(color: Colors.white70),
             border: OutlineInputBorder(),
           ),
@@ -912,12 +912,12 @@ class _ProfileScreenState extends State<ProfileScreen>
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.darkNavy,
-        title: Text('About Manara', style: TextStyle(color: Colors.white)),
+        title: Text('About manar', style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('مَنارة', style: GoogleFonts.amiri(fontSize: 24, color: AppColors.gold, fontWeight: FontWeight.bold)),
+            Text('مَنار', style: GoogleFonts.amiri(fontSize: 24, color: AppColors.gold, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
             Text('Version 1.0.0', style: TextStyle(color: Colors.white70)),
             SizedBox(height: 16),

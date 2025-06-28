@@ -50,50 +50,46 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
     super.dispose();
   }
 
+  
   void _initializeConversation() async {
-    final authService = context.read<AuthService>();
-    final plannerService = context.read<AIDayPlannerService>();
-    final userId = authService.currentUser?.uid ?? 'guest';
+  final authService = context.read<AuthService>();
+  final plannerService = context.read<AIDayPlannerService>();
+  final userId = authService.currentUser?.uid ?? 'guest';
+  
+  // Start conversation immediately with welcome message
+  _addMessage(ChatMessage(
+    text: 'Hi there! 👋 I\'m your AI trip planner. Let me ask you a few questions to create the perfect day plan for you in Qatar!',
+    isUser: false,
+    timestamp: DateTime.now(),
+  ));
+  
+  // Generate dynamic questions using AI (but don't show typing indicator)
+  try {
+    questions = await plannerService.generateDynamicQuestions(userId);
+    setState(() {
+      isLoadingQuestions = false;
+    });
     
-    // Start conversation
+    // Short delay before asking first question
+    Future.delayed(Duration(milliseconds: 100), () {
+      _askQuestion(0);
+    });
+  } catch (e) {
+    setState(() {
+      isLoadingQuestions = false;
+    });
+    
     _addMessage(ChatMessage(
-      text: 'Hi there! 👋 I\'m your AI trip planner. Let me ask you a few questions to create the perfect day plan for you in Qatar!',
+      text: 'I\'m having trouble connecting to my AI brain right now. Let me ask you some basic questions to get started!',
       isUser: false,
       timestamp: DateTime.now(),
     ));
     
-    // Generate dynamic questions using AI
-    setState(() {
-      isTyping = true;
+    Future.delayed(Duration(milliseconds: 100), () {
+      _askQuestion(0);
     });
-    
-    try {
-      questions = await plannerService.generateDynamicQuestions(userId);
-      setState(() {
-        isLoadingQuestions = false;
-        isTyping = false;
-      });
-      
-      Future.delayed(Duration(milliseconds: 1500), () {
-        _askQuestion(0);
-      });
-    } catch (e) {
-      setState(() {
-        isLoadingQuestions = false;
-        isTyping = false;
-      });
-      
-      _addMessage(ChatMessage(
-        text: 'I\'m having trouble connecting to my AI brain right now. Let me ask you some basic questions to get started!',
-        isUser: false,
-        timestamp: DateTime.now(),
-      ));
-      
-      Future.delayed(Duration(milliseconds: 1000), () {
-        _askQuestion(0);
-      });
-    }
   }
+}
 
   void _addMessage(ChatMessage message) {
     setState(() {
@@ -160,7 +156,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
         timestamp: DateTime.now(),
       ));
 
-      Future.delayed(Duration(milliseconds: 1200), () {
+      Future.delayed(Duration(milliseconds: 100), () {
         _askQuestion(currentQuestionIndex + 1);
       });
     });
@@ -206,7 +202,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
         final question = questions[currentQuestionIndex];
         userResponses[question.responseKey] = text;
 
-        Future.delayed(Duration(milliseconds: 1200), () {
+        Future.delayed(Duration(milliseconds: 100), () {
           _askQuestion(currentQuestionIndex + 1);
         });
       }
@@ -225,7 +221,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
         final question = questions[currentQuestionIndex];
         userResponses[question.responseKey] = text;
 
-        Future.delayed(Duration(milliseconds: 1200), () {
+        Future.delayed(Duration(milliseconds: 100), () {
           _askQuestion(currentQuestionIndex + 1);
         });
       }
@@ -371,7 +367,8 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
             
             // Chat messages
             Expanded(
-              child: Consumer<AIDayPlannerService>(
+              child: 
+              Consumer<AIDayPlannerService>(
                 builder: (context, plannerService, child) {
                   return ListView.builder(
                     controller: _scrollController,
@@ -560,7 +557,7 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
               decoration: BoxDecoration(
                 gradient: message.isUser 
                   ? LinearGradient(colors: [AppColors.primaryBlue, AppColors.darkPurple])
-                  : LinearGradient(colors: [Colors.grey[800]!, Colors.grey[700]!]),
+                  : LinearGradient( colors: [Colors.grey[500]!.withOpacity(0.2), Colors.grey[400]!.withOpacity(0.2)]),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
@@ -611,7 +608,6 @@ class _AIDayPlannerScreenState extends State<AIDayPlannerScreen>
                       ),
                     )).toList(),
                     
-                    // Custom answer option (only for regular questions)
                     if (message.questionId != 'error_recovery' && message.questionId != 'modify_preferences')
                       Container(
                         margin: EdgeInsets.only(top: 8),

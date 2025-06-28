@@ -1,4 +1,4 @@
-# manara
+# manar
 
 A new Flutter project.
 

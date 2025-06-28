@@ -203,7 +203,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
       // Step 1: AI availability check
       await Future.delayed(Duration(seconds: 1));
       _addMessage(ChatMessage(
-        text: '🔍 Using AI to check real-time availability at ${step.stopName}...',
+        text: ' Using AI to check real-time availability at ${step.stopName}...',
         isUser: false,
         timestamp: DateTime.now(),
       ));
@@ -229,7 +229,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
         });
         
         _addMessage(ChatMessage(
-          text: '✅ Great news! ${step.stopName} has availability at ${step.time}.\n\nMy AI analysis indicates I need a few quick details to optimize your reservation:',
+          text: 'Great news! ${step.stopName} has availability at ${step.time}.\n\nMy AI analysis indicates I need a few quick details to optimize your reservation:',
           isUser: false,
           timestamp: DateTime.now(),
           needsInput: true,
@@ -294,7 +294,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
     await Future.delayed(Duration(seconds: 2));
     
     _addMessage(ChatMessage(
-      text: '🧠 AI optimization complete - found the best available slot matching your preferences!',
+      text: ' AI optimization complete - found the best available slot matching your preferences!',
       isUser: false,
       timestamp: DateTime.now(),
     ));
@@ -325,7 +325,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
       });
 
       _addMessage(ChatMessage(
-        text: '✅ AI booking successful for ${step.stopName}!\n\n'
+        text: 'AI booking successful for ${step.stopName}!\n\n'
               '📋 Confirmation: $confirmationNumber\n'
               '⏰ Time: ${step.time}\n'
               '📍 Location: ${step.location}\n'
@@ -344,7 +344,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
     } else {
       step.status = BookingStatus.failed;
       _addMessage(ChatMessage(
-        text: '❌ Unable to secure reservation at ${step.stopName}. My AI is searching for alternative options...',
+        text: ' Unable to secure reservation at ${step.stopName}. My AI is searching for alternative options...',
         isUser: false,
         timestamp: DateTime.now(),
       ));
@@ -370,7 +370,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
     if (step.type == 'restaurant') {
       int base = 25;
       int extra = (step.time.startsWith('19')) ? 15 : 0;
-      return '\$${base + extra}';
+      return '${base + extra}';
     }
     Map<String, String> costEstimates = {
       'attraction': '\$15',
@@ -401,7 +401,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
 
   Future<void> _findAIAlternative(BookingStep failedStep) async {
     _addMessage(ChatMessage(
-      text: '🔄 AI found an excellent alternative: ${_generateAlternativeName(failedStep.stopName)}',
+      text: ' AI found an excellent alternative: ${_generateAlternativeName(failedStep.stopName)}',
       isUser: false,
       timestamp: DateTime.now(),
     ));
@@ -414,7 +414,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
     failedStep.confirmationNumber = 'ALT${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}';
 
     _addMessage(ChatMessage(
-      text: '✅ Alternative booking confirmed! ${failedStep.stopName} offers similar quality with immediate availability.',
+      text: 'Alternative booking confirmed! ${failedStep.stopName} offers similar quality with immediate availability.',
       isUser: false,
       timestamp: DateTime.now(),
     ));
@@ -1194,7 +1194,7 @@ class _BookingAgentScreenState extends State<BookingAgentScreen>
                       Icon(Icons.calendar_today, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        'View Complete Itinerary',
+                        'View Itinerary',
                         style: GoogleFonts.inter(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '390297939113',
     projectId: 'manar-612e2',
     storageBucket: 'manar-612e2.firebasestorage.app',
-    iosBundleId: 'com.example.manara',
+    iosBundleId: 'com.example.manar',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '390297939113',
     projectId: 'manar-612e2',
     storageBucket: 'manar-612e2.firebasestorage.app',
-    iosBundleId: 'com.example.manara',
+    iosBundleId: 'com.example.manar',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

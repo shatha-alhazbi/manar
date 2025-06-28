@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_theme.dart';
-import 'package:manara/services/user_services.dart';
+import 'package:manar/services/user_services.dart';
 import '../../widgets/common/loading_overlay.dart';
 
 class OnboardingFlow extends StatefulWidget {
@@ -291,7 +291,7 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
           ),
           _buildOptionCard(
             icon: Icons.car_rental,
-            title: 'Rental Car',
+            title: 'Car',
             subtitle: 'Drive yourself, more flexibility',
             isSelected: _transportMode == 'car',
             onTap: () => setState(() => _transportMode = 'car'),

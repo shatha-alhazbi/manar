@@ -1,4 +1,4 @@
-package com.example.manara
+package com.example.manar
 
 import io.flutter.embedding.android.FlutterActivity
 
